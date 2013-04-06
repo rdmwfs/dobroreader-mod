@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.anonymous.dobrochan.widget.DobroHomeItemView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="?attr/gdDrawableItemViewStyle"
+	
+	android:layout_height="wrap_content"
+	android:minHeight="?attr/gdItemViewPreferredHeight"
+	android:padding="?attr/gdItemViewPreferredPaddingLeft">
+
+	<greendroid.widget.AsyncImageView
+		android:id="@+id/gd_drawable"
+		style="?attr/gdDrawableItemViewStyleDrawable"
+		android:background="?attr/dcHomeImageColor"
+		android:adjustViewBounds="true"
+		android:layout_height="?attr/gdItemViewPreferredHeight"
+		android:layout_width="192dp"
+		android:layout_gravity="center_vertical" />
+
+	<TextView
+		android:id="@+id/gd_text"
+		style="?attr/gdDrawableItemViewStyleText"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		
+		android:singleLine="false"
+		android:maxLines="2"
+		android:gravity="center" />
+
+</org.anonymous.dobrochan.widget.DobroHomeItemView>

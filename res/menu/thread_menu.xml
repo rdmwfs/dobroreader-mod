@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/force_reload" android:id="@+id/force_reload"></item>
+    <item android:id="@+id/go_to" android:title="@string/go_to"></item>
+    <item android:id="@+id/copy_link" android:title="Копировать ссылку"></item>
+    <item android:id="@+id/search_thread" android:title="Поиск"></item>
+</menu>

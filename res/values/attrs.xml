@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="dcOpTitleColor" format="color"/>
+    <attr name="dcPostMetadataColor" format="color"/>
+    <attr name="dcHomeImageColor" format="color"/>
+    <attr name="dcPicrelatedColor" format="color"/>
+    <attr name="dcBackgroundColor" format="color"/>
+    <attr name="postFontSize" format="dimension"/>
+    <attr name="messageText" format="color"/>
+</resources>

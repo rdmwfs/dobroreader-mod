@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dcDarkHomeItem">#B2B2B2</color>
+    <color name="dcDarkOpTitle">#33ff0000</color>
+    <color name="dcDarkMetadata">#4476d28e</color>
+    <color name="dcDarkPicrelated">#10FFFFFF</color>
+
+    <color name="dcLightPicrelated">#d0d0d0</color>
+    <color name="dcLightHomeItem">#b2b2b2</color>
+    <color name="dcLightOpTitle">#33ad00</color>
+    <color name="dcLightMetadata">#cae072</color>
+
+    <color name="dcOrigTextColor">#600000</color>
+    <color name="dcOrigDarkBackground">#EEAA88</color>
+    <color name="dcOrigDarkestbackground">#E04000</color>
+    <color name="dcOrigOpTextColor">#CC1105</color>
+    <color name="dcOrigMetadata">#DDCCC5</color>
+    <color name="dcOrigBackground">#FFFFEE</color>
+</resources>

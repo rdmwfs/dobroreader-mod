@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<style name="Theme.DobroTheme" parent="@style/Theme.GreenDroid.NoTitleBar">
+	    <item name="dcOpTitleColor">@color/dcDarkOpTitle</item>
+	    <item name="dcPostMetadataColor">@color/dcDarkMetadata</item>
+    	<item name="dcHomeImageColor">@color/dcDarkHomeItem</item>
+    	<item name="dcPicrelatedColor">@color/dcDarkPicrelated</item>
+    	<item name="dcBackgroundColor">#000000</item>
+    	<item name="messageText">@drawable/white_text</item>
+	</style>
+	<style name="Theme.DobroLightTheme" parent="@style/Theme.GreenDroid.Light.NoTitleBar">
+	    <item name="dcOpTitleColor">@color/dcLightOpTitle</item>
+	    <item name="dcPostMetadataColor">@color/dcLightMetadata</item>
+    	<item name="dcHomeImageColor">@color/dcLightHomeItem</item>
+    	<item name="dcPicrelatedColor">@color/dcLightPicrelated</item>
+    	<item name="dcBackgroundColor">#FFFFFF</item>
+    	<item name="messageText">@drawable/black_text</item>
+	</style>
+	<style name="Theme.DobroChanTheme" parent="@style/Theme.GreenDroid.Light.NoTitleBar">
+	    <item name="dcOpTitleColor">@color/dcOrigDarkestbackground</item>
+	    <item name="dcPostMetadataColor">@color/dcOrigDarkBackground</item>
+    	<item name="dcHomeImageColor">@color/dcOrigBackground</item>
+    	<item name="dcPicrelatedColor">@color/dcOrigMetadata</item>
+    	<item name="android:windowBackground">@color/dcOrigBackground</item>
+    	<item name="dcBackgroundColor">@color/dcOrigBackground</item>
+    	<item name="gdActionBarBackground">@color/dcOrigTextColor</item>
+    	<item name="messageText">@drawable/black_text</item>
+	</style>
+	
+	<style name="Theme.DialogLight" parent="@android:style/Theme.Dialog">
+         <item name="dcBackgroundColor">#FFFFFF</item>
+    </style>
+    
+	<style name="Theme.DialogDobro" parent="@android:style/Theme.Dialog">
+         <item name="dcBackgroundColor">@color/dcOrigBackground</item>
+    </style>
+    
+	<style name="DialogLight" parent="@android:style/Theme.Dialog">
+	    <item name="android:background">#FFFFFF</item>
+	</style>
+    
+	<style name="AlertDialogLight" parent="@android:style/Theme.Dialog">
+	    <item name="android:textColor">#FFFFFF</item>
+	</style>
+</resources>

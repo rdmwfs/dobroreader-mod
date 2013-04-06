@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/resizeX"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:enabled="false"/>
+
+        <EditText
+            android:id="@+id/resizeY"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:enabled="false"/>
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/resizeBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:max="999"
+        android:progress="999" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button android:id="@+id/resizeOk"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="OK"/>
+        <Button android:id="@+id/resizeCancel"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Отмена"/>
+    </LinearLayout>
+
+</LinearLayout>

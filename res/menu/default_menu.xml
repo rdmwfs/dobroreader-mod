@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/starred_threads" android:title="@string/starred"></item>
+	<item android:id="@+id/update_diff" android:title="@string/update_diff"></item>
+	<item android:id="@+id/history" android:title="@string/history"></item>
+	<item android:id="@+id/go_to" android:title="@string/go_to"></item>
+	<item android:id="@+id/options" android:title="@string/options"></item>
+	<item android:id="@+id/hidden_threads" android:title="@string/hidden_threads"></item>
+	<item android:id="@+id/about" android:title="@string/about"></item>
+</menu>

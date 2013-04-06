@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message" />
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="4"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+            <requestFocus />
+        </EditText>
+        
+        <LinearLayout
+            android:id="@+id/formatPanel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/boldButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="B"
+                android:textStyle="bold"
+                android:onClick="onBoldClick" />
+
+            <Button
+                android:id="@+id/italicButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="I"
+                android:textStyle="italic"
+                android:onClick="onItalicClick" />
+            
+            <Button
+                android:id="@+id/boldItalicButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="BI"
+                android:textStyle="bold|italic"
+                android:onClick="onBoldItalicClick" />
+            
+            <Button
+                android:id="@+id/strikeoutButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="S"
+                android:onClick="onStrikeClick" />
+            
+            <Button
+                android:id="@+id/codeButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="M"
+                android:typeface="monospace"
+                android:onClick="onCodeClick" />
+            
+            <Button
+                android:id="@+id/spoilerButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="%%"
+                android:onClick="onSpoilerClick" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/captcha" />
+
+        <org.anonymous.dobrochan.widget.CaptchaImageView
+            android:id="@+id/captcha_img"
+            android:layout_width="wrap_content"
+            android:layout_height="48dip"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:onClick="onCaptchaClick" />
+
+        <EditText
+            android:inputType="textNoSuggestions"
+            android:id="@+id/captcha"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:onClick="onSendButtonClick"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/gallery"
+                android:onClick="onAddImageClick" />
+
+            <Button
+                android:id="@+id/addBooruButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/booru"
+                android:onClick="onAddBooruClick" />
+            
+            <Button
+                android:id="@+id/takePhoto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/photo"
+                android:onClick="onAddPhotoClick" />
+            
+            <Button
+                android:id="@+id/takeFile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/file"
+                android:onClick="onAddFileClick" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="92dip" >
+
+            <LinearLayout
+                android:id="@+id/picsScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="left"
+                android:orientation="horizontal" >
+
+                <!-- images here -->
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <CheckBox android:id="@+id/sage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sage"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name" />
+
+        <EditText
+            android:inputType="textCapSentences"
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme" />
+
+        <EditText
+            android:inputType="textCapSentences"
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</ScrollView>

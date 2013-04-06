@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.anonymous.dobrochan"
+    android:versionCode="70"
+    android:versionName="3.3.10" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+
+    <application
+        android:name=".DobroApplication"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.DobroTheme">
+        <activity
+            android:name=".activity.DobroHomeActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".DobroNetworkService" >
+        </service>
+
+        <activity
+            android:name=".activity.DobroBoardActivity"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="dobrochan.ru" android:pathPattern="/.*/index.xhtml" />
+                <data android:scheme="http" android:host="dobrochan.ru" android:pathPattern="/.*/0.xhtml" />
+                <data android:scheme="http" android:host="dobrochan.org" android:pathPattern="/.*/index.xhtml" />
+                <data android:scheme="http" android:host="dobrochan.org" android:pathPattern="/.*/0.xhtml" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.DobroBoardActivityEx"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.DobroOptions"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.DobroThreadActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="dobrochan.ru" android:pathPattern="/.*/res/.*\\.xhtml" />
+                <data android:scheme="http" android:host="dobrochan.ru" android:pathPattern="/.*/res/.*\\.xhtml#i.*" />
+                <data android:scheme="http" android:host="dobrochan.org" android:pathPattern="/.*/res/.*\\.xhtml" />
+                <data android:scheme="http" android:host="dobrochan.org" android:pathPattern="/.*/res/.*\\.xhtml#i.*" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activity.DobroPostActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+
+        <receiver android:name=".DobroNetworkStateReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activity.DobroHiddenEditor"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.DobroStarredEditor"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+    			<action android:name="android.intent.action.CREATE_SHORTCUT" />
+    			<category android:name="android.intent.category.DEFAULT" />
+  			</intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.DobroNewPostActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.DobroGotoActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.DobroHistoryActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity 
+            android:name=".activity.DobroTabsList"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name=".activity.CopyPasteActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Dialog" />
+        
+        <activity
+            android:name=".activity.DobroImageViewer"
+            android:configChanges="keyboardHidden|keyboard|orientation"
+            android:theme="@android:style/Theme.NoTitleBar">
+<!--             <meta-data -->
+<!--                 android:name="android.app.default_searchable" -->
+<!--                 android:value=".PostListActivity" /> -->
+        </activity>
+        
+        <service android:name=".DCDashClockExtension"
+            android:icon="@drawable/dashclock"
+            android:label="@string/app_name"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.anonymous.dobrochan.favs" />
+            </intent-filter>
+            <meta-data android:name="protocolVersion" android:value="1" />
+            <meta-data android:name="description"
+                android:value="Уведомление о новых сообщениях" />
+        </service>
+    </application>
+
+</manifest>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.anonymous.dobrochan.widget.DobroPostItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dobropostitemview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?attr/dcBackgroundColor"
+    android:orientation="vertical" >
+
+    <HorizontalScrollView
+        android:id="@+id/horizScroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/metadataLayout" >
+
+        <LinearLayout
+            android:id="@+id/imagesLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="150dip"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/metadataLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/titleView"
+        android:background="?attr/dcPostMetadataColor"
+        android:longClickable="true"
+        android:orientation="horizontal" >
+        
+        <TextView 
+            android:id="@+id/postNumber"
+            android:layout_width="40dp"
+            android:layout_weight="0"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            />
+
+        <TextView
+            android:id="@+id/metadataLeftView"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="left|center_vertical"
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Small" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/metadataRightView"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right|center_vertical"
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Small" >
+        </TextView>
+        
+        <TextView 
+            android:id="@+id/refsButton"
+            android:layout_width="58dp"
+            android:layout_weight="0"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:background="#40ffffff"
+            android:gravity="center"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            />
+    </LinearLayout>
+
+    <org.anonymous.dobrochan.TextViewWithSpoilers
+        android:id="@+id/messageView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizScroll"
+        android:layout_toRightOf="@+id/imagesLayout"
+        android:gravity="fill_horizontal"
+        android:longClickable="true"
+        android:textColor="?attr/messageText"
+        android:text="">
+    </org.anonymous.dobrochan.TextViewWithSpoilers>
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:longClickable="true"
+        android:background="?attr/dcOpTitleColor"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" >
+    </TextView>
+
+</org.anonymous.dobrochan.widget.DobroPostItemView>
