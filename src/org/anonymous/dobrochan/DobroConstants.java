@@ -8,6 +8,7 @@ public class DobroConstants {
 	public static final String ALARM_INTENT = "ALARM";
 	public static final String DISALARM_INTENT = "DISALARM";
 	public static final String NEXT = "NEXT";
+	public static final String BANNERS_SOURCE = "http://dobrochan.ru/src/zip/1301/banners_v1.zip";
 	public static final String BOARD = "BOARD_NAME";
 	public static final String SCHROLL_TO = "SCHROLL_TO";
 	public static final String DISABLE_UPDATE = "DISABLE_UPDATE";
