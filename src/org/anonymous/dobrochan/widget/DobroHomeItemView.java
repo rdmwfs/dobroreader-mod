@@ -1,7 +1,7 @@
 package org.anonymous.dobrochan.widget;
 
 import org.anonymous.dobrochan.DobroHomeItem;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 
 import greendroid.widget.AsyncImageView;
 import greendroid.widget.itemview.ItemView;

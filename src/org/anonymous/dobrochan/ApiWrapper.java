@@ -37,21 +37,25 @@ public class ApiWrapper {
 	}
 	
 	public static String getPicturesDir (){
-		if (Build.VERSION.SDK_INT > 7)
+		/*if (Build.VERSION.SDK_INT > 7)
 			return Environment.getExternalStoragePublicDirectory(
 					Environment.DIRECTORY_PICTURES).getAbsolutePath();
 		else
-			return Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures";
+			return Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures";*/
+		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		return prefs.getString("download_target", "auto");
 	}
 	
 	public static String getDownloadDir() {
-		if(Build.VERSION.SDK_INT > 7)
+		/*if(Build.VERSION.SDK_INT > 7)
 			return Environment.getExternalStoragePublicDirectory(
 					Environment.DIRECTORY_PICTURES).getAbsolutePath()
 					+ File.separator + "Dobrochan";
 		else
 			return Environment.getExternalStorageDirectory().getAbsolutePath()
-					+ File.separator + "Pictures" + File.separator + "Dobrochan";
+					+ File.separator + "Pictures" + File.separator + "Dobrochan";*/
+		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		return prefs.getString("download_target", "auto") + "Dobrochan";
 	}
 	
 	public static Intent getOpenImageIntent(Uri uri) {

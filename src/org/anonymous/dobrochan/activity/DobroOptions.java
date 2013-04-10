@@ -5,7 +5,7 @@ import java.io.File;
 import org.anonymous.dobrochan.ApiWrapper;
 import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroHelper;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -122,6 +123,11 @@ public class DobroOptions extends PreferenceActivity {
 		EditTextPreference t2h = (EditTextPreference) findPreference("threads2hide");
 		t2h.getEditText().setSingleLine(false);
 		t2h.getEditText().setMinLines(3);
+		
+		EditTextPreference dt = (EditTextPreference) findPreference("download_target");
+		dt.getEditText().setSingleLine(false);
+		dt.getEditText().setMinLines(3);
+		
 		
 		if(Build.VERSION.SDK_INT < 9)
 		{

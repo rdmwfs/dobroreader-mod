@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.anonymous.dobrochan.json.DobroFile.Rating;
+import org.anonymous.dobrochan.clear.R;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;

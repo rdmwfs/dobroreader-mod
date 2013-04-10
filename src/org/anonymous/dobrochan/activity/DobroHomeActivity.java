@@ -31,7 +31,7 @@ import org.anonymous.dobrochan.DobroConstants;
 import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroHomeItem;
 import org.anonymous.dobrochan.DobroNetwork;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -45,8 +45,10 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -314,8 +316,23 @@ public class DobroHomeActivity extends GDListActivity {
 		if (DobroHelper.checkSdcard()
 				&& !new File(dir.getAbsolutePath() + "/.data_v1").isFile()) {
 			new BannersLoader()
-					.execute("http://dobrochan.ru/src/zip/1301/banners_v1.zip");
+					.execute(DobroConstants.BANNERS_SOURCE);
 		}
+		SharedPreferences dt = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		String temp_gt_val = "";
+		if(Build.VERSION.SDK_INT > 7)
+			temp_gt_val = Environment.getExternalStoragePublicDirectory(
+					Environment.DIRECTORY_PICTURES).getAbsolutePath().toString()
+					+ File.separator;
+		else
+			temp_gt_val = Environment.getExternalStorageDirectory().getAbsolutePath()
+					+ File.separator + "Pictures" + File.separator;
+		String temp_gt_val_to_compare = dt.getString("download_target", "");
+		 
+		if (temp_gt_val_to_compare == "")
+			{
+			dt.edit().putString("download_target",temp_gt_val).commit();
+			};
 		String threads_cache_dir = String.format(DobroConstants.THREADS_CACHE,
 				Environment.getExternalStorageDirectory());
 		String threads_info_cache_dir = String.format(

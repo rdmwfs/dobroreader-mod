@@ -13,7 +13,7 @@ import org.anonymous.dobrochan.DobroConstants;
 import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 import org.anonymous.dobrochan.json.DobroSession;
 import org.anonymous.dobrochan.json.DobroThread;
 
