@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DobroReader</string>
     <string name="loading">Загрузка&#8230;</string>
@@ -45,7 +45,7 @@
         <item>wifi</item>
         <item>never</item>
     </string-array>
-    <string name="about_text">DobroReader app by DobroAnon\ndobroanon@ymail.com\nVersion %s\nDonate, please:\nhttps://sites.google.com/site/dobroreader/donate</string>
+    <string name="about_text">DobroReader app by DobroAnon\ndobroanon@ymail.com\nVersion %s</string>
     <string name="open">Открыть</string>
     <string name="last_50">Последние</string>
     <string name="hide_thread">Скрыть тред</string>
@@ -69,6 +69,7 @@
     <string name="thread_unstar_error">Невозможно удалить тред из избранного: ошибка %s</string>
     <string name="hidden_threads">Скрытые треды</string>
     <string name="force_reload">Перезагрузить</string>
+    <string name="download_target">Папка для загрузки</string>
     <string name="options">Настройки</string>
     <string name="about">О программе</string>
     <string name="unread">Непрочитанных: %s</string>
@@ -186,4 +187,5 @@
 	<string name="password_summary">Используется для удаления сообщений</string>
 	<string name="password_title">Пароль</string>
 	<string name="thumb_desc">Thumbnail</string>
+	<string name="download_target_summary">Папка, в которую загружаются изображения</string>
 </resources>

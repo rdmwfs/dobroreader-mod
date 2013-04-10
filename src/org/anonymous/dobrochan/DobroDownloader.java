@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.anonymous.dobrochan.minoriko.BitmapDownloaderTask;
+import org.anonymous.dobrochan.clear.R;
 import org.apache.http.HttpResponse;
 
 import android.app.Notification;

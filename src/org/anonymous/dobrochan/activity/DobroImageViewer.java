@@ -11,7 +11,7 @@ import java.util.Comparator;
 
 import org.anonymous.dobrochan.ApiWrapper;
 import org.anonymous.dobrochan.DobroApplication;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 import org.anonymous.dobrochan.minoriko.BitmapDownloaderTask;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
