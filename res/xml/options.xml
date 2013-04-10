@@ -51,6 +51,7 @@
             android:defaultValue="true"
             android:summary="@string/youtube_summary"
             android:title="@string/youtube_title" />
+        <EditTextPreference android:key="download_target" android:title="@string/download_target" android:summary="@string/download_target_summary"/>
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/general" >

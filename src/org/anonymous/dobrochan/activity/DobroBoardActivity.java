@@ -17,7 +17,7 @@ import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
@@ -198,9 +198,9 @@ public class DobroBoardActivity extends DobroPostsList {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.update_board:
-			m_adapter = new ItemAdapter(this);
+		int tempid = item.getItemId();
+		if (tempid == R.id.update_board)
+			{m_adapter = new ItemAdapter(this);
 			atask = null;
 			final ProgressItem load_item = new ProgressItem(
 					getString(R.string.loading), true);
@@ -209,14 +209,14 @@ public class DobroBoardActivity extends DobroPostsList {
 			m_adapter.add(load_item);
 			setListAdapter(m_adapter);
 			createThread("0");
-			return true;
-		case R.id.go_to: {
+			return true;}
+		else if (tempid == R.id.go_to) {
 			Intent i = new Intent(this, DobroGotoActivity.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.go_to));
 			startActivity(i);
 			return true;
 		}
-		case R.id.new_thread: {
+		else if (tempid == R.id.new_thread) {
 			Intent intent = new Intent(this, DobroNewPostActivity.class);
 			intent.putExtra(DobroConstants.BOARD, board);
 			intent.putExtra(DobroConstants.THREAD, "0");
@@ -225,8 +225,8 @@ public class DobroBoardActivity extends DobroPostsList {
 			startActivity(intent);
 			return true;
 		}
-		}
-		return super.onOptionsItemSelected(item);
+		
+	else return super.onOptionsItemSelected(item);
 	}
 
 	@Override

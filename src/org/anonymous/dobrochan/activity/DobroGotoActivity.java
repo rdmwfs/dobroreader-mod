@@ -2,7 +2,7 @@ package org.anonymous.dobrochan.activity;
 
 import org.anonymous.dobrochan.DobroConstants;
 import org.anonymous.dobrochan.DobroHelper;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.clear.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
