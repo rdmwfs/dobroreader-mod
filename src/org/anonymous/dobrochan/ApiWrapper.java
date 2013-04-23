@@ -43,7 +43,7 @@ public class ApiWrapper {
 		else
 			return Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures";*/
 		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		return prefs.getString("download_target", "auto");
+		return prefs.getString("download_target", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures");
 	}
 	
 	public static String getDownloadDir() {
@@ -55,7 +55,7 @@ public class ApiWrapper {
 			return Environment.getExternalStorageDirectory().getAbsolutePath()
 					+ File.separator + "Pictures" + File.separator + "Dobrochan";*/
 		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		return prefs.getString("download_target", "auto") + "Dobrochan";
+		return prefs.getString("download_target", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures") + File.separator + "/Dobrochan";
 	}
 	
 	public static Intent getOpenImageIntent(Uri uri) {
