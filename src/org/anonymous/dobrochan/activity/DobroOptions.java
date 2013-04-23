@@ -10,7 +10,10 @@ import org.anonymous.dobrochan.clear.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,9 +25,12 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 
 public class DobroOptions extends PreferenceActivity {
 	Preference clearCache;
+	Preference pickcolor;
+	final Context context = this;
 	private class CacheCleaner extends AsyncTask<Void, Integer, Void>{
 		@Override
 		protected void onPreExecute() {
@@ -46,6 +52,21 @@ public class DobroOptions extends PreferenceActivity {
 		}
 		
 	}
+	
+	private class ColorPicker extends AsyncTask<Void, Integer, Void>{
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+		}
+			@Override
+			protected Void doInBackground(Void... params) {
+				
+				return null;
+			}
+			
+		}
+		
 	private class CacheSizeCounter extends AsyncTask<Void, Long, Long>{
 		
 		@Override
@@ -101,6 +122,7 @@ public class DobroOptions extends PreferenceActivity {
 		((DobroApplication) getApplication()).registerAlarm();
 	}
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		DobroHelper.updateCurrentTheme(this);
@@ -114,8 +136,39 @@ public class DobroOptions extends PreferenceActivity {
 						new CacheCleaner().execute();
 						return true;
 					}
-
 				});
+		/*pickcolor = (Preference) findPreference("img_viewer_bg_color");
+		pickcolor.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					public boolean onPreferenceClick(Preference preference) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(DobroOptions.this);
+					    // Get the layout inflater
+						LayoutInflater inflater = DobroOptions.this.getLayoutInflater();
+
+					    // Inflate and set the layout for the dialog
+					    // Pass null as the parent view because its going in the dialog layout
+					    builder.setView(inflater.inflate(R.layout.color_picker, null))
+					    // Add action buttons
+					           .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					               @Override
+					               public void onClick(DialogInterface dialog, int id) {
+					               String tempcolor = Integer.toHexString(R.id.color_picker_red);
+					               tempcolor = tempcolor+Integer.toHexString(R.id.color_picker_red);
+					               tempcolor = tempcolor+Integer.toHexString(R.id.color_picker_green);
+					               tempcolor = tempcolor+Integer.toHexString(R.id.color_picker_blue);
+					               tempcolor = tempcolor+Integer.toHexString(R.id.color_picker_alpha);
+					               SharedPreferences bgcolortoedit = DobroApplication.getApplicationStatic().getDefaultPrefs();
+					               bgcolortoedit.edit().putString("img_viewer_bg_color", tempcolor).commit();
+					               }
+					           })
+					           .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					               public void onClick(DialogInterface dialog, int id) {
+					            DobroOptions.this.dismissDialog(id);
+					               }
+					           });
+					    builder.create();
+						return true;	
+					}
+		});*/
 		EditTextPreference txt = (EditTextPreference) findPreference("spells");
 		txt.getEditText().setSingleLine(false);
 		txt.getEditText().setMinLines(3);
@@ -124,9 +177,9 @@ public class DobroOptions extends PreferenceActivity {
 		t2h.getEditText().setSingleLine(false);
 		t2h.getEditText().setMinLines(3);
 		
-		EditTextPreference dt = (EditTextPreference) findPreference("download_target");
+		/*EditTextPreference dt = (EditTextPreference) findPreference("download_target");
 		dt.getEditText().setSingleLine(false);
-		dt.getEditText().setMinLines(3);
+		dt.getEditText().setMinLines(3);*/
 		
 		
 		if(Build.VERSION.SDK_INT < 9)
