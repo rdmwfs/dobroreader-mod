@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DobroReader</string>
+    <string name="Image_viewer_bg_color_summary">Цвет фона в формате hex</string>
     <string name="loading">Загрузка&#8230;</string>
     <string name="next_page">Читать дальше</string>
     <string name="page">Страница № %s</string>
@@ -188,4 +189,5 @@
 	<string name="password_title">Пароль</string>
 	<string name="thumb_desc">Thumbnail</string>
 	<string name="download_target_summary">Папка, в которую загружаются изображения</string>
+	<string name="image_viewer_bg_color">Цвет фона просмотрщика изображений</string>
 </resources>

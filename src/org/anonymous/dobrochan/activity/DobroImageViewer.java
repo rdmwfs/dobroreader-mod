@@ -17,10 +17,13 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -135,7 +138,9 @@ public class DobroImageViewer extends Activity {
 		
 		ImageLoader.getInstance().displayImage(getIntent().getStringExtra("preview"), splash);
 		
-		wi = new WebImage(v, true, false, 0x000000FF); //TODO: background color from settings
+		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		wi = new WebImage(v, true, false, /*0x000000FF Integer.parseInt(prefs.getString("img_viewer_bg_color1", "000000FF"),16)*/Color.parseColor(prefs.getString("img_viewer_bg_color1", "#FF000000"))); //TODO: background color from settings
+		
 		v.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) 
                {
