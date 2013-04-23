@@ -51,7 +51,15 @@
             android:defaultValue="true"
             android:summary="@string/youtube_summary"
             android:title="@string/youtube_title" />
-        <EditTextPreference android:key="download_target" android:title="@string/download_target" android:summary="@string/download_target_summary"/>
+        <EditTextPreference 
+            android:key="download_target" 
+            android:title="@string/download_target" 
+            android:summary="@string/download_target_summary"/>
+        <EditTextPreference 
+            android:key="img_viewer_bg_color1" 
+            android:title="@string/image_viewer_bg_color" 
+            android:defaultValue="#FF000000"
+        	android:summary="@string/Image_viewer_bg_color_summary"/>
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/general" >
