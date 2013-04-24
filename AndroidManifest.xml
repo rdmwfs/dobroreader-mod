@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.anonymous.dobrochan.clear"
+    package="org.anonymous.dobrochan"
     android:versionCode="70"
-    android:versionName="3.3.10" >
+    android:versionName="3.3.11" >
 
     <uses-sdk android:minSdkVersion="8" />
 
@@ -16,12 +16,12 @@
     <uses-feature android:name="android.hardware.wifi" android:required="false" />
 
     <application
-        android:name="org.anonymous.dobrochan.DobroApplication"
+        android:name=".DobroApplication"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.DobroTheme">
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroHomeActivity"
+            android:name=".activity.DobroHomeActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name" >
             <intent-filter>
@@ -31,11 +31,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name="org.anonymous.dobrochan.DobroNetworkService" >
+        <service android:name=".DobroNetworkService" >
         </service>
 
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroBoardActivity"
+            android:name=".activity.DobroBoardActivity"
             android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -48,15 +48,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroBoardActivityEx"
+            android:name=".activity.DobroBoardActivityEx"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroOptions"
+            android:name=".activity.DobroOptions"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroThreadActivity"
+            android:name=".activity.DobroThreadActivity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTop">
             <intent-filter>
@@ -76,22 +76,22 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroPostActivity"
+            android:name=".activity.DobroPostActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
 
-        <receiver android:name="org.anonymous.dobrochan.DobroNetworkStateReceiver" >
+        <receiver android:name=".DobroNetworkStateReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroHiddenEditor"
+            android:name=".activity.DobroHiddenEditor"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroStarredEditor"
+            android:name=".activity.DobroStarredEditor"
             android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
     			<action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -99,23 +99,23 @@
   			</intent-filter>
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroNewPostActivity"
+            android:name=".activity.DobroNewPostActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroGotoActivity"
+            android:name=".activity.DobroGotoActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroHistoryActivity"
+            android:name=".activity.DobroHistoryActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity 
-            android:name="org.anonymous.dobrochan.activity.DobroTabsList"
+            android:name=".activity.DobroTabsList"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name="org.anonymous.dobrochan.activity.CopyPasteActivity"
+            android:name=".activity.CopyPasteActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
@@ -126,7 +126,7 @@
             android:theme="@android:style/Theme.Dialog" />
         
         <activity
-            android:name="org.anonymous.dobrochan.activity.DobroImageViewer"
+            android:name=".activity.DobroImageViewer"
             android:configChanges="keyboardHidden|keyboard|orientation"
             android:theme="@android:style/Theme.NoTitleBar">
 <!--             <meta-data -->
@@ -134,7 +134,7 @@
 <!--                 android:value=".PostListActivity" /> -->
         </activity>
         
-        <service android:name="org.anonymous.dobrochan.DCDashClockExtension"
+        <service android:name=".DCDashClockExtension"
             android:icon="@drawable/dashclock"
             android:label="@string/app_name"
             android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">

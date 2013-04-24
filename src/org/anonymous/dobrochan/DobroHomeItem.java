@@ -2,7 +2,7 @@ package org.anonymous.dobrochan;
 
 import greendroid.widget.item.TextItem;
 import greendroid.widget.itemview.ItemView;
-import org.anonymous.dobrochan.clear.R;
+import org.anonymous.dobrochan.R;
 
 import android.content.Context;
 import android.view.ViewGroup;

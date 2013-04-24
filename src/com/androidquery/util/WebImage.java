@@ -19,7 +19,7 @@ package com.androidquery.util;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 
-import org.anonymous.dobrochan.clear.R;
+import org.anonymous.dobrochan.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

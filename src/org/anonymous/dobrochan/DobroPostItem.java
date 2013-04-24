@@ -3,7 +3,7 @@ package org.anonymous.dobrochan;
 import java.io.IOException;
 
 import org.anonymous.dobrochan.json.DobroPost;
-import org.anonymous.dobrochan.clear.R;
+import org.anonymous.dobrochan.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

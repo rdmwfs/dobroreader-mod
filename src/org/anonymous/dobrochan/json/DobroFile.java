@@ -17,7 +17,7 @@ public class DobroFile {
 		public Float length;
 		public Integer sample_rate;
 		public String tracknumber;
-		public Integer bitrate;
+		public Float bitrate;
 		//PDF
 		public Boolean secured;
 		//Text

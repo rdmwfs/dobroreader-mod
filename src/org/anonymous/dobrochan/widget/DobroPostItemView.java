@@ -17,7 +17,7 @@ import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroPostItem;
 import org.anonymous.dobrochan.DobroQuoteHolder;
 import org.anonymous.dobrochan.DobroTabsHolder;
-import org.anonymous.dobrochan.clear.R;
+import org.anonymous.dobrochan.R;
 import org.anonymous.dobrochan.TextViewWithSpoilers;
 import org.anonymous.dobrochan.activity.CopyPasteActivity;
 import org.anonymous.dobrochan.activity.DobroNewPostActivity;

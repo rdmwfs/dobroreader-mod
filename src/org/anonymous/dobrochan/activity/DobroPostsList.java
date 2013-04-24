@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroPostItem;
-import org.anonymous.dobrochan.clear.R;
+import org.anonymous.dobrochan.R;
 
 import android.app.Dialog;
 import android.graphics.Bitmap;
