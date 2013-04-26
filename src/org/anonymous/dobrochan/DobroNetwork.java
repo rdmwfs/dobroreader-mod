@@ -29,7 +29,7 @@ import org.anonymous.dobrochan.json.DobroSession;
 import org.anonymous.dobrochan.json.DobroThread;
 import org.anonymous.dobrochan.sqlite.IThreadsCache;
 import org.anonymous.dobrochan.sqlite.IThreadsInfoCache;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

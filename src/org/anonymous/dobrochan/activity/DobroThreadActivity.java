@@ -24,7 +24,7 @@ import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
 import org.anonymous.dobrochan.DobroTabsHolder;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
 

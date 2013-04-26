@@ -5,7 +5,7 @@ import java.io.File;
 import org.anonymous.dobrochan.ApiWrapper;
 import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroHelper;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;

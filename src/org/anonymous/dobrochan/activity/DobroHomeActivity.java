@@ -31,7 +31,7 @@ import org.anonymous.dobrochan.DobroConstants;
 import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroHomeItem;
 import org.anonymous.dobrochan.DobroNetwork;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

@@ -10,7 +10,7 @@ import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroConstants;
 import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroFile.Rating;
 import org.anonymous.dobrochan.activity.DobroImageViewer;
 

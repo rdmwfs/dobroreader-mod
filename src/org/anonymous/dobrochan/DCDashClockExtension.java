@@ -3,7 +3,7 @@ package org.anonymous.dobrochan;
 import greendroid.app.GDActivity;
 
 import org.anonymous.dobrochan.activity.DobroStarredEditor;
-import org.anonymous.dobrochan.R;
+import org.anonymous.dobrochan.reader.R;
 
 import android.content.Context;
 import android.content.Intent;
