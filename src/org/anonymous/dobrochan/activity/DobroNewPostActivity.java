@@ -1,4 +1,4 @@
-﻿package org.anonymous.dobrochan.activity;
+package org.anonymous.dobrochan.activity;
 
 import greendroid.app.GDActivity;
 import greendroid.util.Md5Util;
