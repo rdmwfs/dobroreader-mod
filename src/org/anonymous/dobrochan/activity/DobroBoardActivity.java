@@ -130,19 +130,26 @@ public class DobroBoardActivity extends DobroPostsList {
 					postPositionMap.put(post.getDisplay_id(),
 							adapter.getCount());
 					adapter.add(postItem);
+
 					final int skipped_count = post.getThread().getPostsCount() - 11;
-					final int skipped_count_mod_ten = skipped_count % 10;
+					final int skipped_count_last_d = skipped_count % 10;
+					final int skipped_count_prelast_d = (skipped_count % 100) / 10;
 					int skipped_string;
-					if(skipped_count < 20 && skipped_count > 4)
+					if (skipped_count_prelast_d == 1)
 						skipped_string = R.string.skipped;
-					else if (skipped_count_mod_ten == 1)
-						skipped_string = R.string.skipped_1;
-					else if (skipped_count_mod_ten == 2 |
-							skipped_count_mod_ten == 3|
-							skipped_count_mod_ten == 4)
-						skipped_string = R.string.skipped_2_3_4;
-					else
-						skipped_string = R.string.skipped;
+					else {
+						switch (skipped_count_last_d) {
+							case 1:  skipped_string = R.string.skipped_1;
+							         break;
+							case 2:
+							case 3:
+							case 4:  skipped_string = R.string.skipped_2_3_4;
+							         break;
+							default: skipped_string = R.string.skipped;
+							break;
+						}
+					}
+
 					if (post.isOp() && thread.getPostsCount() > 11)
 						adapter.add(new SeparatorItem(DobroBoardActivity.this
 								.getString(skipped_string,
@@ -225,7 +232,7 @@ public class DobroBoardActivity extends DobroPostsList {
 			startActivity(intent);
 			return true;
 		}
-		
+
 	else return super.onOptionsItemSelected(item);
 	}
 

@@ -70,7 +70,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 	private ThreadLoader atask = null;
 	public String board = null;
 	public ExpandablePostAdapter<Item,Item> m_adapter = null;
-	
+
 	public Map<String,Integer[]> postPositionMap = new HashMap<String, Integer[]>();
 
 	private class ThreadLoaderParams {
@@ -153,19 +153,25 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 						Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(postItem, new LinkedList<Item>());
 						adapter.add(ent);
 
-						final int skipped_count = post.getThread().getPostsCount();
-						final int skipped_count_mod_ten = skipped_count % 10;
-						int skipped_string;
-						if(skipped_count < 20 && skipped_count > 4)
-							skipped_string = R.string.skipped_ex;
-						else if (skipped_count_mod_ten == 1)
-							skipped_string = R.string.skipped_ex_1;
-						else if (skipped_count_mod_ten == 2 |
-								skipped_count_mod_ten == 3|
-								skipped_count_mod_ten == 4)
-							skipped_string = R.string.skipped_ex_2_3_4;
-						else
-							skipped_string = R.string.skipped_ex;
+					final int skipped_count = post.getThread().getPostsCount() - 11;
+					final int skipped_count_last_d = skipped_count % 10;
+					final int skipped_count_prelast_d = (skipped_count % 100) / 10;
+					int skipped_string;
+					if (skipped_count_prelast_d == 1)
+						skipped_string = R.string.skipped_ex;
+					else {
+						switch (skipped_count_last_d) {
+							case 1:  skipped_string = R.string.skipped_ex_1;
+							         break;
+							case 2:
+							case 3:
+							case 4:  skipped_string = R.string.skipped_ex_2_3_4;
+							         break;
+							default: skipped_string = R.string.skipped_ex;
+							break;
+						}
+					}
+
 						String s = DobroBoardActivityEx.this
 								.getString(skipped_string,
 										String.valueOf(skipped_count),
@@ -339,7 +345,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 					.substring(DobroConstants.NEXT.length())));
 		}
 	}
-	
+
 	@Override
 	public void openLinks(List<String> list) {
 		List<DobroPostItem> items = new LinkedList<DobroPostItem>();
@@ -363,14 +369,14 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 		ItemAdapter ad = new ItemAdapter(this, items.toArray(new Item[0]));
 		ListView listView = new ListView(this);
 		listView.setAdapter(ad);
-		
+
 		Dialog d = new Dialog(this);//,DobroHelper.getDialogTheme(this));
 		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		d.setCanceledOnTouchOutside(true);
 		d.setContentView(listView);
 		d.show();
 	}
-	
+
 	@Override
 	public boolean openLink(CharSequence post) {
 		Integer[] pos = postPositionMap.get(post);
