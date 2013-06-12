@@ -1,6 +1,6 @@
 package org.anonymous.dobrochan;
 
-import greendroid.app.GDActivity;
+import greendroid.app.ActionBarActivity;
 
 import org.anonymous.dobrochan.activity.DobroStarredEditor;
 import org.anonymous.dobrochan.reader.R;
@@ -19,7 +19,7 @@ public class DCDashClockExtension extends DashClockExtension {
 	protected void onInitialize(boolean isReconnect) {
 		super.onInitialize(isReconnect);
 		setUpdateWhenScreenOn(true);
-		String[] urls = {"null://org.anonymous.dobrochan.content.favs"};
+		String[] urls = { "null://org.anonymous.dobrochan.content.favs" };
 		addWatchContentUris(urls);
 	}
 
@@ -33,16 +33,20 @@ public class DCDashClockExtension extends DashClockExtension {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if(intent != null && TextUtils.equals(intent.getAction(),"org.anonymous.dobrochan.favs")) {
+		if (intent != null
+				&& TextUtils.equals(intent.getAction(),
+						"org.anonymous.dobrochan.favs")) {
 			dump = null;
 			text = null;
-			if(intent.hasExtra(DobroConstants.FAVS_DUMP)) {
+			if (intent.hasExtra(DobroConstants.FAVS_DUMP)) {
 				dump = intent.getStringExtra(DobroConstants.FAVS_DUMP);
 			}
-			if(intent.hasExtra(DobroConstants.FAVS_TITLES)) {
+			if (intent.hasExtra(DobroConstants.FAVS_TITLES)) {
 				text = intent.getStringExtra(DobroConstants.FAVS_TITLES);
 			}
-			getContentResolver().notifyChange(Uri.parse("hull://org.anonymous.dobrochan.content.favs"), null, false);
+			getContentResolver().notifyChange(
+					Uri.parse("hull://org.anonymous.dobrochan.content.favs"),
+					null, false);
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -51,24 +55,22 @@ public class DCDashClockExtension extends DashClockExtension {
 	protected void onUpdateData(int arg0) {
 		updateInfo();
 	}
-	
+
 	private void updateInfo() {
-		if(dump == null) {
+		if (dump == null) {
 			publishUpdate(null);
 			return;
 		}
 		Context context = DobroApplication.getApplicationStatic();
 		Intent notificationIntent = new Intent(context,
 				DobroStarredEditor.class);
-		notificationIntent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
+		notificationIntent.putExtra(ActionBarActivity.GD_ACTION_BAR_TITLE,
 				context.getString(R.string.starred));
 		notificationIntent.putExtra(DobroConstants.FAVS_DUMP, dump);
-		publishUpdate(new ExtensionData()
-			.visible(true)
-			.icon(R.drawable.dashclock)
-			.status("+")
-			.expandedTitle("DobroReader")
-			.expandedBody("Новые сообщения:\n"+text)
-			.clickIntent(notificationIntent));
+		publishUpdate(new ExtensionData().visible(true)
+				.icon(R.drawable.dashclock).status("+")
+				.expandedTitle("DobroReader")
+				.expandedBody("Новые сообщения:\n" + text)
+				.clickIntent(notificationIntent));
 	}
 }

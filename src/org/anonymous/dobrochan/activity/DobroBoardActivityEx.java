@@ -1,8 +1,7 @@
 package org.anonymous.dobrochan.activity;
 
-import greendroid.app.GDActivity;
+import greendroid.app.ActionBarActivity;
 import greendroid.app.GDExpandableListActivity;
-import greendroid.util.Md5Util;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.Item;
@@ -26,10 +25,10 @@ import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
 import org.anonymous.dobrochan.ExpandablePostAdapter;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
+import org.anonymous.dobrochan.reader.R;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -37,41 +36,37 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
-public class DobroBoardActivityEx extends GDExpandableListActivity implements IPostsList {
+public class DobroBoardActivityEx extends GDExpandableListActivity implements
+		IPostsList {
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-		if(position == -1) {
+		if (position == -1) {
 			Intent i = new Intent(this, DobroTabsList.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, "Вкладки");
 			i.putExtra(DobroConstants.BOARD, board);
-			i.putExtra(DobroConstants.TITLE, getIntent().getStringExtra(GD_ACTION_BAR_TITLE));
+			i.putExtra(DobroConstants.TITLE,
+					getIntent().getStringExtra(GD_ACTION_BAR_TITLE));
 			startActivity(i);
 			return true;
 		}
 		return super.onHandleActionBarItemClick(item, position);
 	}
+
 	private ThreadLoader atask = null;
 	public String board = null;
-	public ExpandablePostAdapter<Item,Item> m_adapter = null;
+	public ExpandablePostAdapter<Item, Item> m_adapter = null;
 
-	public Map<String,Integer[]> postPositionMap = new HashMap<String, Integer[]>();
+	public Map<String, Integer[]> postPositionMap = new HashMap<String, Integer[]>();
 
 	private class ThreadLoaderParams {
 		public String board;
@@ -99,93 +94,104 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 		protected void onPostExecute(DobroBoard result) {
 			super.onPostExecute(result);
 			final ExpandablePostAdapter adapter = DobroBoardActivityEx.this.m_adapter;
-			ProgressItem pi = (ProgressItem) adapter.getGroup(adapter.getGroupCount() - 1);
+			ProgressItem pi = (ProgressItem) adapter.getGroup(adapter
+					.getGroupCount() - 1);
 			pi.isInProgress = false;
-			if (result == null)
-			{
-				pi.text = DobroBoardActivityEx.this.getString(R.string.next_page);
+			if (result == null) {
+				pi.text = DobroBoardActivityEx.this
+						.getString(R.string.next_page);
 				pi.enabled = true;
 				adapter.notifyDataSetChanged();
 				return;
 			}
 			pi.text = getString(R.string.page, page_s);
 			pi.enabled = false;
-			SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-			String[] hide_rules = prefs.getString("threads2hide", "").split("\n");
+			SharedPreferences prefs = DobroApplication.getApplicationStatic()
+					.getDefaultPrefs();
+			String[] hide_rules = prefs.getString("threads2hide", "").split(
+					"\n");
 			for (DobroThread thread : result.getThreads()) {
-				if(thread == null)
+				if (thread == null)
 					continue;
-				/*if (thread != null
-						&& thread.getTitle() != null
-						&& (Md5Util.md5(thread.getTitle()).equalsIgnoreCase(
-								DobroConstants.DCOTT)))
-					continue;*/
-				if (thread != null && thread.getTitle() != null)
-				{
+				/*
+				 * if (thread != null && thread.getTitle() != null &&
+				 * (Md5Util.md5(thread.getTitle()).equalsIgnoreCase(
+				 * DobroConstants.DCOTT))) continue;
+				 */
+				if (thread != null && thread.getTitle() != null) {
 					boolean skip_thread = false;
-					for(String rule : hide_rules)
-						if(!TextUtils.isEmpty(rule))
-						{
-							try{
-								if(Pattern.compile(rule, Pattern.CASE_INSENSITIVE).matcher(thread.getTitle()).find())
+					for (String rule : hide_rules)
+						if (!TextUtils.isEmpty(rule)) {
+							try {
+								if (Pattern
+										.compile(rule, Pattern.CASE_INSENSITIVE)
+										.matcher(thread.getTitle()).find())
 									skip_thread = true;
 							} catch (Exception e) {
-								 if(TextUtils.equals(rule, thread.getTitle()))
-									 skip_thread = true;
+								if (TextUtils.equals(rule, thread.getTitle()))
+									skip_thread = true;
 							}
-							if(skip_thread)
+							if (skip_thread)
 								break;
 						}
-					if(skip_thread)
-					{
-						DobroNetwork.getInstance().hideThread(thread.getBoardName(), thread.getDisplay_id());
+					if (skip_thread) {
+						DobroNetwork.getInstance().hideThread(
+								thread.getBoardName(), thread.getDisplay_id());
 						continue;
 					}
 				}
 				for (DobroPost post : thread.getPosts()) {
 					DobroPostItem postItem = new DobroPostItem(post);
 					postItem.setTag(DobroConstants.POST_TAG);
-					Integer[] arr = {post.isOp()?adapter.getGroupCount():adapter.getGroupCount()-1,
-							post.isOp()?-1:adapter.getChildrenCount(adapter.getGroupCount()-1)};
-					postPositionMap.put(post.getDisplay_id(),arr);
-					if(post.isOp())
-					{
-						Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(postItem, new LinkedList<Item>());
+					Integer[] arr = {
+							post.isOp() ? adapter.getGroupCount() : adapter
+									.getGroupCount() - 1,
+							post.isOp() ? -1 : adapter.getChildrenCount(adapter
+									.getGroupCount() - 1) };
+					postPositionMap.put(post.getDisplay_id(), arr);
+					if (post.isOp()) {
+						Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(
+								postItem, new LinkedList<Item>());
 						adapter.add(ent);
 
-					final int skipped_count = post.getThread().getPostsCount() - 11;
-					final int skipped_count_last_d = skipped_count % 10;
-					final int skipped_count_prelast_d = (skipped_count % 100) / 10;
-					int skipped_string;
-					if (skipped_count_prelast_d == 1)
-						skipped_string = R.string.skipped_ex;
-					else {
-						switch (skipped_count_last_d) {
-							case 1:  skipped_string = R.string.skipped_ex_1;
-							         break;
+						final int skipped_count = post.getThread()
+								.getPostsCount() - 11;
+						final int skipped_count_last_d = skipped_count % 10;
+						final int skipped_count_prelast_d = (skipped_count % 100) / 10;
+						int skipped_string;
+						if (skipped_count_prelast_d == 1)
+							skipped_string = R.string.skipped_ex;
+						else {
+							switch (skipped_count_last_d) {
+							case 1:
+								skipped_string = R.string.skipped_ex_1;
+								break;
 							case 2:
 							case 3:
-							case 4:  skipped_string = R.string.skipped_ex_2_3_4;
-							         break;
-							default: skipped_string = R.string.skipped_ex;
-							break;
+							case 4:
+								skipped_string = R.string.skipped_ex_2_3_4;
+								break;
+							default:
+								skipped_string = R.string.skipped_ex;
+								break;
+							}
 						}
-					}
 
-						String s = DobroBoardActivityEx.this
-								.getString(skipped_string,
-										String.valueOf(skipped_count),
-										String.valueOf(thread.getFilesCount()));
+						String s = DobroBoardActivityEx.this.getString(
+								skipped_string, String.valueOf(skipped_count),
+								String.valueOf(thread.getFilesCount()));
 						String[] sarr = s.split("\n");
-//						if (post.isOp() && thread.getPostsCount() > 11)
+						// if (post.isOp() && thread.getPostsCount() > 11)
 						final TextItem gr = new SubtextItem(sarr[0], sarr[1]);
 						gr.enabled = true;
-						Entry gr_ent = new AbstractMap.SimpleEntry<Item, List<Item>>(gr, new LinkedList<Item>());
-						if(skipped_count > 1)
+						Entry gr_ent = new AbstractMap.SimpleEntry<Item, List<Item>>(
+								gr, new LinkedList<Item>());
+						if (skipped_count > 1)
 							adapter.add(gr_ent);
-					}
-					else
-						adapter.addChild(adapter.getGroup(adapter.getGroupCount()-1),postItem);
+					} else
+						adapter.addChild(
+								adapter.getGroup(adapter.getGroupCount() - 1),
+								postItem);
 				}
 			}
 			ProgressItem nextPage = new ProgressItem(
@@ -194,7 +200,8 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 			nextPage.setTag(DobroConstants.NEXT
 					+ String.valueOf(Integer.parseInt(page_s) + 1));
 			List list = new LinkedList<Item>();
-			Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(nextPage, list);
+			Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(nextPage,
+					list);
 			adapter.add(ent);
 			adapter.notifyDataSetChanged();
 			atask = null;
@@ -213,14 +220,16 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.update_board:
-			m_adapter = new ExpandablePostAdapter<Item, Item>(this, 0, 0, 0, new LinkedList<Entry<Item, List<Item>>>());
+			m_adapter = new ExpandablePostAdapter<Item, Item>(this, 0, 0, 0,
+					new LinkedList<Entry<Item, List<Item>>>());
 			atask = null;
 			final ProgressItem load_item = new ProgressItem(
 					getString(R.string.loading), true);
 			load_item.enabled = false;
 			load_item.setTag(DobroConstants.NEXT + "0");
 			List list = new LinkedList<Item>();
-			Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(load_item, list);
+			Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(
+					load_item, list);
 			m_adapter.add(ent);
 			setListAdapter(m_adapter);
 			createThread("0");
@@ -235,7 +244,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 			Intent intent = new Intent(this, DobroNewPostActivity.class);
 			intent.putExtra(DobroConstants.BOARD, board);
 			intent.putExtra(DobroConstants.THREAD, "0");
-			intent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
+			intent.putExtra(ActionBarActivity.GD_ACTION_BAR_TITLE,
 					String.format("Новый тред в >>%s", board));
 			startActivity(intent);
 			return true;
@@ -257,7 +266,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 	@Override
 	protected void onDestroy() {
 		try {
-//			DobroNetwork.getInstance().clearPendingUrls();
+			// DobroNetwork.getInstance().clearPendingUrls();
 			if (atask != null)
 				atask.cancel(true);
 		} catch (Exception e) {
@@ -273,8 +282,10 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 		super.onCreate(savedInstanceState);
 		this.getExpandableListView().setFastScrollEnabled(true);
 		this.getExpandableListView().setItemsCanFocus(false);
-		this.getExpandableListView().setGroupIndicator(new ColorDrawable(Color.TRANSPARENT));
-		m_adapter = new ExpandablePostAdapter<Item, Item>(this, 0, 0, 0, new LinkedList<Entry<Item, List<Item>>>());
+		this.getExpandableListView().setGroupIndicator(
+				new ColorDrawable(Color.TRANSPARENT));
+		m_adapter = new ExpandablePostAdapter<Item, Item>(this, 0, 0, 0,
+				new LinkedList<Entry<Item, List<Item>>>());
 		final ProgressItem load_item = new ProgressItem(
 				getString(R.string.loading), true);
 		load_item.enabled = false;
@@ -282,26 +293,27 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 		String page = "0";
 		String data = i.getDataString();
 		if (data != null) {
-			Pattern p = Pattern.compile("dobrochan\\.(ru|org)/(.*?)/(.*?)\\.xhtml");
+			Pattern p = Pattern
+					.compile("dobrochan\\.(ru|org)/(.*?)/(.*?)\\.xhtml");
 			Matcher m = p.matcher(data);
-			if(m.find()) {
+			if (m.find()) {
 				board = m.group(2);
 				page = m.group(3);
-				if(TextUtils.equals(page, "index"))
+				if (TextUtils.equals(page, "index"))
 					page = "0";
 			}
 		}
-		if(board == null)
-		{
+		if (board == null) {
 			if (getIntent().hasExtra(DobroConstants.BOARD)) {
-					this.board = getIntent().getStringExtra(DobroConstants.BOARD);
+				this.board = getIntent().getStringExtra(DobroConstants.BOARD);
 			} else {
-					this.board = null;
+				this.board = null;
 			}
 		}
 		load_item.setTag(DobroConstants.NEXT + page);
 		List list = new LinkedList<Item>();
-		Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(load_item, list);
+		Entry ent = new AbstractMap.SimpleEntry<Item, List<Item>>(load_item,
+				list);
 		m_adapter.add(ent);
 		setListAdapter(m_adapter);
 		createThread(page);
@@ -349,20 +361,19 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 	@Override
 	public void openLinks(List<String> list) {
 		List<DobroPostItem> items = new LinkedList<DobroPostItem>();
-		for(String ref : list)
-		{
+		for (String ref : list) {
 			String post = ref.subSequence(2, ref.length()).toString();
 			Integer[] pos = postPositionMap.get(post);
 			DobroPostItem old;
-			try{
-				if(pos[1]==-1)
+			try {
+				if (pos[1] == -1)
 					old = (DobroPostItem) m_adapter.getGroup(pos[0]);
 				else
 					old = (DobroPostItem) m_adapter.getChild(pos[0], pos[1]);
 			} catch (IndexOutOfBoundsException e) {
 				old = null;
 			}
-			if(old == null)
+			if (old == null)
 				continue;
 			items.add(new DobroPostItem(old.post));
 		}
@@ -370,7 +381,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 		ListView listView = new ListView(this);
 		listView.setAdapter(ad);
 
-		Dialog d = new Dialog(this);//,DobroHelper.getDialogTheme(this));
+		Dialog d = new Dialog(this);// ,DobroHelper.getDialogTheme(this));
 		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		d.setCanceledOnTouchOutside(true);
 		d.setContentView(listView);
@@ -380,10 +391,9 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 	@Override
 	public boolean openLink(CharSequence post) {
 		Integer[] pos = postPositionMap.get(post);
-		if(pos != null && getExpandableListView() != null)
-		{
+		if (pos != null && getExpandableListView() != null) {
 			List<String> l = new LinkedList<String>();
-			l.add(">>"+post.toString());
+			l.add(">>" + post.toString());
 			openLinks(l);
 			return true;
 		}

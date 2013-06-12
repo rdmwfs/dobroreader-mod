@@ -13,7 +13,7 @@ public class SpoilerSpan extends CharacterStyle implements UpdateAppearance {
 	public SpoilerSpan() {
 		super();
 		clickable = !DobroApplication.getApplicationStatic().show_spoilers;
-		if(clickable) {
+		if (clickable) {
 			clicked = false;
 		}
 	}
@@ -21,12 +21,12 @@ public class SpoilerSpan extends CharacterStyle implements UpdateAppearance {
 	@Override
 	public void updateDrawState(TextPaint arg0) {
 		arg0.setColor(Color.GRAY);
-		if(!clicked)
+		if (!clicked)
 			arg0.bgColor = Color.GRAY;
 	}
 
 	public void onClick(View arg0) {
-		if(clickable)
+		if (clickable)
 			clicked = !clicked;
 	}
 

@@ -23,28 +23,41 @@ public class DobroConstants {
 	public static final String DOMAIN = "dobrochan.ru";
 	public static final String HOST = "http://" + DOMAIN + "/";
 	public static final String API_DIFF = HOST + "api/chan/stats/diff.json";
-	public static final String API_DET_POST      = HOST + "api/post/%s/%s.json?new_format&message_html";
-	public static final String API_THREAD_INFO   = HOST + "api/thread/%s/last.json?new_format&count=1";
-	public static final String API_FULL_THREAD   = HOST + "api/thread/%s/all.json?new_format&message_html";
-	public static final String API_NEW_POSTS     = HOST + "api/thread/%s/new.json?new_format&last_post=%s&message_html"; 
-	public static final String API_COUNT_POSTS   = HOST + "api/thread/%s/last.json?new_format&count=%s&message_html";
-	public static final String API_HIDE_THREAD   = HOST + "api/thread/%s/%s/hide.json";
-	public static final String API_UNHIDE_THREAD = HOST + "api/thread/%s/%s/unhide.json";
-	public static final String API_FAV_THREAD    = HOST + "api/thread/%s/%s/sign.json";
-	public static final String API_UNFAV_THREAD  = HOST + "api/thread/%s/%s/unsign.json";
-	public static final String API_SESSION_INFO  = HOST + "api/user.json?new_format";
-	//public static final String API_THREADS_INFO  = HOST + "api/user.json?threads&new_format";
-	public static final String API_HIDDEN_INFO  = HOST + "api/user.json?threads&new_format&thread-level=hidden";
-	public static final String API_FAVS_INFO  = HOST + "api/user.json?threads&new_format&thread-level=bookmarked";
-	public static final String API_BOARD  		 = HOST + "%s/%s.json?new_format";
-	public static final String API_DEL_POST		 = HOST + "%s/delete";
+	public static final String API_DET_POST = HOST
+			+ "api/post/%s/%s.json?new_format&message_html";
+	public static final String API_THREAD_INFO = HOST
+			+ "api/thread/%s/last.json?new_format&count=1";
+	public static final String API_FULL_THREAD = HOST
+			+ "api/thread/%s/all.json?new_format&message_html";
+	public static final String API_NEW_POSTS = HOST
+			+ "api/thread/%s/new.json?new_format&last_post=%s&message_html";
+	public static final String API_COUNT_POSTS = HOST
+			+ "api/thread/%s/last.json?new_format&count=%s&message_html";
+	public static final String API_HIDE_THREAD = HOST
+			+ "api/thread/%s/%s/hide.json";
+	public static final String API_UNHIDE_THREAD = HOST
+			+ "api/thread/%s/%s/unhide.json";
+	public static final String API_FAV_THREAD = HOST
+			+ "api/thread/%s/%s/sign.json";
+	public static final String API_UNFAV_THREAD = HOST
+			+ "api/thread/%s/%s/unsign.json";
+	public static final String API_SESSION_INFO = HOST
+			+ "api/user.json?new_format";
+	// public static final String API_THREADS_INFO = HOST +
+	// "api/user.json?threads&new_format";
+	public static final String API_HIDDEN_INFO = HOST
+			+ "api/user.json?threads&new_format&thread-level=hidden";
+	public static final String API_FAVS_INFO = HOST
+			+ "api/user.json?threads&new_format&thread-level=bookmarked";
+	public static final String API_BOARD = HOST + "%s/%s.json?new_format";
+	public static final String API_DEL_POST = HOST + "%s/delete";
 	public static final String APP_DIR = "%s/Android/data/org.anonymous.dobrochan/";
 	public static final String TEMP_COMMON = APP_DIR + "temp/";
 	public static final String TEMP_FILE = TEMP_COMMON + "%s.%s";
 	public static final String BANNERS_DIR = APP_DIR + "banners/";
 	public static final String DEFAULT_UA = "Android-%s-%s - Mozilla/5.0 (Linux; U; Android %s; en-us; %s) DobroReader/%s (JSON)";
-	public static final String POST_NEW = HOST+"%s/post/new.xhtml";
-	/*public static final String DCOTT  = "ba92f8660044c3627aa7624020a31030";*/
+	public static final String POST_NEW = HOST + "%s/post/new.xhtml";
+	/* public static final String DCOTT = "ba92f8660044c3627aa7624020a31030"; */
 	public static final String PICRELATED_BACKGROUND = "#10FFFFFF";
 	public static final String POST_TAG = "POST";
 	public static final String UPDATE_TAG = "UPDATE";
@@ -99,8 +112,8 @@ public class DobroConstants {
 		temp.put(3, "news");
 		BOARD_ID_TO_NAME = Collections.unmodifiableMap(temp);
 	}
-	
-	//old unused
+
+	// old unused
 	public static final String THREADS_CACHE = APP_DIR + "threads/";
 	public static final String THREADS_INFO_CACHE = APP_DIR + "threads_info/";
 }
