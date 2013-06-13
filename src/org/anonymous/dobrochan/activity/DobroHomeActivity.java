@@ -531,6 +531,14 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		// getActionBar().setTitle(getString(R.string.app_name));// ??
 	}
 
+	@Override
+	protected void onResume() {
+		DobroHelper.updateCurrentTheme(this);
+		DobroHelper.setOrientation(this);
+		assets = getAssets();
+		super.onResume();
+	}
+
 	void updateAutorunIcon(ActionBarItem abi) {
 		SharedPreferences prefs = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();

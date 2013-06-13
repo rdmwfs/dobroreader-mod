@@ -1,11 +1,13 @@
 package org.anonymous.dobrochan.activity;
 
 import java.io.File;
+import java.util.zip.Inflater;
 
 import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.reader.R;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.view.LayoutInflater;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
@@ -117,6 +120,21 @@ public class DobroOptions extends PreferenceActivity {
 		DobroHelper.setOrientation(this);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.options);
+		Preference theme = findPreference("theme");
+		theme.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				LayoutInflater inflater = DobroOptions.this.getLayoutInflater();
+				AlertDialog.Builder adb = new AlertDialog.Builder(
+						DobroOptions.this);
+				adb.setView(inflater.inflate(R.layout.changing_theme_alert,
+						null));
+				adb.setTitle("Изменение темы")
+						.setIcon(android.R.drawable.ic_dialog_alert).show();
+				return false;
+			}
+		});
 		clearCache = findPreference("clearCache");
 		clearCache
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -179,5 +197,4 @@ public class DobroOptions extends PreferenceActivity {
 		new CacheSizeCounter().execute();
 		((DobroApplication) getApplication()).unregisterAlarm();
 	}
-
 }
