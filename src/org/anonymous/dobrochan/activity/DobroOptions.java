@@ -1,7 +1,6 @@
 package org.anonymous.dobrochan.activity;
 
 import java.io.File;
-import java.util.zip.Inflater;
 
 import org.anonymous.dobrochan.DobroApplication;
 import org.anonymous.dobrochan.DobroHelper;

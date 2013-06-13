@@ -67,7 +67,8 @@ public class DobroGotoActivity extends GDActivity implements
 			}
 			break;
 		default:
-			throw new RuntimeException(getText(R.string.beh_not_impl).toString());
+			throw new RuntimeException(getText(R.string.beh_not_impl)
+					.toString());
 		}
 	}
 

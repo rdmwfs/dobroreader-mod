@@ -58,7 +58,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DobroHomeActivity extends GDListActivity implements DialogInterface.OnClickListener {
+public class DobroHomeActivity extends GDListActivity implements
+		DialogInterface.OnClickListener {
 	private class PostsDiffGetter extends
 			AsyncTask<Void, Void, Map<String, Integer>> {
 		@Override
@@ -571,13 +572,13 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		case AB_SETT:
 			startActivity(new Intent(this, DobroOptions.class));
 			break;
-		
+
 		case AB_CHECK:
 			final CharSequence[] items = { "Всегда", "Wifi", "Никогда" };
 			new AlertDialog.Builder(this).setTitle(R.string.autorun)
 					.setItems(items, this).show();
 			break;
-		
+
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
@@ -607,11 +608,11 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		case 0:
 			prefEditor.putString("autorun_network", "always");
 			break;
-		
+
 		case 1:
 			prefEditor.putString("autorun_network", "wifi");
 			break;
-		
+
 		case 3:
 			prefEditor.putString("autorun_network", "never");
 			break;

@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
@@ -326,12 +325,12 @@ public class CachedAsyncImageView extends ImageView implements OnClickListener,
 			ApiWrapper.download(uri, fileUri, fname, getContext(), open);
 		}
 	}
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		final String urlTag = (String) getTag();
-		//XXX
+		// XXX
 		menu.add("Загрузить").setOnMenuItemClickListener(
 				new OnMenuItemClickListener() {
 					@Override
@@ -523,11 +522,11 @@ public class CachedAsyncImageView extends ImageView implements OnClickListener,
 
 	@Override
 	public boolean onMenuItemClick(MenuItem item) {
-		//TODO меню
+		// TODO меню
 		item.getItemId();
 		CharSequence title = item.getTitle();
-		if(title.equals("Загрузить")){
-			
+		if (title.equals("Загрузить")) {
+
 		}
 		return false;
 	}
