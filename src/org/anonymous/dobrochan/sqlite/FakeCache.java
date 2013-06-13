@@ -3,7 +3,8 @@ package org.anonymous.dobrochan.sqlite;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeCache implements IHiddenPosts, IThreadsCache, IThreadsInfoCache {
+public class FakeCache implements IHiddenPosts, IThreadsCache,
+		IThreadsInfoCache {
 
 	@Override
 	public void clearCache() {

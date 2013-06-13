@@ -11,8 +11,8 @@ import java.util.Comparator;
 
 import org.anonymous.dobrochan.ApiWrapper;
 import org.anonymous.dobrochan.DobroApplication;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.minoriko.BitmapDownloaderTask;
+import org.anonymous.dobrochan.reader.R;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 
@@ -23,7 +23,6 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +35,6 @@ import android.widget.ProgressBar;
 import com.androidquery.util.AQUtility;
 import com.androidquery.util.WebImage;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 public class DobroImageViewer extends Activity {
 	ImageDownloader async = null;
@@ -44,23 +42,24 @@ public class DobroImageViewer extends Activity {
 	WebImage wi;
 	ImageView splash;
 	ProgressBar pb;
-	private static Class<?>[] LAYER_TYPE_SIG = {int.class, Paint.class};
+	private static Class<?>[] LAYER_TYPE_SIG = { int.class, Paint.class };
 	public static final int LAYER_TYPE_SOFTWARE = 1;
-	
+
 	private String save_to, file_url;
-	
+
 	private class ImageDownloader extends AsyncTask<String, Integer, String> {
 		boolean canceled = false;
+
 		@Override
 		protected void onCancelled() {
 			canceled = true;
 		}
 
 		private long size = 0;
-		
+
 		@Override
 		protected void onPostExecute(String result) {
-			if(result != null)
+			if (result != null)
 				wi.load(result);
 			pb.setVisibility(View.GONE);
 			v.setVisibility(View.VISIBLE);
@@ -69,165 +68,182 @@ public class DobroImageViewer extends Activity {
 
 		@Override
 		protected void onProgressUpdate(Integer... values) {
-			if(values[0] > -1)
+			if (values[0] > -1)
 				pb.setProgress(values[0]);
-        	pb.setVisibility(View.VISIBLE);
+			pb.setVisibility(View.VISIBLE);
 		}
 
 		@Override
 		protected String doInBackground(String... params) {
 			clearCache();
-			try{
-				String fname = BitmapDownloaderTask.getFileName(DobroImageViewer.this, params[0].toString());
-				for(int i = 0; i < 3; i++) // 3 попытки скачивания 
-				if (!new File(fname).exists()) {
-					File temp = new File(fname+".tmp");
-					try {
-						HttpResponse response = DobroApplication.getApplicationStatic().getNetwork().httpGet(params[0]);
-						HttpEntity ent = response.getEntity();
-						InputStream input = ent.getContent();
-						size = ent.getContentLength();
-						FileOutputStream fOut = new FileOutputStream(temp);
-						long byteCount = 0;
-						byte[] buffer = new byte[4096];
-						int bytesRead = -1;
-						while ((bytesRead = input.read(buffer)) != -1 && !canceled) {
-							fOut.write(buffer, 0, bytesRead);
-							byteCount += bytesRead;
-							if(size > 0)
-								publishProgress((int)(byteCount/(float)size*100));
+			try {
+				String fname = BitmapDownloaderTask.getFileName(
+						DobroImageViewer.this, params[0].toString());
+				for (int i = 0; i < 3; i++)
+					// 3 попытки скачивания
+					if (!new File(fname).exists()) {
+						File temp = new File(fname + ".tmp");
+						try {
+							HttpResponse response = DobroApplication
+									.getApplicationStatic().getNetwork()
+									.httpGet(params[0]);
+							HttpEntity ent = response.getEntity();
+							InputStream input = ent.getContent();
+							size = ent.getContentLength();
+							FileOutputStream fOut = new FileOutputStream(temp);
+							long byteCount = 0;
+							byte[] buffer = new byte[4096];
+							int bytesRead = -1;
+							while ((bytesRead = input.read(buffer)) != -1
+									&& !canceled) {
+								fOut.write(buffer, 0, bytesRead);
+								byteCount += bytesRead;
+								if (size > 0)
+									publishProgress((int) (byteCount
+											/ (float) size * 100));
+							}
+							fOut.flush();
+							fOut.close();
+							ent.consumeContent();
+							if (byteCount == size) {
+								temp.renameTo(new File(fname));
+							} else {
+								temp.delete();
+							}
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+							if (temp.exists())
+								temp.delete();
+						} catch (IOException e) {
+							e.printStackTrace();
+							if (temp.exists())
+								temp.delete();
 						}
-						fOut.flush();
-						fOut.close();
-						ent.consumeContent();
-						if(byteCount == size) {
-							temp.renameTo(new File(fname));
-						} else {
-							temp.delete();
-						}
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-						if(temp.exists())
-							temp.delete();
-					} catch (IOException e) {
-						e.printStackTrace();
-						if(temp.exists())
-							temp.delete();
 					}
-				}
 				return fname;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.web_runtime);
 		file_url = getIntent().getStringExtra("file");
 		save_to = getIntent().getStringExtra("save_to");
 		v = (WebView) findViewById(R.id.webview);
 		pb = (ProgressBar) findViewById(R.id.loadingbar);
-		splash = (ImageView)findViewById(R.id.spoon_preview);
-		
-		ImageLoader.getInstance().displayImage(getIntent().getStringExtra("preview"), splash);
-		
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		wi = new WebImage(v, true, false, /*0x000000FF Integer.parseInt(prefs.getString("img_viewer_bg_color1", "000000FF"),16)*/Color.parseColor(prefs.getString("img_viewer_bg_color1", "#FF000000"))); //TODO: background color from settings
-		
+		splash = (ImageView) findViewById(R.id.spoon_preview);
+
+		ImageLoader.getInstance().displayImage(
+				getIntent().getStringExtra("preview"), splash);
+
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
+		wi = new WebImage(v, true, false, /*
+										 * 0x000000FF
+										 * Integer.parseInt(prefs.getString
+										 * ("img_viewer_bg_color1",
+										 * "000000FF"),16)
+										 */Color.parseColor(prefs.getString(
+				"img_viewer_bg_color1", "#FF000000")));
+		// TODO: background color from settings
+
 		v.setWebChromeClient(new WebChromeClient() {
-			public void onProgressChanged(WebView view, int progress) 
-               {
-//            	pb.setProgress(progress);
-//            	pb.setVisibility(View.VISIBLE);
-            	if(progress == 100) {
-            		wi.done(wi.wv);
-        			splash.setVisibility(View.GONE);
-            	}
-               }
-        });
-		AQUtility.invokeHandler(v, "setLayerType", false, false, LAYER_TYPE_SIG, LAYER_TYPE_SOFTWARE, null);
+			@Override
+			public void onProgressChanged(WebView view, int progress) {
+				// pb.setProgress(progress);
+				// pb.setVisibility(View.VISIBLE);
+				if (progress == 100) {
+					wi.done(wi.wv);
+					splash.setVisibility(View.GONE);
+				}
+			}
+		});
+		AQUtility.invokeHandler(v, "setLayerType", false, false,
+				LAYER_TYPE_SIG, LAYER_TYPE_SOFTWARE, null);
 		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	protected void onResume() {
-		async = (ImageDownloader) new ImageDownloader().execute(getIntent().getStringExtra("sample"));
+		async = (ImageDownloader) new ImageDownloader().execute(getIntent()
+				.getStringExtra("sample"));
 		super.onResume();
 	}
-	
 
 	@Override
 	protected void onPause() {
-		if(async != null && !async.isCancelled())
+		if (async != null && !async.isCancelled())
 			async.cancel(false);
 		async = null;
 		super.onPause();
 	}
-	
+
 	private void clearCache() {
 		File dir = ApiWrapper.getExternalCacheDir(this);
-    	File[] list = dir.listFiles(new FilenameFilter() {
+		File[] list = dir.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
-				if(!filename.contains(".") || filename.endsWith(".tmp"))
+				if (!filename.contains(".") || filename.endsWith(".tmp"))
 					return true;
 				return false;
 			}
 		});
-    	if(list != null && list.length > 10) {
-    		Arrays.sort(list, new Comparator<File>(){
+		if (list != null && list.length > 10) {
+			Arrays.sort(list, new Comparator<File>() {
 				@Override
 				public int compare(File arg0, File arg1) {
-					if(arg0.lastModified() > arg1.lastModified())
+					if (arg0.lastModified() > arg1.lastModified())
 						return 1;
-					else if(arg0.lastModified() < arg1.lastModified())
+					else if (arg0.lastModified() < arg1.lastModified())
 						return -1;
 					return 0;
 				}
-    		});
-    		if(list[0].lastModified() > list[list.length-1].lastModified()) {
-    			for(int i = list.length-1; i>9; i--)
-    				list[i].delete();
-    		} else {
-    			for(int i = 0; i<list.length-10; i++)
-    				list[i].delete();
-    		}
-    	}
+			});
+			if (list[0].lastModified() > list[list.length - 1].lastModified()) {
+				for (int i = list.length - 1; i > 9; i--)
+					list[i].delete();
+			} else {
+				for (int i = 0; i < list.length - 10; i++)
+					list[i].delete();
+			}
+		}
 	}
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.imgview, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.imgmenu_save:
-        {
-        	File picsDir = new File(ApiWrapper.getDownloadDir());
-    		Uri fileUri = Uri.parse("file://" + picsDir.getAbsolutePath()
-    				+ File.separator + save_to);
-        	ApiWrapper.download(Uri.parse(file_url), fileUri, save_to, this, false);
-        }
-            return true;
-        case R.id.imgmenu_save_and_open:
-        {
-        	File picsDir = new File(ApiWrapper.getDownloadDir());
-    		Uri fileUri = Uri.parse("file://" + picsDir.getAbsolutePath()
-    				+ File.separator + save_to);
-        	ApiWrapper.download(Uri.parse(file_url), fileUri, save_to, this, true);
-        }
-        	return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.imgview, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.imgmenu_save: {
+			File picsDir = new File(ApiWrapper.getDownloadDir());
+			Uri fileUri = Uri.parse("file://" + picsDir.getAbsolutePath()
+					+ File.separator + save_to);
+			ApiWrapper.download(Uri.parse(file_url), fileUri, save_to, this,
+					false);
+		}
+			return true;
+		case R.id.imgmenu_save_and_open: {
+			File picsDir = new File(ApiWrapper.getDownloadDir());
+			Uri fileUri = Uri.parse("file://" + picsDir.getAbsolutePath()
+					+ File.separator + save_to);
+			ApiWrapper.download(Uri.parse(file_url), fileUri, save_to, this,
+					true);
+		}
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }

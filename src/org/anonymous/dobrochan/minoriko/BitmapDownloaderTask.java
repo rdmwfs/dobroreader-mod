@@ -48,17 +48,17 @@ import android.content.Context;
  */
 public class BitmapDownloaderTask {
 
-    public static String getFileName(Context context, String url) {
-        File cacheDir = ApiWrapper.getExternalCacheDir(context);
-        File dir = new File(cacheDir, "full-sized");
+	public static String getFileName(Context context, String url) {
+		File cacheDir = ApiWrapper.getExternalCacheDir(context);
+		File dir = new File(cacheDir, "full-sized");
 		if (!dir.exists()) {
 			if (!dir.mkdir()) {
 				dir = cacheDir;
 			}
 		}
-        if (dir == null) { // no SD card
-            return "";
-        }
-        return dir.getPath() + "/" + Integer.toHexString(url.hashCode());
-    }
+		if (dir == null) { // no SD card
+			return "";
+		}
+		return dir.getPath() + "/" + Integer.toHexString(url.hashCode());
+	}
 }

@@ -1,15 +1,16 @@
 package org.anonymous.dobrochan.json;
 
 public class DobroFile {
-	public enum Rating{
+	public enum Rating {
 		SWF, R15, R18, R18G, ILLEGAL
 	}
+
 	public static class Metadata {
 		public String type; // Archive | MP3 | PDF | Text
-		//Archive
+		// Archive
 		public String[] files;
 		public Integer files_count;
-		//MP3
+		// MP3
 		public String album;
 		public String artist;
 		public String title;
@@ -18,18 +19,19 @@ public class DobroFile {
 		public Integer sample_rate;
 		public String tracknumber;
 		public Float bitrate;
-		//PDF
+		// PDF
 		public Boolean secured;
-		//Text
+		// Text
 		public Integer lines;
 
 		public Integer width;
 		public Integer height;
 
 		public Metadata() {
+			// TODO SPECIFIED CONSTRUCTORS
 		}
 	}
-	
+
 	public DobroFile() {
 	}
 

@@ -1,5 +1,8 @@
 package org.anonymous.dobrochan;
 
+import greendroid.widget.item.Item;
+import greendroid.widget.itemview.ItemView;
+
 import java.io.IOException;
 
 import org.anonymous.dobrochan.json.DobroPost;
@@ -11,15 +14,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import greendroid.widget.item.Item;
-import greendroid.widget.itemview.ItemView;
 
 public class DobroPostItem extends Item {
 	public DobroPost post;
+
 	public DobroPostItem(DobroPost p) {
 		super();
 		this.post = p;
 	}
+
 	@Override
 	public ItemView newView(Context context, ViewGroup parent) {
 		return createCellFromXml(context, R.layout.post_item_view, parent);

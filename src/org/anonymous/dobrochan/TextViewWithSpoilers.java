@@ -24,18 +24,19 @@ public class TextViewWithSpoilers extends TextView implements OnClickListener {
 		super(context);
 		handleSpoilers();
 	}
+
 	void handleSpoilers() {
 		setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(DobroApplication.getApplicationStatic().show_spoilers)
+		if (DobroApplication.getApplicationStatic().show_spoilers)
 			return;
-		try{
-			SpoilerSpan[] spans = ((Spannable) getText()).getSpans(0,
-					getText().length(), SpoilerSpan.class);
-			for(SpoilerSpan span : spans)
+		try {
+			SpoilerSpan[] spans = ((Spannable) getText()).getSpans(0, getText()
+					.length(), SpoilerSpan.class);
+			for (SpoilerSpan span : spans)
 				span.onClick(this);
 			invalidate();
 		} catch (Exception e) {

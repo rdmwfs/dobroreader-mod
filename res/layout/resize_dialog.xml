@@ -9,21 +9,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <EditText
+        <TextView
             android:id="@+id/resizeX"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:enabled="false"/>
+            android:layout_height="wrap_content" 
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_weight="1" />
 
-        <EditText
+        <TextView
             android:id="@+id/resizeY"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:enabled="false"/>
+            android:layout_height="wrap_content" 
+            android:gravity="center"
+            android:textColor="@android:color/white" 
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <SeekBar
@@ -31,23 +31,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:max="999"
-        android:progress="999" />
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button android:id="@+id/resizeOk"
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="OK"/>
-        <Button android:id="@+id/resizeCancel"
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Отмена"/>
-    </LinearLayout>
+        android:progress="999" 
+        android:layout_margin="3dp"/>
 
 </LinearLayout>

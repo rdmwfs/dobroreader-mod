@@ -64,7 +64,7 @@
     
     <PreferenceCategory android:title="@string/general" >
         <ListPreference
-            android:defaultValue="dark"
+            android:defaultValue="dc"
             android:entries="@array/theme_keys"
             android:entryValues="@array/theme_values"
             android:key="theme"

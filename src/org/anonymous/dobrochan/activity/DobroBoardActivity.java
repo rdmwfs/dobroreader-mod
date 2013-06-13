@@ -1,7 +1,6 @@
 package org.anonymous.dobrochan.activity;
 
-import greendroid.app.GDActivity;
-import greendroid.util.Md5Util;
+import greendroid.app.ActionBarActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.Item;
@@ -17,16 +16,15 @@ import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
+import org.anonymous.dobrochan.reader.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,11 +37,12 @@ import com.google.gson.JsonObject;
 public class DobroBoardActivity extends DobroPostsList {
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-		if(position == -1) {
+		if (position == -1) {
 			Intent i = new Intent(this, DobroTabsList.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, "Вкладки");
 			i.putExtra(DobroConstants.BOARD, board);
-			i.putExtra(DobroConstants.TITLE, getIntent().getStringExtra(GD_ACTION_BAR_TITLE));
+			i.putExtra(DobroConstants.TITLE,
+					getIntent().getStringExtra(GD_ACTION_BAR_TITLE));
 			startActivity(i);
 			return true;
 		}
@@ -83,8 +82,7 @@ public class DobroBoardActivity extends DobroPostsList {
 			ProgressItem pi = (ProgressItem) adapter
 					.getItem(adapter.getCount() - 1);
 			pi.isInProgress = false;
-			if (result == null)
-			{
+			if (result == null) {
 				pi.text = DobroBoardActivity.this.getString(R.string.next_page);
 				pi.enabled = true;
 				adapter.notifyDataSetChanged();
@@ -92,35 +90,37 @@ public class DobroBoardActivity extends DobroPostsList {
 			}
 			pi.text = getString(R.string.page, page_s);
 			pi.enabled = false;
-			SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-			String[] hide_rules = prefs.getString("threads2hide", "").split("\n");
+			SharedPreferences prefs = DobroApplication.getApplicationStatic()
+					.getDefaultPrefs();
+			String[] hide_rules = prefs.getString("threads2hide", "").split(
+					"\n");
 			for (DobroThread thread : result.getThreads()) {
-				if(thread == null)
+				if (thread == null)
 					continue;
-				/*if (thread != null
-						&& thread.getTitle() != null
-						&& (Md5Util.md5(thread.getTitle()).equalsIgnoreCase(
-								DobroConstants.DCOTT)))
-					continue;*/
-				if (thread != null && thread.getTitle() != null)
-				{
+				/*
+				 * if (thread != null && thread.getTitle() != null &&
+				 * (Md5Util.md5(thread.getTitle()).equalsIgnoreCase(
+				 * DobroConstants.DCOTT))) continue;
+				 */
+				if (thread != null && thread.getTitle() != null) {
 					boolean skip_thread = false;
-					for(String rule : hide_rules)
-						if(!TextUtils.isEmpty(rule))
-						{
-							try{
-								if(Pattern.compile(rule, Pattern.CASE_INSENSITIVE).matcher(thread.getTitle()).find())
+					for (String rule : hide_rules)
+						if (!TextUtils.isEmpty(rule)) {
+							try {
+								if (Pattern
+										.compile(rule, Pattern.CASE_INSENSITIVE)
+										.matcher(thread.getTitle()).find())
 									skip_thread = true;
 							} catch (Exception e) {
-								 if(TextUtils.equals(rule, thread.getTitle()))
-									 skip_thread = true;
+								if (TextUtils.equals(rule, thread.getTitle()))
+									skip_thread = true;
 							}
-							if(skip_thread)
+							if (skip_thread)
 								break;
 						}
-					if(skip_thread)
-					{
-						DobroNetwork.getInstance().hideThread(thread.getBoardName(), thread.getDisplay_id());
+					if (skip_thread) {
+						DobroNetwork.getInstance().hideThread(
+								thread.getBoardName(), thread.getDisplay_id());
 						continue;
 					}
 				}
@@ -139,13 +139,16 @@ public class DobroBoardActivity extends DobroPostsList {
 						skipped_string = R.string.skipped;
 					else {
 						switch (skipped_count_last_d) {
-							case 1:  skipped_string = R.string.skipped_1;
-							         break;
-							case 2:
-							case 3:
-							case 4:  skipped_string = R.string.skipped_2_3_4;
-							         break;
-							default: skipped_string = R.string.skipped;
+						case 1:
+							skipped_string = R.string.skipped_1;
+							break;
+						case 2:
+						case 3:
+						case 4:
+							skipped_string = R.string.skipped_2_3_4;
+							break;
+						default:
+							skipped_string = R.string.skipped;
 							break;
 						}
 					}
@@ -183,7 +186,7 @@ public class DobroBoardActivity extends DobroPostsList {
 			new ThreadLoader().execute(new ThreadLoaderParams(board, tag
 					.substring(DobroConstants.NEXT.length())));
 		}
-		if (tag!=null&&tag.equalsIgnoreCase(DobroConstants.POST_TAG)) {
+		if (tag != null && tag.equalsIgnoreCase(DobroConstants.POST_TAG)) {
 			/*
 			 * Intent intent = new Intent(DobroDeskActivity.this,
 			 * DobroThreadActivity.class); intent.putExtra(DobroConstants.BOARD,
@@ -206,8 +209,8 @@ public class DobroBoardActivity extends DobroPostsList {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int tempid = item.getItemId();
-		if (tempid == R.id.update_board)
-			{m_adapter = new ItemAdapter(this);
+		if (tempid == R.id.update_board) {
+			m_adapter = new ItemAdapter(this);
 			atask = null;
 			final ProgressItem load_item = new ProgressItem(
 					getString(R.string.loading), true);
@@ -216,24 +219,24 @@ public class DobroBoardActivity extends DobroPostsList {
 			m_adapter.add(load_item);
 			setListAdapter(m_adapter);
 			createThread("0");
-			return true;}
-		else if (tempid == R.id.go_to) {
+			return true;
+		} else if (tempid == R.id.go_to) {
 			Intent i = new Intent(this, DobroGotoActivity.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.go_to));
 			startActivity(i);
 			return true;
-		}
-		else if (tempid == R.id.new_thread) {
+		} else if (tempid == R.id.new_thread) {
 			Intent intent = new Intent(this, DobroNewPostActivity.class);
 			intent.putExtra(DobroConstants.BOARD, board);
 			intent.putExtra(DobroConstants.THREAD, "0");
-			intent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
+			intent.putExtra(ActionBarActivity.GD_ACTION_BAR_TITLE,
 					String.format("Новый тред в >>%s", board));
 			startActivity(intent);
 			return true;
 		}
 
-	else return super.onOptionsItemSelected(item);
+		else
+			return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -249,7 +252,7 @@ public class DobroBoardActivity extends DobroPostsList {
 	@Override
 	protected void onDestroy() {
 		try {
-//			DobroNetwork.getInstance().clearPendingUrls();
+			// DobroNetwork.getInstance().clearPendingUrls();
 			if (atask != null)
 				atask.cancel(true);
 		} catch (Exception e) {
@@ -263,12 +266,14 @@ public class DobroBoardActivity extends DobroPostsList {
 		DobroHelper.updateCurrentTheme(this);
 		DobroHelper.setOrientation(this);
 		super.onCreate(savedInstanceState);
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		boolean ex_board = prefs.getBoolean("expandable_board", true);
-		if(ex_board) {
+		if (ex_board) {
 			Intent ex_intent = getIntent();
 			ex_intent.setClass(this, DobroBoardActivityEx.class);
-			ex_intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			ex_intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(ex_intent);
 			finish();
 			return;
@@ -283,21 +288,21 @@ public class DobroBoardActivity extends DobroPostsList {
 		String page = "0";
 		String data = i.getDataString();
 		if (data != null) {
-			Pattern p = Pattern.compile("dobrochan\\.(ru|org)/(.*?)/(.*?)\\.xhtml");
+			Pattern p = Pattern
+					.compile("dobrochan\\.(ru|org)/(.*?)/(.*?)\\.xhtml");
 			Matcher m = p.matcher(data);
-			if(m.find()) {
+			if (m.find()) {
 				board = m.group(2);
 				page = m.group(3);
-				if(TextUtils.equals(page, "index"))
+				if (TextUtils.equals(page, "index"))
 					page = "0";
 			}
 		}
-		if(board == null)
-		{
+		if (board == null) {
 			if (getIntent().hasExtra(DobroConstants.BOARD)) {
-					this.board = getIntent().getStringExtra(DobroConstants.BOARD);
+				this.board = getIntent().getStringExtra(DobroConstants.BOARD);
 			} else {
-					this.board = null;
+				this.board = null;
 			}
 		}
 		load_item.setTag(DobroConstants.NEXT + page);
