@@ -26,6 +26,7 @@ import org.anonymous.dobrochan.json.DobroToken;
 import org.anonymous.dobrochan.reader.R;
 import org.apache.http.HttpResponse;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -56,10 +57,10 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -69,6 +70,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.http.multipart.FilePart;
@@ -77,7 +79,8 @@ import com.android.internal.http.multipart.Part;
 import com.android.internal.http.multipart.StringPart;
 import com.google.gson.JsonObject;
 
-public class DobroNewPostActivity extends GDActivity {
+public class DobroNewPostActivity extends GDActivity implements
+		Dialog.OnClickListener {
 	boolean back_pressed = false;
 	boolean always_show_captcha = false;
 
@@ -183,21 +186,28 @@ public class DobroNewPostActivity extends GDActivity {
 		protected void onPostExecute(HttpResponse response) {
 			setResult(Activity.RESULT_OK);
 			super.onPostExecute(response);
+
 			try {
+				// если не сможем определить статус отправки, можно будет еще
+				// раз ткнуть в кнопку
 				Button sendButton = (Button) findViewById(R.id.sendButton);
 				sendButton.setEnabled(true);
 			} catch (Exception e) {
 
 			}
+
 			if (!dlg.isShowing()) {
+				// Почему-то ProgressDialog скрыт о_О
+				// Ну и хуй с ним
 				Log.d("DIALOG", "!isShowing()");
 				DobroNewPostActivity.this.finish(); // TODO: check
 				return;
 			}
 			dlg.dismiss();
+
 			if (response == null) {
+				// Сервер не ответил на отправку
 				Log.d("RESPONSE", "NULL");
-				// DobroNewPostActivity.this.finish(); //TODO: check
 				Toast.makeText(DobroNewPostActivity.this,
 						"Не удалось установить статус отправки сообщения.",
 						Toast.LENGTH_SHORT).show();
@@ -205,8 +215,10 @@ public class DobroNewPostActivity extends GDActivity {
 				updateCaptchaImg();
 				return;
 			}
+
 			boolean ok = false;
 			try {
+				// если НЕошибка - будет ok == true
 				ok = !response.getFirstHeader("Location").getValue()
 						.startsWith("http://dobrochan.ru/error/");
 			} catch (NullPointerException e) {
@@ -214,12 +226,14 @@ public class DobroNewPostActivity extends GDActivity {
 				ok = false;
 			}
 			if (!ok) {
+				// таки ошибка
 				Toast.makeText(DobroNewPostActivity.this,
 						"Ошибка отправки сообщения!", Toast.LENGTH_SHORT)
 						.show();
 				error_while_posting = true;
 				updateCaptchaImg();
 			} else {
+				// таки все ок
 				DobroNewPostActivity.this.finish();
 			}
 		}
@@ -227,12 +241,14 @@ public class DobroNewPostActivity extends GDActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dlg = ProgressDialog.show(DobroNewPostActivity.this, "Ожидайте...",
-					"Идет отправка сообщения");
+			dlg = ProgressDialog.show(DobroNewPostActivity.this,
+					"Подождите...", "Идет отправка сообщения");
 			dlg.setCancelable(true);
 			dlg.setOnCancelListener(new OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {
+					// FIXME нихрена не остановит. Нужен Thread canceller,
+					// который, если надо, будет делать HttpResponse.abort()
 					NewPoster.this.cancel(true);
 				}
 			});
@@ -265,7 +281,7 @@ public class DobroNewPostActivity extends GDActivity {
 		addImage(uri, temporary, "SFW");
 	}
 
-	private void addImage(String uri, boolean temporary, String rating) {
+	private void addImage(String uri, boolean temporary, final String rating) {
 		if (attachments.size() >= 5)
 			return;
 		AsyncImageView image = new AsyncImageView(this);
@@ -279,17 +295,26 @@ public class DobroNewPostActivity extends GDActivity {
 		image.setPadding(4, 2, 4, 2);
 		registerForContextMenu(image);
 		image.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+			@SuppressLint("DefaultLocale")
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v,
 					ContextMenuInfo menuInfo) {
 				// menu.setHeaderTitle("Select rating");
 				int i;
+				String r = attachments.get((Integer) v.getTag()).rating;
 				for (i = 0; i < ratings.length; i++) {
-					menu.add(Menu.NONE, (Integer) v.getTag(), i, ratings[i]);
+					if (r.equals(ratings[i].toString().toLowerCase())) {
+						menu.add(Menu.NONE, (Integer) v.getTag(), i,
+								((String) ratings[i]).concat(" (selected)"));
+					} else {
+						menu.add(Menu.NONE, (Integer) v.getTag(), i, ratings[i]);
+					}
 				}
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.crop);
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.resize);
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.delete);
+				Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT)
+						.show();
 			}
 		});
 		LinearLayout scroll = (LinearLayout) findViewById(R.id.picsScroll);
@@ -352,6 +377,9 @@ public class DobroNewPostActivity extends GDActivity {
 				}
 			} else if ((requestCode == SELECT_PICTURE || requestCode == SELECT_FILE)
 					&& imageReturnedIntent != null) {
+				// FIXME при выборе файла может вывалиться RuntimeException за
+				// PermissionDenial. У меня на AndroZip сделалось. RootExplorer
+				// и Dropbox работают
 				Uri selectedImage = imageReturnedIntent.getData();
 				String filePath;
 				if (selectedImage.getScheme().equals("content")) {
@@ -481,7 +509,7 @@ public class DobroNewPostActivity extends GDActivity {
 			photoPickerIntent.setType("image/*");
 			photoPickerIntent
 					.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-			startActivityForResult(photoPickerIntent, SELECT_FILE);
+			startActivityForResult(photoPickerIntent, SELECT_PICTURE);
 		} catch (Exception e) {
 			Toast.makeText(DobroNewPostActivity.this,
 					R.string.open_intent_error, Toast.LENGTH_SHORT).show();
@@ -499,7 +527,7 @@ public class DobroNewPostActivity extends GDActivity {
 			photoPickerIntent.setType("file/*");
 			photoPickerIntent
 					.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-			startActivityForResult(photoPickerIntent, SELECT_PICTURE);
+			startActivityForResult(photoPickerIntent, SELECT_FILE);
 		} catch (Exception e) {
 			Toast.makeText(DobroNewPostActivity.this,
 					R.string.open_intent_error, Toast.LENGTH_SHORT).show();
@@ -633,13 +661,18 @@ public class DobroNewPostActivity extends GDActivity {
 		updateCaptchaImg();
 	}
 
+	/**
+	 * ID элемента, на котором было вызвано onContextMenuItemSelected
+	 */
+	private int id;
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		final NewPostAttachment a = attachments.get(item.getItemId());
+		id = item.getItemId();
 		int order = item.getOrder();
-		if (order < 4)
-			a.rating = item.getTitle().toString();
-		else if (order == 4) {
+		if (order < 4) {
+			attachments.get(id).rating = item.getTitle().toString();
+		} else if (order == 4) {
 			/*
 			 * may be this is better? Intent { act=android.intent.action.VIEW
 			 * dat=file:///mnt/sdcard/Pictures/....jpg
@@ -648,7 +681,7 @@ public class DobroNewPostActivity extends GDActivity {
 			new File(String.format(DobroConstants.TEMP_COMMON, Environment
 					.getExternalStorageDirectory().getPath())).mkdirs();
 			crop_attach = attachments.get(item.getItemId());
-			File f = new File(a.fname);
+			File f = new File(attachments.get(id).fname);
 			Uri photoUri = Uri.fromFile(f);
 			String fname = f.getName();
 			Uri crop_output = Uri.parse("file://"
@@ -668,7 +701,8 @@ public class DobroNewPostActivity extends GDActivity {
 			BitmapFactory.Options o = new BitmapFactory.Options();
 			o.inJustDecodeBounds = true;
 			try {
-				FileInputStream fis = new FileInputStream(a.fname);
+				FileInputStream fis = new FileInputStream(
+						attachments.get(id).fname);
 				BitmapFactory.decodeStream(fis, null, o);
 				fis.close();
 			} catch (FileNotFoundException e) {
@@ -680,17 +714,25 @@ public class DobroNewPostActivity extends GDActivity {
 			}
 			final int oldWidth = o.outWidth;
 			final int oldHeight = o.outHeight;
-			// resize
-			final Dialog dialog = new Dialog(this);
-			dialog.setContentView(R.layout.resize_dialog);
-			dialog.setTitle("Change resolution");
-			final EditText resXEdit = (EditText) dialog
-					.findViewById(R.id.resizeX);
-			resXEdit.setText(String.valueOf(o.outWidth));
-			final EditText resYEdit = (EditText) dialog
-					.findViewById(R.id.resizeY);
-			resYEdit.setText(String.valueOf(o.outHeight));
-			final SeekBar resSeekBar = (SeekBar) dialog
+
+			/* == Creation of dialog == */
+			final AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+			LayoutInflater systemInflater = (LayoutInflater) (getApplicationContext()
+					.getSystemService(LAYOUT_INFLATER_SERVICE));
+			View dialogView = systemInflater.inflate(R.layout.resize_dialog,
+					null);
+
+			adb.setView(dialogView).setTitle("Масштабирование")
+					.setPositiveButton(android.R.string.ok, this)
+					.setNegativeButton(android.R.string.cancel, this);
+
+			final TextView x = (TextView) dialogView.findViewById(R.id.resizeX);
+			x.setText(String.valueOf(o.outWidth));
+			final TextView y = (TextView) dialogView.findViewById(R.id.resizeY);
+			y.setText(String.valueOf(o.outHeight));
+
+			final SeekBar resSeekBar = (SeekBar) dialogView
 					.findViewById(R.id.resizeBar);
 			resSeekBar
 					.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -711,69 +753,14 @@ public class DobroNewPostActivity extends GDActivity {
 							int height = oldHeight * (progress + 1) / 1000;
 							if (height == 0)
 								height = 1;
-							resXEdit.setText(String.valueOf(width));
-							resYEdit.setText(String.valueOf(height));
+							x.setText(String.valueOf(width));
+							y.setText(String.valueOf(height));
 						}
 					});
-			Button ok = (Button) dialog.findViewById(R.id.resizeOk);
-			ok.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					new File(String
-							.format(DobroConstants.TEMP_COMMON, Environment
-									.getExternalStorageDirectory().getPath()))
-							.mkdirs();
-					File f = new File(a.fname);
-					String fname = f.getName();
-					Bitmap out = null;
-					try {
-						out = Bitmap.createScaledBitmap(
-								loadBitmap(a.fname, true),
-								Integer.parseInt(resXEdit.getText().toString()),
-								Integer.parseInt(resYEdit.getText().toString()),
-								true);
-					} catch (Exception e1) {
-						dialog.dismiss();
-						DobroApplication.getApplicationStatic().showToast(
-								e1.getMessage(), 1);
-						return;
-					}
-					String resize_output = String.format(
-							DobroConstants.TEMP_FILE, Environment
-									.getExternalStorageDirectory().getPath(),
-							fname.substring(0, fname.lastIndexOf("."))
-									+ "_resized", "jpg");
-					FileOutputStream out_stream;
-					try {
-						out_stream = new FileOutputStream(resize_output);
-						out.compress(Bitmap.CompressFormat.JPEG, 90, out_stream);
-						out_stream.close();
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-						return;
-					} catch (IOException e) {
-						e.printStackTrace();
-						return;
-					}
-					Bitmap b = loadBitmap(resize_output);
-					if (b == null)
-						return;
-					a.imageview.setImageBitmap(b);
-					a.fname = resize_output;
-					a.delete_after = true;
-					dialog.dismiss();
-				}
-			});
-			Button cancel = (Button) dialog.findViewById(R.id.resizeCancel);
-			cancel.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialog.dismiss();
-				}
-			});
-			dialog.show();
+			adb.show();
 		} else {
 			LinearLayout scroll = (LinearLayout) findViewById(R.id.picsScroll);
+			NewPostAttachment a = attachments.get(id);
 			scroll.removeView(a.imageview);
 			attachments.remove(a);
 			for (NewPostAttachment at : attachments) {
@@ -834,6 +821,9 @@ public class DobroNewPostActivity extends GDActivity {
 		SharedPreferences prefs = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();
 		if (prefs.getBoolean("send_confirm", true)) {
+			// не вынес Listener-ы, потому что, во-1, нельзя просто так взять и
+			// вынести из 2 разных диалогов, и во-2, потому что пофиг на 1-2
+			// строчники
 			new AlertDialog.Builder(new ContextThemeWrapper(this,
 					R.style.AlertDialogLight))
 					.setMessage(R.string.send_confirm_dialog)
@@ -862,22 +852,25 @@ public class DobroNewPostActivity extends GDActivity {
 	private void sendMessage() {
 		Button sendButton = (Button) findViewById(R.id.sendButton);
 		sendButton.setEnabled(false);
-		String ch = "UTF-8";
+		String charset = "UTF-8";
 		List<Part> parts = new LinkedList<Part>();
 		parts.add(new StringPart("message", message_edit.getText().toString(),
-				ch));
+				charset));
 		if (captcha_edit.isEnabled())
 			parts.add(new StringPart("captcha", captcha_edit.getText()
-					.toString(), ch));
-		parts.add(new StringPart("thread_id", thread, ch));
-		parts.add(new StringPart("task", "post", ch));
-		parts.add(new StringPart("name", name_edit.getText().toString(), ch));
-		parts.add(new StringPart("subject", title_edit.getText().toString(), ch));
-		parts.add(new StringPart("new_post", "Отправить", ch));
+					.toString(), charset));
+		parts.add(new StringPart("thread_id", thread, charset));
+		parts.add(new StringPart("task", "post", charset));
+		parts.add(new StringPart("name", name_edit.getText().toString(),
+				charset));
+		parts.add(new StringPart("subject", title_edit.getText().toString(),
+				charset));
+		parts.add(new StringPart("new_post", "Отправить", charset));
 		password = PreferenceManager.getDefaultSharedPreferences(
 				DobroNewPostActivity.this).getString("password", "");
-		if (TextUtils.equals(password, "")) // oops
-		{
+		if (TextUtils.equals(password, "")) {
+			// если в SharedPrefs нет пароля - создаем новый и пихаем туда
+			Log.e("Sending post", "Password is missing");
 			Time now = new Time();
 			now.setToNow();
 			password = Md5Util.md5(now.toString());
@@ -887,11 +880,10 @@ public class DobroNewPostActivity extends GDActivity {
 			ed.commit();
 
 		}
-		parts.add(new StringPart("password", password, ch));
-		Log.e("PASSWORD", password);
+		parts.add(new StringPart("password", password, charset));
 		parts.add(new StringPart("post_files_count", String.valueOf(attachments
-				.size()), ch));
-		parts.add(new StringPart("goto", "thread", ch));
+				.size()), charset));
+		parts.add(new StringPart("goto", "thread", charset));
 		for (int i = 0; i < 6; i++) {
 			String file_key = String.format("file_%s", i + 1);
 			String rating_key = String.format("file_%s_rating", i + 1);
@@ -900,26 +892,81 @@ public class DobroNewPostActivity extends GDActivity {
 					parts.add(new FilePart(file_key, new File(attachments
 							.get(i).fname)));
 					parts.add(new StringPart(rating_key,
-							attachments.get(i).rating, ch));
+							attachments.get(i).rating, charset));
 				} catch (FileNotFoundException e) {
-					parts.add(new StringPart(file_key, "", ch));
-					parts.add(new StringPart(rating_key, "SFW", ch));
+					parts.add(new StringPart(file_key, "", charset));
+					parts.add(new StringPart(rating_key, "SFW", charset));
 				}
 			else {
-				parts.add(new StringPart(file_key, "", ch));
-				parts.add(new StringPart(rating_key, "SFW", ch));
+				parts.add(new StringPart(file_key, "", charset));
+				parts.add(new StringPart(rating_key, "SFW", charset));
 			}
 		}
 		if (((CheckBox) findViewById(R.id.sage)).isChecked())
-			parts.add(new StringPart("sage", "on", ch));
+			parts.add(new StringPart("sage", "on", charset));
 		MultipartEntity entity = new MultipartEntity(parts.toArray(new Part[0]));
 		new NewPoster().execute(entity);
 	}
 
 	protected void updateCaptchaImg() {
-
 		String uri = String.format("http://dobrochan.ru/captcha/%s/%s.png",
 				board, System.currentTimeMillis());
 		new BitmapDownloader().execute(uri);
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		switch (which) {
+		case DialogInterface.BUTTON_POSITIVE:
+			System.out.println("Positive");
+			View x = ((AlertDialog) dialog).findViewById(R.id.resizeX);
+			View y = ((AlertDialog) dialog).findViewById(R.id.resizeY);
+			int width = Integer.parseInt(((TextView) x).getText().toString());
+			int height = Integer.parseInt(((TextView) y).getText().toString());
+			NewPostAttachment a = attachments.get(id);
+			new File(String.format(DobroConstants.TEMP_COMMON, Environment
+					.getExternalStorageDirectory().getPath())).mkdirs();
+			File f = new File(a.fname);
+			String fname = f.getName();
+			Bitmap out = null;
+			try {
+				out = Bitmap.createScaledBitmap(loadBitmap(a.fname, true),
+						width, height, true);
+			} catch (Exception e1) {
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), e1.getMessage(),
+						Toast.LENGTH_LONG);
+				return;
+			}
+			String resize_output = String.format(DobroConstants.TEMP_FILE,
+					Environment.getExternalStorageDirectory().getPath(),
+					fname.substring(0, fname.lastIndexOf(".")) + "_resized",
+					"jpg");
+			FileOutputStream out_stream;
+			try {
+				out_stream = new FileOutputStream(resize_output);
+				out.compress(Bitmap.CompressFormat.JPEG, 90, out_stream);
+				out_stream.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+			Bitmap b = loadBitmap(resize_output);
+			if (b == null)
+				return;
+			a.imageview.setImageBitmap(b);
+			a.fname = resize_output;
+			a.delete_after = true;
+			dialog.dismiss();
+			break;
+
+		case DialogInterface.BUTTON_NEGATIVE:
+			System.out.println("negative");
+			dialog.dismiss();
+			break;
+		}
 	}
 }

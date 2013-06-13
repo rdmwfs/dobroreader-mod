@@ -749,7 +749,7 @@ public class DobroNetwork extends Object {
 		ConnManagerParams.setTimeout(params, 20000);
 		HttpConnectionParams.setSoTimeout(params, 20000);
 		HttpConnectionParams.setTcpNoDelay(params, true);
-		HttpConnectionParams.setSocketBufferSize(params, 8192);
+		HttpConnectionParams.setSocketBufferSize(params, 8 * 1024);
 
 		p.setParams(params);
 		p.setEntity(entity);

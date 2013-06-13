@@ -60,8 +60,8 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
-public class DobroPostItemView extends RelativeLayout implements ItemView,
-		View.OnCreateContextMenuListener {
+public class DobroPostItemView extends RelativeLayout implements ItemView, View.OnClickListener, OnMenuItemClickListener, 
+		View.OnCreateContextMenuListener, View.OnLongClickListener {
 	final static int QA_OPEN = 0;
 	final static int QA_ANSWER = 1;
 	final static int QA_QUOTE = 2;
@@ -122,59 +122,13 @@ public class DobroPostItemView extends RelativeLayout implements ItemView,
 		metadataLayout = (LinearLayout) findViewById(R.id.metadataLayout);
 		// refsView = (TextView) findViewById(R.id.refsView);
 		refsButton = (TextView) findViewById(R.id.refsButton);
-		refsButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				IPostsList activity = null;
-				try {
-					activity = (IPostsList) getContext();
-				} catch (ClassCastException e) {
-				}
-				if (activity == null)
-					return;
-				activity.openLinks(dobroitem.post.getRefs());
-			}
-		});
-		// QA
-		messageView.setOnLongClickListener(new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				DobroPostItemView.this.onShowBar(v);
-				return true;
-			}
-		});
-
-		metadataLayout.setOnLongClickListener(new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				DobroPostItemView.this.onShowBar(v);
-				return true;
-			}
-		});
-
-		titleView.setOnLongClickListener(new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				DobroPostItemView.this.onShowBar(v);
-				return true;
-			}
-		});
-
-		metadataLayout.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				DobroPostItemView.this.onAnyViewClick(v);
-				if (!DobroApplication.getApplicationStatic().show_spoilers)
-					messageView.performClick();
-			}
-		});
-
-		titleView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				DobroPostItemView.this.onAnyViewClick(v);
-			}
-		});
+//XXX
+		refsButton.setOnClickListener(this);
+		messageView.setOnLongClickListener(this);
+		metadataLayout.setOnLongClickListener(this);
+		titleView.setOnLongClickListener(this);
+		metadataLayout.setOnClickListener(this);
+		titleView.setOnClickListener(this);
 	}
 
 	public void onAnyViewClick(View v) {
@@ -890,5 +844,49 @@ public class DobroPostItemView extends RelativeLayout implements ItemView,
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		// TODO меню
+		return false;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.refsButton:
+			IPostsList activity = null;
+			try {
+				activity = (IPostsList) getContext();
+			} catch (ClassCastException e) {
+			}
+			if (activity == null)
+				return;
+			activity.openLinks(dobroitem.post.getRefs());
+			break;
+			
+		case R.id.metadataLayout:
+			DobroPostItemView.this.onAnyViewClick(v);
+			if (!DobroApplication.getApplicationStatic().show_spoilers)
+				messageView.performClick();
+			break;
+			
+		case R.id.titleView:
+			DobroPostItemView.this.onAnyViewClick(v);
+			break;
+		}
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+		switch(v.getId()){
+		case R.id.titleView:
+		case R.id.metadataLayout:
+		case R.id.messageView:
+			DobroPostItemView.this.onShowBar(v);
+			return true;
+		}
+		return false;
 	}
 }

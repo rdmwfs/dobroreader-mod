@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
-public class DobroTabsList extends GDListActivity {
+public class DobroTabsList extends GDListActivity implements View.OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add("Очистить все").setOnMenuItemClickListener(
@@ -221,5 +221,11 @@ public class DobroTabsList extends GDListActivity {
 			DobroTabsHolder.getInstance().addTab(board, thread, scroll, text,
 					post);
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

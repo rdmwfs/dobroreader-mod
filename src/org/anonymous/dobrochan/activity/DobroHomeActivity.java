@@ -32,7 +32,6 @@ import org.anonymous.dobrochan.DobroHomeItem;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.reader.R;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -58,9 +57,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class DobroHomeActivity extends GDListActivity {
+public class DobroHomeActivity extends GDListActivity implements DialogInterface.OnClickListener {
 	private class PostsDiffGetter extends
 			AsyncTask<Void, Void, Map<String, Integer>> {
 		@Override
@@ -475,12 +473,7 @@ public class DobroHomeActivity extends GDListActivity {
 
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		Toast.makeText(
-				getApplicationContext(),
-				Environment.getExternalStorageDirectory().getPath()
-						.concat("/Pictures/MLP/rarity.png"), Toast.LENGTH_LONG)
-				.show();
+	protected void onCreate(Bundle savedInstanceState) {
 		DobroHelper.updateCurrentTheme(this);
 		DobroHelper.setOrientation(this);
 		super.onCreate(savedInstanceState);
@@ -553,6 +546,7 @@ public class DobroHomeActivity extends GDListActivity {
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		if (position == -1) {
+			System.out.println("Home button");
 			Intent i = new Intent(this, DobroTabsList.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, "Вкладки");
 			i.putExtra(DobroConstants.BOARD, "home");
@@ -560,49 +554,22 @@ public class DobroHomeActivity extends GDListActivity {
 			return true;
 		}
 		switch (item.getItemId()) {
-		case AB_STAR: {
+		case AB_STAR:
 			Intent i = new Intent(this, DobroStarredEditor.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.starred));
 			startActivity(i);
-		}
 			break;
+
 		case AB_SETT:
 			startActivity(new Intent(this, DobroOptions.class));
 			break;
+		
 		case AB_CHECK:
 			final CharSequence[] items = { "Всегда", "Wifi", "Никогда" };
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.autorun);
-			builder.setItems(items, new DialogInterface.OnClickListener() {
-				@Override
-				@SuppressLint("NewApi")
-				public void onClick(DialogInterface dialog, int item) {
-					((DobroApplication) getApplication()).unregisterAlarm();
-					SharedPreferences prefs = DobroApplication
-							.getApplicationStatic().getDefaultPrefs();
-					SharedPreferences.Editor prefEditor = prefs.edit();
-					switch (item) {
-					case 0:
-						prefEditor.putString("autorun_network", "always");
-						break;
-					case 1:
-						prefEditor.putString("autorun_network", "wifi");
-						break;
-					default:
-						prefEditor.putString("autorun_network", "never");
-						break;
-					}
-					prefEditor.commit();
-					updateAutorunIcon(getActionBar().getItem(AB_CHECK - 1));
-					String autorun = prefs.getString("autorun_network", "wifi");
-					if (autorun.equalsIgnoreCase("never"))
-						return;
-					((DobroApplication) getApplication()).registerAlarm();
-				}
-			});
-			AlertDialog alert = builder.create();
-			alert.show();
+			new AlertDialog.Builder(this).setTitle(R.string.autorun)
+					.setItems(items, this).show();
 			break;
+		
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
@@ -620,5 +587,32 @@ public class DobroHomeActivity extends GDListActivity {
 		DobroHomeItem board = new DobroHomeItem("/" + data.board + "/", uri);
 		board.setTag(data);
 		adapter.add(board);
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int item) {
+		((DobroApplication) getApplication()).unregisterAlarm();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
+		SharedPreferences.Editor prefEditor = prefs.edit();
+		switch (item) {
+		case 0:
+			prefEditor.putString("autorun_network", "always");
+			break;
+		
+		case 1:
+			prefEditor.putString("autorun_network", "wifi");
+			break;
+		
+		case 3:
+			prefEditor.putString("autorun_network", "never");
+			break;
+		}
+		prefEditor.commit();
+		updateAutorunIcon(getActionBar().getItem(AB_CHECK - 1));
+		String autorun = prefs.getString("autorun_network", "wifi");
+		if (autorun.equalsIgnoreCase("never"))
+			return;
+		((DobroApplication) getApplication()).registerAlarm();
 	}
 }

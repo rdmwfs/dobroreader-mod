@@ -28,6 +28,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
@@ -43,9 +44,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
+/**
+ * Описывает маленькие превьюшки картинок, прицепленных к постам.
+ */
 @SuppressLint("NewApi")
 public class CachedAsyncImageView extends ImageView implements OnClickListener,
-		OnCreateContextMenuListener {
+		OnCreateContextMenuListener, OnMenuItemClickListener {
 	public String mCachedUrl = null;
 	public Rating mRating = Rating.SWF;
 	private Bitmap mBitmap;
@@ -322,11 +326,12 @@ public class CachedAsyncImageView extends ImageView implements OnClickListener,
 			ApiWrapper.download(uri, fileUri, fname, getContext(), open);
 		}
 	}
-
+	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		final String urlTag = (String) getTag();
+		//XXX
 		menu.add("Загрузить").setOnMenuItemClickListener(
 				new OnMenuItemClickListener() {
 					@Override
@@ -514,5 +519,16 @@ public class CachedAsyncImageView extends ImageView implements OnClickListener,
 		} catch (Exception e) {
 		}
 		return null;
+	}
+
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		//TODO меню
+		item.getItemId();
+		CharSequence title = item.getTitle();
+		if(title.equals("Загрузить")){
+			
+		}
+		return false;
 	}
 }

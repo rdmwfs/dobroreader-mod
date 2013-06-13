@@ -21,7 +21,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
 
-public class CaptchaImageView extends AsyncImageView {
+public class CaptchaImageView extends AsyncImageView implements OnMenuItemClickListener {
 
 	public CaptchaImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -98,5 +98,11 @@ public class CaptchaImageView extends AsyncImageView {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		// TODO меню
+		return false;
 	}
 }
