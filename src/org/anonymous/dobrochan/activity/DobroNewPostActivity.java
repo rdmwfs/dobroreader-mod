@@ -303,12 +303,7 @@ public class DobroNewPostActivity extends GDActivity implements
 				int i;
 				String r = attachments.get((Integer) v.getTag()).rating;
 				for (i = 0; i < ratings.length; i++) {
-					if (r.equals(ratings[i].toString().toLowerCase())) {
-						menu.add(Menu.NONE, (Integer) v.getTag(), i,
-								((String) ratings[i]).concat(" (selected)"));
-					} else {
-						menu.add(Menu.NONE, (Integer) v.getTag(), i, ratings[i]);
-					}
+					menu.add(Menu.NONE, (Integer) v.getTag(), i, ratings[i]);
 				}
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.crop);
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.resize);
@@ -935,7 +930,7 @@ public class DobroNewPostActivity extends GDActivity implements
 			} catch (Exception e1) {
 				dialog.dismiss();
 				Toast.makeText(getApplicationContext(), e1.getMessage(),
-						Toast.LENGTH_LONG);
+						Toast.LENGTH_LONG).show();
 				return;
 			}
 			String resize_output = String.format(DobroConstants.TEMP_FILE,
