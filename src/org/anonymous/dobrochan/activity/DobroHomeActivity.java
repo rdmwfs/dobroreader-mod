@@ -1,8 +1,7 @@
 package org.anonymous.dobrochan.activity;
 
-import greendroid.app.GDActivity;
+import greendroid.app.ActionBarActivity;
 import greendroid.app.GDListActivity;
-import greendroid.widget.ActionBar;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.SeparatorItem;
@@ -33,13 +32,12 @@ import org.anonymous.dobrochan.DobroHomeItem;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.reader.R;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
@@ -48,8 +46,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.EditTextPreference;
-import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -59,25 +55,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DobroHomeActivity extends GDListActivity {
-	private class PostsDiffGetter extends AsyncTask<Void, Void, Map<String, Integer> > {
+public class DobroHomeActivity extends GDListActivity implements DialogInterface.OnClickListener {
+	private class PostsDiffGetter extends
+			AsyncTask<Void, Void, Map<String, Integer>> {
 		@Override
 		protected void onPostExecute(Map<String, Integer> result) {
-			if(result == null)
+			if (result == null)
 				return;
-			for(int i = 0; i<adapter.getCount(); i++)
-			{
-				try{
-					DobroHomeItem item = (DobroHomeItem)adapter.getItem(i);
+			for (int i = 0; i < adapter.getCount(); i++) {
+				try {
+					DobroHomeItem item = (DobroHomeItem) adapter.getItem(i);
 					StringPair p = (StringPair) item.getTag();
-					if(result.containsKey(p.board))
-						item.text = "/"+p.board+"/\n"+String.valueOf(result.get(p.board));
+					if (result.containsKey(p.board))
+						item.text = "/" + p.board + "/\n"
+								+ String.valueOf(result.get(p.board));
 					else
-						item.text = "/"+p.board+"/\n?";
+						item.text = "/" + p.board + "/\n?";
 				} catch (ClassCastException e) {
 					continue;
 				}
@@ -90,7 +86,7 @@ public class DobroHomeActivity extends GDListActivity {
 			return DobroNetwork.getInstance().getPostsDiff();
 		}
 	}
-	
+
 	private class OldDataCleaner extends AsyncTask<Void, Integer, Void> {
 		ProgressDialog dlg;
 		boolean canceled = false;
@@ -181,15 +177,15 @@ public class DobroHomeActivity extends GDListActivity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			try{
+			try {
 				dlg.dismiss();
 				if (result) {
 					Intent intent = getIntent();
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 				}
 			} catch (Exception e) {
-				
+
 			}
 			super.onPostExecute(result);
 		}
@@ -315,24 +311,29 @@ public class DobroHomeActivity extends GDListActivity {
 		}
 		if (DobroHelper.checkSdcard()
 				&& !new File(dir.getAbsolutePath() + "/.data_v1").isFile()) {
-			new BannersLoader()
-					.execute(DobroConstants.BANNERS_SOURCE);
+			new BannersLoader().execute(DobroConstants.BANNERS_SOURCE);
 		}
-		SharedPreferences dt = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences dt = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String temp_gt_val = "";
-		if(Build.VERSION.SDK_INT > 7)
-			temp_gt_val = Environment.getExternalStoragePublicDirectory(
-					Environment.DIRECTORY_PICTURES).getAbsolutePath().toString()
+		if (Build.VERSION.SDK_INT > 7)
+			temp_gt_val = Environment
+					.getExternalStoragePublicDirectory(
+							Environment.DIRECTORY_PICTURES).getAbsolutePath()
+					.toString()
 					+ File.separator;
 		else
-			temp_gt_val = Environment.getExternalStorageDirectory().getAbsolutePath()
-					+ File.separator + "Pictures" + File.separator;
+			temp_gt_val = Environment.getExternalStorageDirectory()
+					.getAbsolutePath()
+					+ File.separator
+					+ "Pictures"
+					+ File.separator;
 		String temp_gt_val_to_compare = dt.getString("download_target", "");
-		 
-		if (temp_gt_val_to_compare == "")
-			{
-			dt.edit().putString("download_target",temp_gt_val).commit();
-			};
+
+		if (temp_gt_val_to_compare == "") {
+			dt.edit().putString("download_target", temp_gt_val).commit();
+		}
+		;
 		String threads_cache_dir = String.format(DobroConstants.THREADS_CACHE,
 				Environment.getExternalStorageDirectory());
 		String threads_info_cache_dir = String.format(
@@ -344,26 +345,28 @@ public class DobroHomeActivity extends GDListActivity {
 				&& (dir1.isDirectory() || dir2.isDirectory())) {
 			new OldDataCleaner().execute();
 		}
-		new Thread(new Runnable(){
+		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					File cacheDir = ApiWrapper.getExternalCacheDir(DobroHomeActivity.this);
+					File cacheDir = ApiWrapper
+							.getExternalCacheDir(DobroHomeActivity.this);
 					File[] files2del = cacheDir.listFiles(new FilenameFilter() {
-						
+
 						@Override
 						public boolean accept(File dir, String filename) {
-							if(filename.startsWith("images_cache"))
+							if (filename.startsWith("images_cache"))
 								return true;
 							return false;
 						}
 					});
-					for(File f : files2del)
+					for (File f : files2del)
 						f.delete();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}}).start();
+			}
+		}).start();
 	}
 
 	private final int AB_STAR = 1;
@@ -419,10 +422,9 @@ public class DobroHomeActivity extends GDListActivity {
 			message.setMovementMethod(LinkMovementMethod.getInstance());
 			message.setPadding(4, 4, 4, 4);
 			message.setTextColor(Color.WHITE);
-			new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogLight))
-					.setIcon(R.drawable.icon)
-					.setTitle("About")
-					.setPositiveButton("Ok", null)
+			new AlertDialog.Builder(new ContextThemeWrapper(this,
+					R.style.AlertDialogLight)).setIcon(R.drawable.icon)
+					.setTitle("About").setPositiveButton("Ok", null)
 					.setView(message).show();
 			return true;
 		}
@@ -457,19 +459,21 @@ public class DobroHomeActivity extends GDListActivity {
 		super.onListItemClick(l, v, position, id);
 		final DobroHomeItem item = (DobroHomeItem) l.getAdapter().getItem(
 				position);
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		boolean ex_board = prefs.getBoolean("expandable_board", true);
-		Intent intent = new Intent(this, (ex_board?DobroBoardActivityEx.class:DobroBoardActivity.class));
+		Intent intent = new Intent(this, (ex_board ? DobroBoardActivityEx.class
+				: DobroBoardActivity.class));
 		intent.putExtra(DobroConstants.BOARD,
 				((StringPair) item.getTag()).board);
-		intent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
+		intent.putExtra(ActionBarActivity.GD_ACTION_BAR_TITLE,
 				((StringPair) item.getTag()).caption);
 		startActivity(intent);
 	}
 
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		DobroHelper.updateCurrentTheme(this);
 		DobroHelper.setOrientation(this);
 		super.onCreate(savedInstanceState);
@@ -524,15 +528,16 @@ public class DobroHomeActivity extends GDListActivity {
 		updateAutorunIcon(abi);
 		addActionBarItem(ActionBarItem.Type.Settings, AB_SETT);
 		new PostsDiffGetter().execute();
-//		getActionBar().setTitle(getString(R.string.app_name));// ??
+		// getActionBar().setTitle(getString(R.string.app_name));// ??
 	}
-	
+
 	void updateAutorunIcon(ActionBarItem abi) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String autorun = prefs.getString("autorun_network", "wifi");
-		if(TextUtils.equals(autorun, "always"))
+		if (TextUtils.equals(autorun, "always"))
 			abi.setDrawable(R.drawable.spin_28x32);
-		else if(TextUtils.equals(autorun, "wifi"))
+		else if (TextUtils.equals(autorun, "wifi"))
 			abi.setDrawable(R.drawable.rss_alt_32x32);
 		else
 			abi.setDrawable(R.drawable.x_alt_32x32);
@@ -540,7 +545,8 @@ public class DobroHomeActivity extends GDListActivity {
 
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-		if(position == -1) {
+		if (position == -1) {
+			System.out.println("Home button");
 			Intent i = new Intent(this, DobroTabsList.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, "Вкладки");
 			i.putExtra(DobroConstants.BOARD, "home");
@@ -548,49 +554,24 @@ public class DobroHomeActivity extends GDListActivity {
 			return true;
 		}
 		switch (item.getItemId()) {
-		case AB_STAR: {
+		case AB_STAR:
 			Intent i = new Intent(this, DobroStarredEditor.class);
 			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.starred));
 			startActivity(i);
-		}
 			break;
+
 		case AB_SETT:
 			startActivity(new Intent(this, DobroOptions.class));
 			break;
+
 		case AB_CHECK:
-			final CharSequence[] items = {"Всегда", "Wifi", "Никогда"};
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.autorun);
-			builder.setItems(items, new DialogInterface.OnClickListener() {
-			    @SuppressLint("NewApi")
-				public void onClick(DialogInterface dialog, int item) {
-			    	((DobroApplication) getApplication()).unregisterAlarm();
-			    	SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-			    	SharedPreferences.Editor prefEditor = prefs.edit();
-			    	switch(item) {
-			    	case 0:
-				    	prefEditor.putString("autorun_network", "always");
-			    		break;
-			    	case 1:
-				    	prefEditor.putString("autorun_network", "wifi");
-			    		break;
-			    	default:
-				    	prefEditor.putString("autorun_network", "never");
-			    		break;
-			    	}
-			        prefEditor.commit();
-					updateAutorunIcon(getActionBar().getItem(AB_CHECK-1));
-					String autorun = prefs.getString("autorun_network", "wifi");
-					if (autorun.equalsIgnoreCase("never"))
-						return;
-					((DobroApplication) getApplication()).registerAlarm();
-			    }
-			});
-			AlertDialog alert = builder.create();
-			alert.show();
+			final CharSequence[] items = { "Всегда", "Wifi", "Никогда" };
+			new AlertDialog.Builder(this).setTitle(R.string.autorun)
+					.setItems(items, this).show();
 			break;
-			default:
-				return super.onHandleActionBarItemClick(item, position);
+
+		default:
+			return super.onHandleActionBarItemClick(item, position);
 		}
 		return true;
 	}
@@ -606,5 +587,32 @@ public class DobroHomeActivity extends GDListActivity {
 		DobroHomeItem board = new DobroHomeItem("/" + data.board + "/", uri);
 		board.setTag(data);
 		adapter.add(board);
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int item) {
+		((DobroApplication) getApplication()).unregisterAlarm();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
+		SharedPreferences.Editor prefEditor = prefs.edit();
+		switch (item) {
+		case 0:
+			prefEditor.putString("autorun_network", "always");
+			break;
+
+		case 1:
+			prefEditor.putString("autorun_network", "wifi");
+			break;
+
+		case 3:
+			prefEditor.putString("autorun_network", "never");
+			break;
+		}
+		prefEditor.commit();
+		updateAutorunIcon(getActionBar().getItem(AB_CHECK - 1));
+		String autorun = prefs.getString("autorun_network", "wifi");
+		if (autorun.equalsIgnoreCase("never"))
+			return;
+		((DobroApplication) getApplication()).registerAlarm();
 	}
 }
