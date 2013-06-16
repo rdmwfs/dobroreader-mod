@@ -198,7 +198,7 @@ public class DobroNewPostActivity extends GDActivity implements
 
 			if (!dlg.isShowing()) {
 				// Почему-то ProgressDialog скрыт о_О
-				// Ну и хуй с ним
+				// Ну и Хоро с ним
 				Log.d("DIALOG", "!isShowing()");
 				DobroNewPostActivity.this.finish(); // TODO: check
 				return;

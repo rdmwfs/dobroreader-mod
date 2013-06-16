@@ -5,7 +5,6 @@ import java.net.URL;
 
 import org.anonymous.dobrochan.json.DobroFile.Rating;
 import org.anonymous.dobrochan.reader.R;
-import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +15,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 public class DobroHelper {
@@ -24,18 +22,20 @@ public class DobroHelper {
 		return Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState());
 	}
-	
+
 	public static void setOrientation(Activity c) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String rotate = prefs.getString("rotate", "auto");
-		if(rotate.equals("land"))
+		if (rotate.equals("land"))
 			c.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		else if(rotate.equals("port"))
+		else if (rotate.equals("port"))
 			c.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 
 	public static boolean checkAutorun(Context c) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String autorun = prefs.getString("autorun_network", "never");
 		if (autorun.equalsIgnoreCase("never"))
 			return false;
@@ -43,29 +43,35 @@ public class DobroHelper {
 	}
 
 	public static void updateCurrentTheme(ContextWrapper a) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		String t = prefs.getString("theme", "dark");
-		int m_theme = R.style.Theme_DobroTheme;
-		if (t.equals("light"))
-			m_theme = R.style.Theme_DobroLightTheme;
-		else if (t.equals("dc"))
-			m_theme = R.style.Theme_DobroChanTheme;
-		a.setTheme(m_theme);
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
+		String t = prefs.getString("theme", "dc");
+		int theme;
+		if (t.equals("dc")) {
+			theme = R.style.Theme_DobroChanTheme;
+		} else if (t.equals("light"))
+			theme = R.style.Theme_DobroLightTheme;
+		else {
+			theme = R.style.Theme_DobroTheme;
+		}
+		a.setTheme(theme);
 	}
-	
+
 	public static int getDialogTheme(Context a) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		String t = prefs.getString("theme", "dark");
-		if (t.equals("light"))
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
+		String t = prefs.getString("theme", "dc");
+		if (t.equals("dc") || t.equals("light")) {
 			return R.style.DialogLight;
-		else if (t.equals("dc"))
-			return R.style.DialogLight;
-		else
-			return android.R.style.Theme_Dialog;	
+		} else {
+			// "dark"
+			return android.R.style.Theme_Dialog;
+		}
 	}
 
 	public static boolean checkNetwork(Context c) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String autorun = prefs.getString("autorun_network", "never");
 		if (autorun.equalsIgnoreCase("never"))
 			return false;
@@ -85,9 +91,10 @@ public class DobroHelper {
 		}
 		return false;
 	}
-	
+
 	public static boolean checkNetworkForPictures(Context c) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String autorun = prefs.getString("images_show", "wifi");
 		if (autorun.equalsIgnoreCase("never"))
 			return false;
@@ -109,7 +116,8 @@ public class DobroHelper {
 	}
 
 	public static boolean checkRating(Context c, Rating r) {
-		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
+		SharedPreferences prefs = DobroApplication.getApplicationStatic()
+				.getDefaultPrefs();
 		String max_rating = prefs.getString("rating", "swf");
 		return (max_rating.compareTo("swf") == 0 && r != Rating.SWF)
 				|| (max_rating.compareTo("r15") == 0 && r == Rating.R18)
@@ -117,36 +125,36 @@ public class DobroHelper {
 				|| (max_rating.compareTo("r18") == 0 && r == Rating.R18G)
 				|| r == Rating.ILLEGAL;
 	}
-	
+
 	public static URL formatUrl(Uri uri) throws MalformedURLException {
 		String scheme = uri.getScheme();
-		if(scheme == null)
+		if (scheme == null)
 			scheme = "http";
 		String host = uri.getHost();
-		if(host == null)
+		if (host == null)
 			host = DobroConstants.DOMAIN;
 		String path = uri.getEncodedPath();
 		String query = uri.getEncodedQuery();
-		return new URL(scheme,host,path+"?"+query);
+		return new URL(scheme, host, path + "?" + query);
 	}
-	
-	public static String formatUri(String uri_s){
+
+	public static String formatUri(String uri_s) {
 		Uri uri;
-		if(!uri_s.startsWith("http"))
-			uri = Uri.parse(Uri.encode(DobroConstants.HOST+uri_s, ":/?&"));
+		if (!uri_s.startsWith("http"))
+			uri = Uri.parse(Uri.encode(DobroConstants.HOST + uri_s, ":/?&"));
 		else
 			uri = Uri.parse(Uri.encode(uri_s, ":/?&"));
 		String scheme = uri.getScheme();
-		if(scheme == null)
+		if (scheme == null)
 			scheme = "http";
 		String host = uri.getHost();
-		if(host == null)
+		if (host == null)
 			host = DobroConstants.DOMAIN;
 		String path = uri.getEncodedPath();
 		String query = uri.getQuery();
-		String result = scheme+"://"+host+path;
-		if(query != null && !TextUtils.isEmpty(query))
-			result += "?"+Uri.encode(query,"/?&=");
+		String result = scheme + "://" + host + path;
+		if (query != null && !TextUtils.isEmpty(query))
+			result += "?" + Uri.encode(query, "/?&=");
 		return result;
 	}
 }
