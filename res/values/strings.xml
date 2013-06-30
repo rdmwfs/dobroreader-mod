@@ -1,26 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Statics -->
     <string name="app_name">DobroReader</string>
-    <string name="Image_viewer_bg_color_summary">Цвет фона в формате hex</string>
-    <string name="loading">Загрузка&#8230;</string>
-    <string name="next_page">Читать дальше</string>
-    <string name="page">Страница № %s</string>
-    <string name="post_id">№ %s</string>
-    <string name="post_date">%s</string>
-    <string name="skipped_1">%1$s пост пропущен, %2$s с файлами</string>
-    <string name="skipped_2_3_4">%1$s поста пропущено, %2$s с файлами</string>
-    <string name="skipped">%1$s постов пропущено, %2$s с файлами</string>
-    <string name="skipped_ex_1">%1$s пост\n%2$s с файлами</string>
-    <string name="skipped_ex_2_3_4">%1$s поста\n%2$s с файлами</string>
-    <string name="skipped_ex">%1$s постов\n%2$s с файлами</string>
+    <string name="about">О программе</string>
+	
+    <!-- Multiply usage -->
+    <string name="untitled">Безымянный тред</string>
+    <string name="go_to">Перейти</string>
+    <string name="delete">Удалить</string>
+    
+    <!-- Context menus -->
+
     <string-array name="rating_keys">
-        <item>SWF</item>
+        <item>SFW</item>
         <item>R-15</item>
         <item>R-18</item>
         <item>R-18G</item>
     </string-array>
     <string-array name="rating_values">
-        <item>swf</item>
+        <item>sfw</item>
         <item>r15</item>
         <item>r18</item>
         <item>r18g</item>
@@ -30,164 +29,9 @@
         <item>Болотная</item>
         <item>Доброчан</item>
     </string-array>
-    <string name="options_theme">Тема оформления</string>
-    <string-array name="theme_values">
-        <item>light</item>
-        <item>dark</item>
-        <item>dc</item>
-    </string-array>
-    <string-array name="network_keys">
-        <item>Всегда</item>
-        <item>Только по WIFI</item>
-        <item>Никогда</item>
-    </string-array>
-    <string-array name="network_values">
-        <item>always</item>
-        <item>wifi</item>
-        <item>never</item>
-    </string-array>
-    <string name="about_text">DobroReader app by DobroAnon\ndobroanon@ymail.com\nVersion %s</string>
-    <string name="open">Открыть</string>
-    <string name="last_50">Последние</string>
-    <string name="hide_thread">Скрыть тред</string>
-    <string name="untitled">Безымянный тред</string>
-    <string name="update">Обновить</string>
-    <string name="hide_post">Скрыть пост</string>
-    <string name="answer">Ответить</string>
-    <string name="show_images">Загружать изображения</string>
-    <string name="stole_cookies">Тырить печеньки</string>
-    <string name="max_rating">Максимальный рейтинг</string>
-    <string name="img_rating">Рейтинг изображения</string>
-    <string name="autorun">Автопроверка избранного</string>
-    <string name="fav">В избранное</string>
-    <string name="thread_hidden">Тред будет скрыт после следующей загрузки страницы</string>
-    <string name="thread_hide_error">Невозможно скрыть тред: ошибка %s</string>
-    <string name="thread_unhidden">Тред удален из списка скрытых</string>
-    <string name="thread_unhide_error">Невозможно удалить тред из скрытых: ошибка %s</string>
-    <string name="thread_starred">Тред добавлен в избранное</string>
-    <string name="thread_star_error">Невозможно добавить тред в избранное: ошибка %s</string>
-    <string name="thread_unstarred">Тред удален из избранного</string>
-    <string name="thread_unstar_error">Невозможно удалить тред из избранного: ошибка %s</string>
-    <string name="hidden_threads">Скрытые треды</string>
-    <string name="force_reload">Перезагрузить</string>
-    <string name="download_target">Папка для загрузки</string>
-    <string name="options">Настройки</string>
-    <string name="about">О программе</string>
-    <string name="unread">Непрочитанных: %s</string>
-    <string name="starred">Избранное</string>
-    <string name="delete">Удалить</string>
-    <string name="force_update">Некоторые сообщения были удалены. Пожалуйста, обновите тред</string>
-    <string name="unreaded_posts">Новые сообщения в треде!</string>
-    <string name="new_posts">Обнаружены новые сообщения!</string>
-    <string name="period_title">Периодичность автопроверки</string>
-    <string name="period">Проверять изменения в избранных тредах. Минимум - 5 минут</string>
-    <string name="no_user_captcha">Вам не надо вводить капчу</string>
-    <string name="board">Доска</string>
-    <string name="display_id">Номер треда или поста</string>
-    <string name="go_to">Перейти</string>
-    <string name="values_not_filled">Указаны не все данные</string>
-    <string name="update_avaliable">Доступно обновление программы DobroReader</string>
-    <string name="new_thread">Новый тред</string>
-    <string name="quote">Цитата</string>
-    <string name="message">Сообщение</string>
-    <string name="captcha">Капча</string>
-    <string name="send">Отправить</string>
-    <string name="add_picture">Добавить картинку</string>
-    <string name="gallery">Галерея</string>
-    <string name="booru">Booru</string>
-    <string name="photo">Фото</string>
-    <string name="sage">Не поднимать тред</string>
-    <string name="name">Имя</string>
-    <string name="theme">Тема</string>
-    <string name="quoted">Пост скопирован</string>
-    <string name="max_files">Достигнуто максимальное количество файлов</string>
-    <string name="minoriko_needed">У вас не установленна патченная версия Minoriko</string>
-    <string name="last_count_summary">Количество постов при частичной загрузке</string>
-    <string name="last_count_title">Загружать N последних</string>
+
     <string name="answers">Ответы: </string>
-    <string name="downloading">Загрузка&#8230;</string>
-    <string name="always_show_op_images_title">Картинки ОП-постов</string>
-    <string name="always_show_op_images">Всегда показывать картинки ОП-постов</string>
-    <string name="faw_thread_edited">Изменен %s</string>
-    <string name="notify_sound_on">Звук</string>
-    <string name="notify_sound">Выбрать звук</string>
-    <string name="notify_vibro">Вибро</string>
-    <string name="notifications">Уведомления</string>
-    <string name="pictures">Изображения</string>
-    <string name="general">Общие</string>
-    <string name="thread_del_ok">Пост удален</string>
-    <string name="thread_del_error">Ошибка удаления поста</string>
-    <string name="clear_cache">Очистить кэш</string>
-    <string name="cleaning">Очистка</string>
-    <string name="cache_size">Размер кеша: %s</string>
-    <string name="crop">Обрезать</string>
-    <string name="resize">Масштабировать</string>
-    <string name="led">Мигать светодиодом</string>
-    <string name="orientation">Ориентация</string>
-    <string-array name="rotate_keys">
-        <item>Авто</item>
-        <item>Ландшафт</item>
-        <item>Портрет</item>
-    </string-array>
-    <string-array name="rotate_values">
-        <item>auto</item>
-        <item>land</item>
-        <item>port</item>
-    </string-array>
-    
-    <!-- ACRA -->
-	<string name="crash_notif_ticker_text">Обнаружена ошибка. Пожалуйста, отправьте её разработчику.</string>
-	<string name="crash_notif_title">DobroReader упал&#8230;</string>
-	<string name="crash_notif_text">Информация о баге готова к отправке</string>
-	<string name="crash_dialog_title">DobroReader упал</string>
-	<string name="crash_dialog_text">Программа выполнила невыполнимое и была закрыта.
-    Чтобы в следующем релизе такого не происходило, отправьте сообщение об ошибке.
-    Все что от вас тредуется - это нажать \'OK\'.</string>
-	<string name="crash_dialog_comment_prompt">Также вы можете добавить свой комментарий (к примеру - действия, повлекшие за собой ошибку):</string>
-	<string name="crash_dialog_ok_toast">Спасибо!</string>
-	<string name="updates_check">Проверить обновления</string>
-	
-	<string name="big_font_title">Размер шрифта</string>
-	<string name="big_font">Размер шрифта для текста сообщений</string>
-	<string name="send_confirm">Выдавать запрос на отправку сообщений</string>
-	<string name="send_confirm_title">Подтверждать отправку</string>
-	<string name="send_confirm_dialog">Отправить сообщение?</string>
-	<string name="show_file_info_title">Названия файлов</string>
-	<string name="show_file_info_summary">Показывать названия файлов, их размер и разрешение</string>
-	<string name="images_size_title">Высота картинок</string>
-	<string name="images_size">Высота панели с превьюшками</string>
-	
-	<string name="file_info_parretn">Название1: %1$s\nНазвание2: %2$s\nРазмер: %3$s\nДата первой заливки: %4$s\nРейтинг: %5$s\n%6$s</string>
-	
-	<string name="file">Файл</string>
-	<string name="open_intent_error">Не найдено программы, с помощью которой можно завершить действие.</string>
-	<string name="update_diff">Обновить цифры</string>
-	<string name="download_service_off">Альтернативный загрузчик</string>
-	<string name="download_service_off_summary">Не использовать системный менеджер загрузок (включите, если картинки не открываются после загрузки)</string>
-	<string name="history">История</string>
-	<string name="youtube_title">Превью YouTube</string>
-	<string name="youtube_summary">Показывать превью ссылок на ролики YouTube</string>
-	<string name="create_sortcut">Создать ярлык</string>
-	<string name="hide_threads_title">Автоскрытие тредов</string>
-	<string name="hide_threads_summary">Названия тредов, которые требуется скрывать</string>
-	<string name="expand_board">Сворачивать треды</string>
-	<string name="expand_board_summary">Отображать только ОП-посты на доске</string>
-	<string name="quick_search">Быстрый поиск</string>
-	<string name="quick_search_summary">Использовать быстрый поиск среди вложенных папок (возможны сбои)</string>
-	<string name="imgviewer_summary">Использовать встроенный просмотрщик изображений</string>
-	<string name="imgviewer_title">Встроенный просмотрщик</string>
-	<string name="imgviewer_max_summary">Уменьшать изображения при просмотре, если их размер (ширина или высота) больше значения</string>
-	<string name="imgviewer_max_title">Максимальный размер</string>
-	<string name="autocheck_interval_summary">Период автообновления треда (в секундах, минимум - 30с)</string>
-	<string name="autocheck_interval_title">Период автообновления</string>
-	<string name="autocheck_sound_summary">Играть звук при получении новых сообщений во время автообновления</string>
-	<string name="autocheck_sound_title">Звук автообновления</string>
-	<string name="cant_play_gif">Не могу воспроизвести файл!</string>
-	<string name="timeout">Таймаут соединений, сек.</string>
-	<string name="timeout_description">Для нестабильных интернет соединений увеличьте значение</string>
-	<string name="password_summary">Используется для удаления сообщений</string>
-	<string name="password_title">Пароль</string>
-	<string name="thumb_desc">Thumbnail</string>
-	<string name="download_target_summary">Папка, в которую загружаются изображения</string>
-	<string name="image_viewer_bg_color">Цвет фона просмотрщика изображений</string>
+    <string name="create_sortcut">Создать ярлык</string>
+    <string name="img_rating">Рейтинг изображения</string>
+
 </resources>

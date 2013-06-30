@@ -532,6 +532,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 		 */
 		View v = null;
 		if (Build.VERSION.SDK_INT < 11) {
+			//XXX SDK_INT < 11
 			EditText edit = new EditText(getContext());
 			edit.setPadding(10, 10, 10, 10);
 			edit.setGravity(Gravity.TOP);

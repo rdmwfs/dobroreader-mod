@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- HomeActivity -->
+
+    <string name="cleaning">Очистка</string>
+    <string name="about_text">DobroReader app by Dobroanons\nVersion %s</string>
+    <string name="history">История</string>
+    <string name="hidden_threads">Скрытые треды</string>
+    <string name="starred">Избранное</string>
+    <string name="update_diff">Обновить цифры</string>
+
+    <!-- TODO выпилить кнопку на выбор способа апдейта избранного. Оно не в тему -->
+
+
+    <!-- BoardActivity[+Expandable] -->
+    <string name="new_thread">Новый тред</string>
+    <string name="next_page">Читать дальше</string>
+    <string name="page">Страница № %s</string>
+    <string name="skipped_1">%1$s пост пропущен, %2$s с файлами</string>
+    <string name="skipped_2_3_4">%1$s поста пропущено, %2$s с файлами</string>
+    <string name="skipped">%1$s постов пропущено, %2$s с файлами</string>
+    <string name="skipped_ex_1">%1$s пост\n%2$s с файлами</string>
+    <string name="skipped_ex_2_3_4">%1$s поста\n%2$s с файлами</string>
+    <string name="skipped_ex">%1$s постов\n%2$s с файлами</string>
+
+    <!-- ThreadActivity -->
+    <string name="update">Обновить</string>
+    <string name="force_reload">Перезагрузить</string>
+
+    <!-- NewPostActivity -->
+    <string name="name">Имя</string>
+    <string name="theme">Тема</string>
+    <string name="message">Сообщение</string>
+    <string name="captcha">Капча</string>
+    <string name="no_user_captcha">Вам не надо вводить капчу</string>
+    <string name="add_picture">Добавить картинку</string>
+    <string name="gallery">Галерея</string>
+    <string name="booru">Booru</string>
+    <string name="photo">Фото</string>
+    <string name="sage">Не поднимать тред</string>
+    <string name="crop">Обрезать</string>
+    <string name="resize">Масштабировать</string>
+    <string name="max_files">Достигнуто максимальное количество файлов</string>
+    <string name="minoriko_needed">У вас не установленна патченная версия Minoriko</string>
+    <string name="send">Отправить</string>
+    <string name="file">Файл</string>
+ 
+    <!-- GotoActivity (используются в layout/*.xml -->
+    <string name="display_id">Номер треда или поста</string>
+    <string name="board">Доска</string>
+
+    <!-- Options -->
+    <string name="stole_cookies">Тырить печеньки</string>
+
+    <!-- StarredEditor -->
+    <string name="faw_thread_edited">Изменен %s</string>
+
+    <!-- HiddenEditor -->
+
+</resources>

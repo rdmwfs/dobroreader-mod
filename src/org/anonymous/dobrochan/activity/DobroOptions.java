@@ -189,6 +189,7 @@ public class DobroOptions extends PreferenceActivity {
 		 */
 
 		if (Build.VERSION.SDK_INT < 9) {
+			//XXX SDK_INT < 9
 			CheckBoxPreference dm = (CheckBoxPreference) findPreference("download_service_off");
 			dm.setEnabled(false);
 		}

@@ -118,6 +118,7 @@ public class DobroTabsList extends GDListActivity {
 	private ItemAdapter m_adapter;
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+		//XXX SDK_INT >= 11
 		int flags = (Build.VERSION.SDK_INT >= 11)?Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK:Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP;
 		super.onListItemClick(l, v, position, id);
 		SubtitleItem item = (SubtitleItem)m_adapter.getItem(position);

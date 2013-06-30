@@ -176,6 +176,7 @@ public class DobroNetwork extends Object{
 			e.printStackTrace();
 		}
 		saveCookes();
+		//XXX SDK_INT > 8
 		if (Build.VERSION.SDK_INT > 8)
 			DobroApplication.getApplicationStatic().unregisterReceiver(downloadReceiver);
 	}
@@ -312,6 +313,7 @@ public class DobroNetwork extends Object{
 					context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			
 			if(Build.VERSION.SDK_INT < 16) {
+				//XXX SDK_INT < 16
 				notification = new Notification(R.drawable.icon,
 						context.getText(R.string.app_name), System.currentTimeMillis());
 				notification.setLatestEventInfo(context, contentTitle, contentText,
@@ -363,6 +365,7 @@ public class DobroNetwork extends Object{
 	@TargetApi(9)
 	void createDownloadReceiver() {
 		if (Build.VERSION.SDK_INT > 8) {
+			//XXX SDK_INT > 8
 			downloadReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {

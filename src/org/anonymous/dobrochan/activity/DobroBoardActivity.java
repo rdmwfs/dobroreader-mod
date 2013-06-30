@@ -1,7 +1,6 @@
 package org.anonymous.dobrochan.activity;
 
 import greendroid.app.GDActivity;
-import greendroid.util.Md5Util;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.Item;
@@ -17,16 +16,15 @@ import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
+import org.anonymous.dobrochan.reader.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;

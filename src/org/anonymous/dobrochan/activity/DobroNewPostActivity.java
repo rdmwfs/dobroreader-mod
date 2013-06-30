@@ -78,6 +78,7 @@ import com.android.internal.http.multipart.MultipartEntity;
 import com.android.internal.http.multipart.Part;
 import com.android.internal.http.multipart.StringPart;
 import com.google.gson.JsonObject;
+import static org.anonymous.dobrochan.DobroConstants.ratings;
 
 public class DobroNewPostActivity extends GDActivity implements
 		Dialog.OnClickListener {
@@ -262,6 +263,7 @@ public class DobroNewPostActivity extends GDActivity implements
 	public final static int SELECT_PICTURE = 1;
 	public final static int SELECT_FILE = 5;
 	public final static int IMAGE_CROP = 4;
+	
 	private final List<NewPostAttachment> attachments = new ArrayList<NewPostAttachment>();
 	String board;
 	String thread;
@@ -275,7 +277,6 @@ public class DobroNewPostActivity extends GDActivity implements
 	NewPostAttachment crop_attach = null;
 	private boolean error_while_posting = false;
 	private String password = "empty";
-	private final CharSequence[] ratings = { "SFW", "R-15", "R-18", "R-18G" };
 
 	public void addImage(String uri, boolean temporary) {
 		addImage(uri, temporary, "SFW");
@@ -343,6 +344,7 @@ public class DobroNewPostActivity extends GDActivity implements
 						ExifInterface exif = new ExifInterface(filePath);
 						exif.setAttribute(ExifInterface.TAG_MODEL, "");
 						exif.setAttribute(ExifInterface.TAG_MAKE, "");
+						//XXX SDK_INT > 7
 						if (Build.VERSION.SDK_INT > 8) {
 							exif.setAttribute(ExifInterface.TAG_GPS_ALTITUDE,
 									"");
@@ -460,10 +462,18 @@ public class DobroNewPostActivity extends GDActivity implements
 		return b;
 	}
 
-	public void onAddBooruClick(View v) {
+	private boolean hasMaxAttachmentsAmount() {
 		if (attachments.size() >= 5) {
 			Toast.makeText(DobroNewPostActivity.this, R.string.max_files,
 					Toast.LENGTH_SHORT).show();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void onAddBooruClick(View v) {
+		if(hasMaxAttachmentsAmount()){
 			return;
 		}
 		Intent booruPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -492,9 +502,7 @@ public class DobroNewPostActivity extends GDActivity implements
 	}
 
 	public void onAddImageClick(View v) {
-		if (attachments.size() >= 5) {
-			Toast.makeText(DobroNewPostActivity.this, R.string.max_files,
-					Toast.LENGTH_SHORT).show();
+		if(hasMaxAttachmentsAmount()){
 			return;
 		}
 		try {
@@ -512,9 +520,7 @@ public class DobroNewPostActivity extends GDActivity implements
 	}
 
 	public void onAddFileClick(View v) {
-		if (attachments.size() >= 5) {
-			Toast.makeText(DobroNewPostActivity.this, R.string.max_files,
-					Toast.LENGTH_SHORT).show();
+		if(hasMaxAttachmentsAmount()){
 			return;
 		}
 		try {
@@ -530,9 +536,7 @@ public class DobroNewPostActivity extends GDActivity implements
 	}
 
 	public void onAddPhotoClick(View v) {
-		if (attachments.size() >= 5) {
-			Toast.makeText(DobroNewPostActivity.this, R.string.max_files,
-					Toast.LENGTH_SHORT).show();
+		if(hasMaxAttachmentsAmount()){
 			return;
 		}
 		File dir = new File(String.format(DobroConstants.TEMP_COMMON,

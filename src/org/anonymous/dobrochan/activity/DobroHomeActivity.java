@@ -316,6 +316,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		SharedPreferences dt = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();
 		String temp_gt_val = "";
+		//XXX SDK_INT > 7
 		if (Build.VERSION.SDK_INT > 7)
 			temp_gt_val = Environment
 					.getExternalStoragePublicDirectory(

@@ -30,6 +30,7 @@ public class CopyPasteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		String text = getIntent().getStringExtra("text");
 		if(Build.VERSION.SDK_INT < 11) {
+			//XXX SDK_INT < 11
 			EditText te = new EditText(this);
 			te.setGravity(Gravity.TOP);
 			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);

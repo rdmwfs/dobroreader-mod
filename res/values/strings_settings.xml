@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="options">Настройки</string>
+
+    <!-- Pictures -->
+    <string name="sett_title_pictures">Изображения</string>
+    <string name="show_images">Загружать изображения</string>
+    <string name="always_show_op_images_title">Картинки ОП-постов</string>
+    <string name="always_show_op_images">Всегда показывать картинки ОП-постов</string>
+    <string name="max_rating">Максимальный рейтинг</string>
+    <string name="password_summary">Используется для удаления сообщений</string>
+    <string name="password_title">Пароль</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="cache_size">Размер кеша: %s</string>
+    <string name="show_file_info_title">Названия файлов</string>
+    <string name="show_file_info_summary">Показывать названия файлов, их размер и разрешение</string>
+    <string name="images_size_title">Высота картинок</string>
+    <string name="images_size">Высота панели с превьюшками</string>
+    <string name="youtube_title">Превью YouTube</string>
+    <string name="youtube_summary">Показывать превью ссылок на ролики YouTube</string>
+    <string name="download_target">Папка для загрузки</string>
+    <string name="download_target_summary">Папка, в которую загружаются изображения</string>
+    <string name="image_viewer_bg_color">Цвет фона просмотрщика изображений</string>
+    <string name="Image_viewer_bg_color_summary">Цвет фона в формате hex</string>
+
+    <!-- General -->
+    <string name="sett_title_general">Общие</string>
+    <string name="options_theme">Тема оформления</string>
+    <string name="big_font_title">Размер шрифта</string>
+    <string name="big_font">Размер шрифта для текста сообщений</string>
+    <string name="orientation">Ориентация</string>
+    <string name="last_count_summary">Количество постов при частичной загрузке</string>
+    <string name="last_count_title">Загружать N последних</string>
+    <string name="autorun">Автопроверка избранного</string>
+    <string name="period_title">Периодичность автопроверки</string>
+    <string name="period">Проверять изменения в избранных тредах. Минимум - 5 минут</string>
+    <string name="send_confirm">Выдавать запрос на отправку сообщений</string>
+    <string name="send_confirm_title">Подтверждать отправку</string>
+
+    <!-- Notification -->
+    <string name="sett_title_notifications">Уведомления</string>
+    <string name="notify_sound_on">Звук</string>
+    <string name="notify_sound">Выбрать звук</string>
+    <string name="notify_vibro">Вибро</string>
+    <string name="led">Мигать светодиодом</string>
+
+    <!-- Lab -->
+    <string name="sett_title_lab">Экспериментальные фичи</string>
+    <string name="sett_show_spoilers">Раскрывать спойлеры</string>
+    <string name="sett_summ_show_spoilers">Показывать содержимое %%спойлеров%%</string>
+    <string name="sett_show_format_panel">Панель форматирования</string>
+    <string name="sett_summ_show_format_panel">Показывать кнопки форматирования в окне создании поста</string>
+    <string name="sett_immediate_update">Моментальное обновление</string>
+    <string name="sett_summ_immediate_update">Автоматически обновлять тред сразу после отправки поста</string>
+    <string name="sett_spells">Заклнания</string>
+    <string name="sett_summ_spells">Каждая строка введенная в поле, позволяет скрыть все посты, содержащие её в себе</string>
+    <string name="hide_threads_title">Автоскрытие тредов</string>
+    <string name="hide_threads_summary">Названия тредов, которые требуется скрывать</string>
+    <string name="download_service_off">Альтернативный загрузчик</string>
+    <string name="download_service_off_summary">Не использовать системный менеджер загрузок (включите, если картинки не открываются после загрузки)</string>
+    <string name="expand_board">Сворачивать треды</string>
+    <string name="expand_board_summary">Отображать только ОП-посты на доске</string>
+    <string name="quick_search">Быстрый поиск</string>
+    <string name="quick_search_summary">Использовать быстрый поиск среди вложенных папок (возможны сбои)</string>
+    <string name="imgviewer_summary">Использовать встроенный просмотрщик изображений</string>
+    <string name="imgviewer_title">Встроенный просмотрщик</string>
+    <string name="imgviewer_max_summary">Уменьшать изображения при просмотре, если их размер (ширина или высота) больше значения</string>
+    <string name="imgviewer_max_title">Максимальный размер</string>
+    <string name="autocheck_interval_summary">Период автообновления треда (в секундах, минимум - 30с)</string>
+    <string name="autocheck_interval_title">Период автообновления</string>
+    <string name="autocheck_sound_summary">Играть звук при получении новых сообщений во время автообновления</string>
+    <string name="autocheck_sound_title">Звук автообновления</string>
+    <string name="sett_show_captcha_always">Диалоги с капчей</string>
+    <string name="sett_summ_show_captcha_always">Отображать капчу, даже если её не надо вводить</string>
+    
+    <!-- Arrays -->
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>dc</item>
+    </string-array>
+    <string-array name="network_keys">
+        <item>Всегда</item>
+        <item>Только по WIFI</item>
+        <item>Никогда</item>
+    </string-array>
+    <string-array name="network_values">
+        <item>always</item>
+        <item>wifi</item>
+        <item>never</item>
+    </string-array>
+    <string-array name="rotate_keys">
+        <item>Авто</item>
+        <item>Ландшафт</item>
+        <item>Портрет</item>
+    </string-array>
+    <string-array name="rotate_values">
+        <item>auto</item>
+        <item>land</item>
+        <item>port</item>
+    </string-array>
+
+</resources>

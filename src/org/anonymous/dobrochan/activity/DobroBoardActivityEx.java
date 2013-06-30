@@ -2,7 +2,6 @@ package org.anonymous.dobrochan.activity;
 
 import greendroid.app.GDActivity;
 import greendroid.app.GDExpandableListActivity;
-import greendroid.util.Md5Util;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.Item;
@@ -26,10 +25,10 @@ import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
 import org.anonymous.dobrochan.ExpandablePostAdapter;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
+import org.anonymous.dobrochan.reader.R;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -37,20 +36,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
