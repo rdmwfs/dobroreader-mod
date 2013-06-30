@@ -95,12 +95,12 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 			pi.isInProgress = false;
 			if (result == null)
 			{
-				pi.text = DobroBoardActivityEx.this.getString(R.string.next_page);
+				pi.text = DobroBoardActivityEx.this.getString(R.string.board_next_page);
 				pi.enabled = true;
 				adapter.notifyDataSetChanged();
 				return;
 			}
-			pi.text = getString(R.string.page, page_s);
+			pi.text = getString(R.string.board_page_N, page_s);
 			pi.enabled = false;
 			SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
 			String[] hide_rules = prefs.getString("threads2hide", "").split("\n");
@@ -150,16 +150,16 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 					final int skipped_count_prelast_d = (skipped_count % 100) / 10;
 					int skipped_string;
 					if (skipped_count_prelast_d == 1)
-						skipped_string = R.string.skipped_ex;
+						skipped_string = R.string.board_skipped_ex;
 					else {
 						switch (skipped_count_last_d) {
-							case 1:  skipped_string = R.string.skipped_ex_1;
+							case 1:  skipped_string = R.string.board_skipped_ex_1;
 							         break;
 							case 2:
 							case 3:
-							case 4:  skipped_string = R.string.skipped_ex_2_3_4;
+							case 4:  skipped_string = R.string.board_skipped_ex_2_3_4;
 							         break;
-							default: skipped_string = R.string.skipped_ex;
+							default: skipped_string = R.string.board_skipped_ex;
 							break;
 						}
 					}
@@ -181,7 +181,7 @@ public class DobroBoardActivityEx extends GDExpandableListActivity implements IP
 				}
 			}
 			ProgressItem nextPage = new ProgressItem(
-					DobroBoardActivityEx.this.getString(R.string.next_page),
+					DobroBoardActivityEx.this.getString(R.string.board_next_page),
 					false);
 			nextPage.setTag(DobroConstants.NEXT
 					+ String.valueOf(Integer.parseInt(page_s) + 1));

@@ -104,7 +104,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 		messageView = (TextViewWithSpoilers) findViewById(R.id.messageView);
 		SharedPreferences prefs = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();
-		int font_size = Integer.parseInt(prefs.getString("font_size", "16"));
+		int font_size = Integer.parseInt(prefs.getString("message_font_size", "16"));
 		if (font_size < 10)
 			font_size = 10;
 		messageView.setTextSize(TypedValue.COMPLEX_UNIT_SP, font_size);
@@ -225,7 +225,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 			numberView.setVisibility(GONE);
 			titleView
 					.setText(dobroitem.post.getSubject().length() == 0 ? getContext()
-							.getString(R.string.untitled) : dobroitem.post
+							.getString(android.R.string.untitled) : dobroitem.post
 							.getSubject());
 			titleView.setVisibility(VISIBLE);
 		} else {
@@ -246,8 +246,8 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 				backgroundRef.resourceId);
 		SharedPreferences prefs = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();
-		boolean show_info = prefs.getBoolean("show_fileinfo", true);
-		boolean force_op_load = prefs.getBoolean("op_pictures_force", false);
+		boolean show_info = prefs.getBoolean("show_file_info", true);
+		boolean force_op_load = prefs.getBoolean("show_op_pic", false);
 
 		if (dobroitem.post.getFiles().length > 0) {
 			for (DobroFile file : dobroitem.post.getFiles()) {
@@ -273,7 +273,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 						date = "?";
 					}
 				imageView.setInfo(getContext().getString(
-						R.string.file_info_parretn, fname1, fname2, size, date,
+						R.string.post_file_info_pattern, fname1, fname2, size, date,
 						file.getRating(), getMetadataText(file.getMetadata())));
 				if (file.getMetadata().width != null)
 					imageView.setSize(file.getMetadata().height,
@@ -485,7 +485,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 		q += (dobroitem.post.getMessage() == null ? dobroitem.post
 				.getFormattedText().toString() : dobroitem.post.getMessage());
 		DobroQuoteHolder.getInstance().addQuote(q);
-		Toast.makeText(getContext(), R.string.quoted, Toast.LENGTH_SHORT)
+		Toast.makeText(getContext(), R.string.toast_quoted, Toast.LENGTH_SHORT)
 				.show();
 	}
 
@@ -549,7 +549,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 			int font_size = 10;
 			try {
 				font_size = Integer
-						.parseInt(prefs.getString("font_size", "16"));
+						.parseInt(prefs.getString("message_font_size", "16"));
 			} catch (Exception e) {
 			}
 			if (font_size < 10)
@@ -631,7 +631,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 			show_open = true;
 		}
 		if (show_open)
-			menu.add(R.string.open).setIcon(R.drawable.eye_32x24)
+			menu.add(R.string.posthead_open).setIcon(R.drawable.eye_32x24)
 					.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem arg0) {
@@ -639,7 +639,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 							return true;
 						}
 					});
-		menu.add(R.string.answer).setIcon(R.drawable.mail_32x24)
+		menu.add(R.string.post_answer_it).setIcon(R.drawable.mail_32x24)
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem arg0) {
@@ -647,7 +647,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 						return true;
 					}
 				});
-		menu.add(R.string.quote).setIcon(R.drawable.right_quote_32x24)
+		menu.add(R.string.post_quote_it).setIcon(R.drawable.right_quote_32x24)
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem arg0) {
@@ -656,7 +656,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 					}
 				});
 		if (show_open)
-			menu.add(R.string.last_50).setIcon(R.drawable.chat_32x32)
+			menu.add(R.string.posthead_show_last_50).setIcon(R.drawable.chat_32x32)
 					.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem arg0) {
@@ -686,7 +686,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 							return true;
 						}
 					});
-		menu.add(R.string.fav).setIcon(R.drawable.heart_fill_32x38)
+		menu.add(R.string.post_add_to_favourities).setIcon(R.drawable.heart_fill_32x38)
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem arg0) {
@@ -694,7 +694,7 @@ public class DobroPostItemView extends RelativeLayout implements ItemView, View.
 						return true;
 					}
 				});
-		menu.add(R.string.hide_thread).setIcon(R.drawable.minus_alt_32x32)
+		menu.add(R.string.post_hide_thread).setIcon(R.drawable.minus_alt_32x32)
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem arg0) {

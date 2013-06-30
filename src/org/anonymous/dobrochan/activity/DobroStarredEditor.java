@@ -93,7 +93,7 @@ public class DobroStarredEditor extends GDListActivity {
 				String subtitle = String.format(">>%s/%s ", t.getBoardName(), t.getDisplay_id());
 				String title = t.getTitle();
 				if(title == null || title.length()==0)
-					title = getString(R.string.untitled);
+					title = getString(android.R.string.untitled);
 				if(t.getUnread() > 0) //FIXME after wakaba update
 				{
 //					subtitle += getString(R.string.unreaded_posts);
@@ -180,11 +180,11 @@ public class DobroStarredEditor extends GDListActivity {
 			Intent shortcutIntent = new Intent(this, DobroStarredEditor.class);
 			shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			shortcutIntent.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.starred));
+			shortcutIntent.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.home_favourities));
 			
 			Intent addIntent = new Intent();
 			addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-			addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.starred));
+			addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.home_favourities));
 			addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.icon));
 
 			addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");

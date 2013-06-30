@@ -123,7 +123,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 			if (dir.isDirectory())
 				subFiles.add(dir.listFiles());
 			dlg = new ProgressDialog(DobroHomeActivity.this);
-			dlg.setTitle(R.string.cleaning);
+			dlg.setTitle(R.string.home_cleaning);
 			dlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			int max = 0;
 			for (File[] files : subFiles)
@@ -329,10 +329,10 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 					+ File.separator
 					+ "Pictures"
 					+ File.separator;
-		String temp_gt_val_to_compare = dt.getString("download_target", "");
+		String temp_gt_val_to_compare = dt.getString("downloads_folder", "");
 
 		if (temp_gt_val_to_compare == "") {
-			dt.edit().putString("download_target", temp_gt_val).commit();
+			dt.edit().putString("downloads_folder", temp_gt_val).commit();
 		}
 		;
 		String threads_cache_dir = String.format(DobroConstants.THREADS_CACHE,
@@ -399,7 +399,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		switch (item.getItemId()) {
 		case R.id.history: {
 			Intent i = new Intent(this, DobroHistoryActivity.class);
-			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.history));
+			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.home_history));
 			startActivity(i);
 			return true;
 		}
@@ -417,7 +417,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 			}
 			final TextView message = new TextView(this);
 			SpannableString text = new SpannableString(getString(
-					R.string.about_text, version_name));
+					R.string.home_about_text, version_name));
 			Linkify.addLinks(text, Linkify.ALL);
 			message.setText(text);
 			message.setMovementMethod(LinkMovementMethod.getInstance());
@@ -431,13 +431,13 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		}
 		case R.id.hidden_threads: {
 			Intent i = new Intent(this, DobroHiddenEditor.class);
-			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.hidden_threads));
+			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.home_hidden_threads));
 			startActivity(i);
 			return true;
 		}
 		case R.id.starred_threads: {
 			Intent i = new Intent(this, DobroStarredEditor.class);
-			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.starred));
+			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.home_favourities));
 			startActivity(i);
 			return true;
 		}
@@ -557,7 +557,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 		switch (item.getItemId()) {
 		case AB_STAR:
 			Intent i = new Intent(this, DobroStarredEditor.class);
-			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.starred));
+			i.putExtra(GD_ACTION_BAR_TITLE, getString(R.string.home_favourities));
 			startActivity(i);
 			break;
 
@@ -567,7 +567,7 @@ public class DobroHomeActivity extends GDListActivity implements DialogInterface
 
 		case AB_CHECK:
 			final CharSequence[] items = { "Всегда", "Wifi", "Никогда" };
-			new AlertDialog.Builder(this).setTitle(R.string.autorun)
+			new AlertDialog.Builder(this).setTitle(R.string.sett_t_autoupdate_favourites)
 					.setItems(items, this).show();
 			break;
 

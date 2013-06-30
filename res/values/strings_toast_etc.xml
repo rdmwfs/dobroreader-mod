@@ -2,27 +2,30 @@
 <resources>
 
     <!-- Toasts -->
-    <string name="values_not_filled">Указаны не все данные</string>
-    <string name="thread_del_ok">Пост удален</string>
-    <string name="thread_del_error">Ошибка удаления поста</string>
+    <string name="toast_some_values_not_filled">Указаны не все данные</string>
+    <string name="toast_thread_del_succ">Пост удален</string>
+    <string name="toast_thread_del_err">Ошибка удаления поста</string>
     <string name="loading">Загрузка&#8230;</string>
-    <string name="quoted">Пост скопирован</string>
-    <string name="thread_hidden">Тред будет скрыт после следующей загрузки страницы</string>
-    <string name="thread_hide_error">Невозможно скрыть тред: ошибка %s</string>
-    <string name="thread_unhidden">Тред удален из списка скрытых</string>
-    <string name="thread_unhide_error">Невозможно удалить тред из скрытых: ошибка %s</string>
-    <string name="thread_starred">Тред добавлен в избранное</string>
-    <string name="thread_star_error">Невозможно добавить тред в избранное: ошибка %s</string>
-    <string name="thread_unstarred">Тред удален из избранного</string>
-    <string name="thread_unstar_error">Невозможно удалить тред из избранного: ошибка %s</string>
-    <string name="force_update">Некоторые сообщения были удалены. Пожалуйста, обновите тред</string>
-    <string name="unreaded_posts">Новые сообщения в треде!</string>
+    <string name="toast_quoted">Пост скопирован</string>
+    <string name="toast_max_files_amt">Достигнуто максимальное количество файлов</string>
+    <string name="toast_thread_will_be_hidden">Тред будет скрыт после следующей загрузки страницы</string>
+    <string name="toast_thread_hide_err">Невозможно скрыть тред: ошибка %s</string>
+    <string name="toast_thread_unhidden">Тред удален из списка скрытых</string>
+    <string name="toast_thread_unhide_err">Невозможно удалить тред из скрытых: ошибка %s</string>
+    <string name="toast_thread_favourited">Тред добавлен в избранное</string>
+    <string name="toast_thread_fav_err">Невозможно добавить тред в избранное: ошибка %s</string>
+    <string name="toast_thread_unfavourited">Тред удален из избранного</string>
+    <string name="toast_thread_unfav_err">Невозможно удалить тред из избранного: ошибка %s</string>
+    <string name="toast_force_reload_needed">Некоторые сообщения были удалены. Пожалуйста, обновите тред</string>
+    <string name="toast_unreaded_posts">Новые сообщения в треде!</string>
+    <string name="toast_minoriko_needed">У вас не установленна патченная версия Minoriko</string>
+    <string name="toast_cant_play_gif">Не могу воспроизвести файл!</string>
 
     <!-- Dialogs -->
-    <string name="send_confirm_dialog">Отправить сообщение?</string>
-    <string name="cant_play_gif">Не могу воспроизвести файл!</string>
+    <string name="dlg_send_confirm_dialog">Отправить сообщение?</string>
+    
     
     <!-- Notifications -->
-  	<string name="new_posts">Обнаружены новые сообщения!</string>    
+  	<string name="notif_new_posts">Обнаружены новые сообщения!</string>    
     
 </resources>

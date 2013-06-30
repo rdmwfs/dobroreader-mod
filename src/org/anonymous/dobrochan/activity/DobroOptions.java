@@ -58,13 +58,13 @@ public class DobroOptions extends PreferenceActivity {
 
 		@Override
 		protected void onPostExecute(Long result) {
-			clearCache.setSummary(getString(R.string.cache_size,
+			clearCache.setSummary(getString(R.string.sett_s_cache_size,
 					humanReadableByteCount(result, true)));
 		}
 
 		@Override
 		protected void onPreExecute() {
-			clearCache.setSummary(getString(R.string.cache_size, "?"));
+			clearCache.setSummary(getString(R.string.sett_s_cache_size, "?"));
 		}
 
 		public String humanReadableByteCount(long bytes, boolean si) {
@@ -75,13 +75,6 @@ public class DobroOptions extends PreferenceActivity {
 			String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1)
 					+ (si ? "" : "i");
 			return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-		}
-
-		@Override
-		protected void onProgressUpdate(Long... values) {
-			clearCache.setSummary(getString(R.string.cache_size,
-					humanReadableByteCount(values[0], true)));
-			super.onProgressUpdate(values);
 		}
 
 		@Override
@@ -183,7 +176,7 @@ public class DobroOptions extends PreferenceActivity {
 
 		/*
 		 * EditTextPreference dt = (EditTextPreference)
-		 * findPreference("download_target");
+		 * findPreference("downloads_folder");
 		 * dt.getEditText().setSingleLine(false);
 		 * dt.getEditText().setMinLines(3);
 		 */

@@ -141,7 +141,7 @@ public class DobroNewPostActivity extends GDActivity implements
 				captcha_img.setAdjustViewBounds(true);
 				captcha_img.setImageBitmap(result);
 				if (captcha_not_needed) {
-					captcha_edit.setText(R.string.no_user_captcha);
+					captcha_edit.setText(R.string.newpost_no_user_captcha);
 					captcha_edit.setEnabled(false);
 				} else {
 					if (!captcha_edit.isEnabled())
@@ -150,7 +150,7 @@ public class DobroNewPostActivity extends GDActivity implements
 				}
 			} else {
 				captcha_img.setVisibility(View.GONE);
-				captcha_edit.setText(R.string.no_user_captcha);
+				captcha_edit.setText(R.string.newpost_no_user_captcha);
 				captcha_edit.setEnabled(false);
 			}
 		}
@@ -306,8 +306,8 @@ public class DobroNewPostActivity extends GDActivity implements
 				for (i = 0; i < ratings.length; i++) {
 					menu.add(Menu.NONE, (Integer) v.getTag(), i, ratings[i]);
 				}
-				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.crop);
-				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.resize);
+				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.newpost_crop_pic);
+				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.newpost_resize_pic);
 				menu.add(Menu.NONE, (Integer) v.getTag(), i++, R.string.delete);
 				Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT)
 						.show();
@@ -464,7 +464,7 @@ public class DobroNewPostActivity extends GDActivity implements
 
 	private boolean hasMaxAttachmentsAmount() {
 		if (attachments.size() >= 5) {
-			Toast.makeText(DobroNewPostActivity.this, R.string.max_files,
+			Toast.makeText(DobroNewPostActivity.this, R.string.toast_max_files_amt,
 					Toast.LENGTH_SHORT).show();
 			return true;
 		} else {
@@ -496,7 +496,7 @@ public class DobroNewPostActivity extends GDActivity implements
 				startActivity(intent);
 			} catch (ActivityNotFoundException ee) {
 				Toast.makeText(DobroNewPostActivity.this,
-						R.string.minoriko_needed, Toast.LENGTH_SHORT).show();
+						R.string.toast_minoriko_needed, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -825,7 +825,7 @@ public class DobroNewPostActivity extends GDActivity implements
 			// строчники
 			new AlertDialog.Builder(new ContextThemeWrapper(this,
 					R.style.AlertDialogLight))
-					.setMessage(R.string.send_confirm_dialog)
+					.setMessage(R.string.dlg_send_confirm_dialog)
 					.setCancelable(false)
 					.setPositiveButton(android.R.string.yes,
 							new DialogInterface.OnClickListener() {

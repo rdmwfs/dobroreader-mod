@@ -61,7 +61,7 @@ public class DCDashClockExtension extends DashClockExtension {
 		Intent notificationIntent = new Intent(context,
 				DobroStarredEditor.class);
 		notificationIntent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
-				context.getString(R.string.starred));
+				context.getString(R.string.home_favourities));
 		notificationIntent.putExtra(DobroConstants.FAVS_DUMP, dump);
 		publishUpdate(new ExtensionData()
 			.visible(true)

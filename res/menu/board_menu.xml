@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:id="@+id/update_board"
-        android:title="@string/update"></item>
+        android:title="@string/thread_update"></item>
 
     <item
         android:id="@+id/go_to"
         android:title="@string/go_to"></item>
-    <item android:id="@+id/new_thread" android:title="@string/new_thread"></item>
+    <item android:id="@+id/new_thread" android:title="@string/board_new_thread"></item>
 </menu>

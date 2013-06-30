@@ -6,12 +6,9 @@
     <string name="about">О программе</string>
 	
     <!-- Multiply usage -->
-    <string name="untitled">Безымянный тред</string>
     <string name="go_to">Перейти</string>
     <string name="delete">Удалить</string>
     
-    <!-- Context menus -->
-
     <string-array name="rating_keys">
         <item>SFW</item>
         <item>R-15</item>
@@ -30,6 +27,7 @@
         <item>Доброчан</item>
     </string-array>
 
+    <!-- Other -->
     <string name="answers">Ответы: </string>
     <string name="create_sortcut">Создать ярлык</string>
     <string name="img_rating">Рейтинг изображения</string>

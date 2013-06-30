@@ -121,7 +121,7 @@ public class DobroHistoryActivity extends GDListActivity {
 				String subtitle = String.format(">>%s/%s ", t.getBoardName(), t.getDisplay_id());
 				String title = t.getTitle();
 				if(title == null || title.length()==0)
-					title = getString(R.string.untitled);
+					title = getString(android.R.string.untitled);
 				SubtitleItem item = new SubtitleItem(title,
 						subtitle);
 				String[] tag = {t.getBoardName(),t.getDisplay_id(), t.getThread_id()};

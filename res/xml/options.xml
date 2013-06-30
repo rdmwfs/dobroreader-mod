@@ -1,122 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/options" >
+    android:title="@string/settings" >
 
-    <PreferenceCategory android:title="@string/sett_title_pictures" >
+    <PreferenceCategory android:title="@string/sett_cat_title_pictures" >
         <ListPreference
             android:defaultValue="wifi"
             android:entries="@array/network_keys"
             android:entryValues="@array/network_values"
-            android:key="images_show"
+            android:key="show_images"
             android:title="@string/show_images" />
 
         <CheckBoxPreference
-            android:key="op_pictures_force"
-            android:summary="@string/always_show_op_images"
-            android:title="@string/always_show_op_images_title" />
+            android:key="show_op_pic"
+            android:summary="@string/sett_s_alw_show_op_img"
+            android:title="@string/sett_t_alw_show_op_img" />
 
         <ListPreference
             android:defaultValue="swf"
             android:entries="@array/rating_keys"
             android:entryValues="@array/rating_values"
-            android:key="rating"
-            android:title="@string/max_rating" />
+            android:key="max_rating"
+            android:title="@string/sett_t_max_rating_to_show" />
         
         <EditTextPreference
             android:defaultValue=""
             android:key="password"
-            android:summary="@string/password_summary"
-            android:title="@string/password_title" />
+            android:summary="@string/sett_s_password"
+            android:title="@string/sett_t_password" />
         
         <Preference
-                android:title="@string/clear_cache"
-                android:summary="@string/cache_size"
+                android:title="@string/sett_t_clear_cache"
+                android:summary="@string/sett_s_cache_size"
                 android:key="clearCache" />
         
         <CheckBoxPreference
-            android:key="show_fileinfo"
+            android:key="show_file_info"
             android:defaultValue="true"
-            android:summary="@string/show_file_info_summary"
-            android:title="@string/show_file_info_title" />
+            android:summary="@string/sett_s_show_file_info"
+            android:title="@string/sett_title_show_file_info" />
         
         <EditTextPreference
             android:defaultValue="200"
             android:key="images_size"
             android:numeric="integer"
-            android:summary="@string/images_size"
-            android:title="@string/images_size_title" />
+            android:summary="@string/sett_s_images_size"
+            android:title="@string/sett_t_images_size" />
         
         <CheckBoxPreference
             android:key="youtube"
             android:defaultValue="true"
-            android:summary="@string/youtube_summary"
-            android:title="@string/youtube_title" />
+            android:summary="@string/sett_s_youtube"
+            android:title="@string/sett_t_youtube" />
         <EditTextPreference 
-            android:key="download_target" 
-            android:title="@string/download_target" 
-            android:summary="@string/download_target_summary"/>
+            android:key="downloads_folder" 
+            android:title="@string/sett_t_download_target" 
+            android:summary="@string/sett_s_download_target"/>
         <EditTextPreference 
             android:key="img_viewer_bg_color1" 
-            android:title="@string/image_viewer_bg_color" 
+            android:title="@string/sett_t_img_viewer_bg_color" 
             android:defaultValue="#FF000000"
-        	android:summary="@string/Image_viewer_bg_color_summary"/>
+        	android:summary="@string/sett_s_img_viewer_bg_color"/>
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="@string/sett_title_general" >
+    <PreferenceCategory 
+        android:title="@string/sett_cat_title_general" >
         <ListPreference
             android:defaultValue="dc"
             android:entries="@array/theme_keys"
             android:entryValues="@array/theme_values"
             android:key="theme"
-            android:title="@string/options_theme" />
+            android:title="@string/sett_t_theme" />
         
         <EditTextPreference
             android:defaultValue="16"
-            android:key="font_size"
+            android:key="message_font_size"
             android:numeric="integer"
-            android:summary="@string/big_font"
-            android:title="@string/big_font_title" />
+            android:summary="@string/sett_s_message_font_size"
+            android:title="@string/sett_t_message_font_size" />
         
         <ListPreference
             android:defaultValue="auto"
             android:entries="@array/rotate_keys"
             android:entryValues="@array/rotate_values"
             android:key="rotate"
-            android:title="@string/orientation" />
+            android:title="@string/sett_t_orientation" />
 
         <EditTextPreference
             android:defaultValue="50"
             android:key="last_count"
             android:numeric="integer"
-            android:summary="@string/last_count_summary"
-            android:title="@string/last_count_title" />
+            android:summary="@string/sett_s_show_last_posts_amt"
+            android:title="@string/sett_t_show_last_posts_amt" />
 
         <ListPreference
             android:defaultValue="never"
             android:entries="@array/network_keys"
             android:entryValues="@array/network_values"
             android:key="autorun_network"
-            android:title="@string/autorun" />
+            android:title="@string/sett_t_autoupdate_favourites" />
 
         <EditTextPreference
             android:defaultValue="30"
             android:key="period"
             android:numeric="integer"
-            android:summary="@string/period"
-            android:title="@string/period_title" />
+            android:summary="@string/sett_s_autoupdate_fav_time"
+            android:title="@string/sett_t_autoupdate_fav_time" />
         
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="send_confirm"
-            android:summary="@string/send_confirm"
-            android:title="@string/send_confirm_title" />
+            android:summary="@string/sett_s_confirm_dispatch"
+            android:title="@string/sett_t_confirm_dispatch" />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="@string/sett_title_notifications" >
+    <PreferenceCategory android:title="@string/sett_cat_title_notifications" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="notify_sound_on"
-            android:title="@string/notify_sound_on" />
+            android:title="@string/sett_t_notify_sound" />
 
         <RingtonePreference
             android:dependency="notify_sound_on"
@@ -124,95 +125,96 @@
             android:ringtoneType="notification"
             android:showDefault="true"
             android:showSilent="false"
-            android:title="@string/notify_sound" />
+            android:title="@string/sett_t_choose_ringtone" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="notify_vibro_on"
-            android:title="@string/notify_vibro" />
+            android:title="@string/sett_t_notify_vibro" />
         
         <CheckBoxPreference
             android:key="led_on"
             android:defaultValue="true"
-            android:title="@string/led" />
+            android:title="@string/sett_t_use_led" />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="@string/sett_title_lab">
+    <PreferenceCategory android:title="@string/sett_cat_title_lab">
         <CheckBoxPreference
             android:key="show_spoilers"
             android:defaultValue="true"
-            android:summary="@string/sett_summ_show_spoilers" android:title="@string/sett_show_spoilers"/>
+            android:summary="@string/sett_s_show_spoilers" 
+            android:title="@string/sett_t_show_spoilers"/>
         
         <CheckBoxPreference
             android:key="show_format"
             android:defaultValue="false"
-            android:title="@string/sett_show_format_panel"
-            android:summary="@string/sett_summ_show_format_panel"/>
+            android:title="@string/sett_t_show_formatting_toolbar"
+            android:summary="@string/sett_s_show_formatting_toolbar"/>
         
         <CheckBoxPreference
             android:key="update_after_posting"
             android:defaultValue="true"
-            android:title="@string/sett_immediate_update"
-            android:summary="@string/sett_summ_immediate_update"/>
+            android:title="@string/sett_t_update_on_post"
+            android:summary="@string/sett_s_update_on_post"/>
 
         <EditTextPreference
             android:key="spells"
-            android:title="@string/sett_spells"
-            android:summary="@string/sett_summ_spells" 
+            android:title="@string/sett_t_spells"
+            android:summary="@string/sett_s_spells" 
             />
         <EditTextPreference
             android:key="threads2hide"
-            android:title="@string/hide_threads_title"
-            android:summary="@string/hide_threads_summary" 
+            android:title="@string/sett_t_threads_to_hide"
+            android:summary="@string/sett_s_threads_to_hide" 
             />
         <CheckBoxPreference
             android:key="download_service_off"
             android:defaultValue="false"
-            android:title="@string/download_service_off"
-            android:summary="@string/download_service_off_summary"/>
+            android:title="@string/sett_t_download_service_off"
+            android:summary="@string/sett_s_download_service_off"/>
         <CheckBoxPreference
             android:key="expandable_board"
             android:defaultValue="true"
-            android:summary="@string/expand_board_summary"
-            android:title="@string/expand_board" />
+            android:summary="@string/sett_s_expandable_board"
+            android:title="@string/sett_t_expandable_board" />
         <CheckBoxPreference
 			android:key="quick_search" 
-			android:title="@string/quick_search" 
-			android:summary="@string/quick_search_summary" 
+			android:title="@string/sett_t_quick_search" 
+			android:summary="@string/sett_s_quick_search" 
 			android:defaultValue="true" />
         
         <CheckBoxPreference
             android:key="internal_viewer"
             android:defaultValue="true"
-            android:summary="@string/imgviewer_summary"
-            android:title="@string/imgviewer_title" />
+            android:summary="@string/sett_s_internal_img_viewer"
+            android:title="@string/sett_t_internal_img_viewer" />
         
         <EditTextPreference
             android:defaultValue="0"
             android:key="imgviewer_max"
             android:numeric="integer"
             android:dependency="internal_viewer"
-            android:summary="@string/imgviewer_max_summary"
-            android:title="@string/imgviewer_max_title" />
+            android:summary="@string/sett_s_img_viewer_max_size"
+            android:title="@string/sett_t_img_viewer_max_size" />
         
         <EditTextPreference
             android:defaultValue="30"
             android:key="autocheck_interval"
             android:numeric="integer"
-            android:summary="@string/autocheck_interval_summary"
-            android:title="@string/autocheck_interval_title" />
+            android:summary="@string/sett_s_thread_autoupdate_time"
+            android:title="@string/sett_t_thread_autoupdate_time" />
         
         <CheckBoxPreference
             android:key="autocheck_sound"
             android:defaultValue="true"
-            android:summary="@string/autocheck_sound_summary"
-            android:title="@string/autocheck_sound_title" />
+            android:summary="@string/sett_s_new_posts_on_autoupdate"
+            android:title="@string/sett_t_new_posts_on_autoupdate" />
         
         <CheckBoxPreference
             android:key="always_show_captcha"
             android:defaultValue="false"
-            android:summary="@string/sett_summ_show_captcha_always"
-            android:title="@string/sett_show_captcha_always" />
+            android:summary="@string/sett_s_show_captcha_always"
+            android:title="@string/sett_t_show_captcha_always" />
     </PreferenceCategory>
 
 </PreferenceScreen>

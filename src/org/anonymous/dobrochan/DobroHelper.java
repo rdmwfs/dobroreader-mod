@@ -118,7 +118,7 @@ public class DobroHelper {
 	public static boolean checkRating(Context c, Rating r) {
 		SharedPreferences prefs = DobroApplication.getApplicationStatic()
 				.getDefaultPrefs();
-		String max_rating = prefs.getString("rating", "swf");
+		String max_rating = prefs.getString("max_rating", "swf");
 		return (max_rating.compareTo("swf") == 0 && r != Rating.SWF)
 				|| (max_rating.compareTo("r15") == 0 && r == Rating.R18)
 				|| (max_rating.compareTo("r15") == 0 && r == Rating.R18G)

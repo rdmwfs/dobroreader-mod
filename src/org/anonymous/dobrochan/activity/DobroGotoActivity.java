@@ -50,7 +50,7 @@ public class DobroGotoActivity extends GDActivity implements
 			if (board_edit.getText().length() == 0
 					|| display_id_edit.getText().length() == 0) {
 				Toast.makeText(DobroGotoActivity.this,
-						getText(R.string.values_not_filled), Toast.LENGTH_SHORT)
+						getText(R.string.toast_some_values_not_filled), Toast.LENGTH_SHORT)
 						.show();
 			} else {
 				Intent i = new Intent(DobroGotoActivity.this,
