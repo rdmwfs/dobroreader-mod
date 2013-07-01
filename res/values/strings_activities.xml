@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- HomeActivity -->
+
+    <string name="home_cleaning">Очистка</string>
+    <string name="home_about_text">DobroReader app by Dobroanons\nVersion %s</string>
+    <string name="home_history">История</string>
+    <string name="home_hidden_threads">Скрытые треды</string>
+    <string name="home_favourities">Избранное</string>
+    <string name="home_update_diff">Обновить цифры</string>
+
+    <!-- TODO выпилить кнопку на выбор способа апдейта избранного. Оно не в тему -->
+
+
+    <!-- BoardActivity[+Expandable] -->
+    <string name="board_new_thread">Новый тред</string>
+    <string name="board_next_page">Читать дальше</string>
+    <string name="board_page_N">Страница № %s</string>
+    <string name="board_skipped_1">%1$s пост пропущен, %2$s с файлами</string>
+    <string name="board_skipped_2_3_4">%1$s поста пропущено, %2$s с файлами</string>
+    <string name="board_skipped">%1$s постов пропущено, %2$s с файлами</string>
+    <string name="board_skipped_ex_1">%1$s пост\n%2$s с файлами</string>
+    <string name="board_skipped_ex_2_3_4">%1$s поста\n%2$s с файлами</string>
+    <string name="board_skipped_ex">%1$s постов\n%2$s с файлами</string>
+
+    <!-- ThreadActivity -->
+    <string name="thread_update">Обновить</string>
+    <string name="thread_force_reload">Перезагрузить</string>
+
+    <!-- NewPostActivity -->
+    <string name="newpost_name">Имя</string>
+    <string name="newpost_theme">Тема</string>
+    <string name="newpost_message">Сообщение</string>
+    <string name="newpost_captcha">Капча</string>
+    <string name="newpost_no_user_captcha">Вам не надо вводить капчу</string>
+    <string name="newpost_add_picture">Добавить картинку</string>
+    <string name="newpost_pic_from_gallery">Галерея</string>
+    <string name="newpost_pic_from_booru">Booru</string>
+    <string name="newpost_pic_from_cam">Фото</string>
+    <string name="newpost_sage">Не поднимать тред</string>
+    <string name="newpost_crop_pic">Обрезать</string>
+    <string name="newpost_resize_pic">Масштабировать</string>
+    <string name="newpost_post">Отправить</string>
+    <string name="newpost_add_file">Файл</string>
+ 
+    <!-- GotoActivity (используются в layout/*.xml -->
+    <string name="goto_thread_or_post">Номер треда или поста</string>
+    <string name="goto_board">Доска</string>
+
+    <!-- StarredEditor -->
+    <string name="faw_thread_edited">Изменен %s</string>
+
+    <!-- HiddenEditor -->
+
+</resources>

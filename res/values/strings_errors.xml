@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO может сделать это менее официальным, более доброчанским?? -->
+    <string name="crash_notif_ticker_text">Обнаружена ошибка. Пожалуйста, отправьте её разработчику.</string>
+	<string name="crash_notif_title">DobroReader упал&#8230;</string>
+	<string name="crash_notif_text">Информация о баге готова к отправке</string>
+	<string name="crash_dialog_title">DobroReader упал</string>
+	<string name="crash_dialog_text">Программа выполнила невыполнимое и была закрыта.
+    Чтобы в следующем релизе такого не происходило, отправьте сообщение об ошибке.
+    Все что от вас тредуется - это нажать \'OK\'.</string>
+	<string name="crash_dialog_comment_prompt">Также вы можете добавить свой комментарий (к примеру - действия, повлекшие за собой ошибку):</string>
+	<string name="crash_dialog_ok_toast">Спасибо!</string>
+	
+	<string name="open_intent_error">Не найдено программы, с помощью которой можно завершить действие.</string>
+</resources>

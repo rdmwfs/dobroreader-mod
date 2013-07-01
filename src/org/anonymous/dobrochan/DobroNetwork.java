@@ -176,6 +176,7 @@ public class DobroNetwork extends Object{
 			e.printStackTrace();
 		}
 		saveCookes();
+		//XXX SDK_INT > 8
 		if (Build.VERSION.SDK_INT > 8)
 			DobroApplication.getApplicationStatic().unregisterReceiver(downloadReceiver);
 	}
@@ -301,17 +302,18 @@ public class DobroNetwork extends Object{
 			NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 			Notification notification;
 			
-			CharSequence contentTitle = context.getText(R.string.starred);
-			CharSequence contentText = context.getText(R.string.new_posts);
+			CharSequence contentTitle = context.getText(R.string.home_favourities);
+			CharSequence contentText = context.getText(R.string.notif_new_posts);
 			Intent notificationIntent = new Intent(context,
 					DobroStarredEditor.class);
 			notificationIntent.putExtra(GDActivity.GD_ACTION_BAR_TITLE,
-					context.getString(R.string.starred));
+					context.getString(R.string.home_favourities));
 			notificationIntent.putExtra(DobroConstants.FAVS_DUMP, dump);
 			PendingIntent contentIntent = PendingIntent.getActivity(
 					context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			
 			if(Build.VERSION.SDK_INT < 16) {
+				//XXX SDK_INT < 16
 				notification = new Notification(R.drawable.icon,
 						context.getText(R.string.app_name), System.currentTimeMillis());
 				notification.setLatestEventInfo(context, contentTitle, contentText,
@@ -363,6 +365,7 @@ public class DobroNetwork extends Object{
 	@TargetApi(9)
 	void createDownloadReceiver() {
 		if (Build.VERSION.SDK_INT > 8) {
+			//XXX SDK_INT > 8
 			downloadReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
@@ -590,7 +593,7 @@ public class DobroNetwork extends Object{
 				if (posts_cached_old_count != posts_real_count
 						- posts_updated_count) {
 					DobroApplication app = DobroApplication.getApplicationStatic();
-					app.showToast(app.getString(R.string.force_update),2);
+					app.showToast(app.getString(R.string.toast_force_reload_needed),2);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -683,9 +686,9 @@ public class DobroNetwork extends Object{
 			r = m_httpclient.execute(get, m_http_context);
 			DobroApplication app = DobroApplication.getApplicationStatic();
 			if (r.getStatusLine().getStatusCode() == 200)
-				app.showToast(app.getString(R.string.thread_hidden),1);
+				app.showToast(app.getString(R.string.toast_thread_will_be_hidden),1);
 			else
-				app.showToast(app.getString(R.string.thread_hide_error, r
+				app.showToast(app.getString(R.string.toast_thread_hide_err, r
 						.getStatusLine().getStatusCode()),2);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -723,11 +726,11 @@ public class DobroNetwork extends Object{
 			r = m_httpclient.execute(get, m_http_context);
 			DobroApplication app = DobroApplication.getApplicationStatic();
 			if (r.getStatusLine().getStatusCode() == 200) {
-				app.showToast(app.getString(R.string.thread_starred),1);
+				app.showToast(app.getString(R.string.toast_thread_favourited),1);
 				getThreadJson(board + "/" + thread, null, null, false);
 				DobroParser.getInstance().parceStarredThreads(getFavsJson());
 			} else
-				app.showToast(app.getString(R.string.thread_star_error, r
+				app.showToast(app.getString(R.string.toast_thread_fav_err, r
 						.getStatusLine().getStatusCode()),2);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -756,9 +759,9 @@ public class DobroNetwork extends Object{
 			HttpResponse r = m_httpclient.execute(get, m_http_context);
 			DobroApplication app = DobroApplication.getApplicationStatic();
 			if (r.getStatusLine().getStatusCode() != 200) {
-				app.showToast(app.getString(R.string.thread_del_ok),1);
+				app.showToast(app.getString(R.string.toast_thread_del_succ),1);
 			} else
-				app.showToast(app.getString(R.string.thread_del_error, r
+				app.showToast(app.getString(R.string.toast_thread_del_err, r
 						.getStatusLine().getStatusCode()),2);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -773,9 +776,9 @@ public class DobroNetwork extends Object{
 			r = m_httpclient.execute(get, m_http_context);
 			DobroApplication app = DobroApplication.getApplicationStatic();
 			if (r.getStatusLine().getStatusCode() == 200)
-				app.showToast(app.getString(R.string.thread_unhidden),1);
+				app.showToast(app.getString(R.string.toast_thread_unhidden),1);
 			else
-				app.showToast(app.getString(R.string.thread_unhide_error, r
+				app.showToast(app.getString(R.string.toast_thread_unhide_err, r
 						.getStatusLine().getStatusCode()),2);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -792,9 +795,9 @@ public class DobroNetwork extends Object{
 			r = m_httpclient.execute(get, m_http_context);
 			DobroApplication app = DobroApplication.getApplicationStatic();
 			if (r.getStatusLine().getStatusCode() == 200)
-				app.showToast(app.getString(R.string.thread_unstarred),1);
+				app.showToast(app.getString(R.string.toast_thread_unfavourited),1);
 			else
-				app.showToast(app.getString(R.string.thread_unstar_error, r
+				app.showToast(app.getString(R.string.toast_thread_unfav_err, r
 						.getStatusLine().getStatusCode()),2);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

@@ -25,6 +25,7 @@ public class ThreadsInfoCacheOpenHelper extends SQLiteOpenHelper implements IThr
     private SQLiteDatabase db;
 
     public ThreadsInfoCacheOpenHelper(Context context) {
+    	//XXX SDK_INT > 7
         super(context,
         		(Build.VERSION.SDK_INT>7?ApiWrapper.getExternalCacheDir(context).getAbsolutePath()+
                 		"/":"")+"threads_info_cache.sqlite",

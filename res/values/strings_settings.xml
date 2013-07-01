@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings">Настройки</string>
+
+    <!-- Pictures -->
+    <string name="sett_cat_title_pictures">Изображения</string>
+    <string name="show_images">Загружать изображения</string>
+    <string name="sett_t_alw_show_op_img">Картинки ОП-постов</string>
+    <string name="sett_s_alw_show_op_img">Всегда показывать картинки ОП-постов</string>
+    <string name="sett_t_max_rating_to_show">Максимальный рейтинг</string>
+    <string name="sett_s_password">Используется для удаления сообщений</string>
+    <string name="sett_t_password">Пароль</string>
+    <string name="sett_t_clear_cache">Очистить кэш</string>
+    <string name="sett_s_cache_size">Размер кеша: %s</string>
+    <string name="sett_title_show_file_info">Названия файлов</string>
+    <string name="sett_s_show_file_info">Показывать названия файлов, их размер и разрешение</string>
+    <string name="sett_t_images_size">Высота картинок</string>
+    <string name="sett_s_images_size">Высота панели с превьюшками</string>
+    <string name="sett_t_youtube">Превью YouTube</string>
+    <string name="sett_s_youtube">Показывать превью ссылок на ролики YouTube</string>
+    <string name="sett_t_download_target">Папка для загрузки</string>
+    <string name="sett_s_download_target">Папка, в которую загружаются изображения</string>
+    <string name="sett_t_img_viewer_bg_color">Цвет фона просмотрщика изображений</string>
+    <string name="sett_s_img_viewer_bg_color">Цвет фона в формате hex</string>
+
+    <!-- General -->
+    <string name="sett_cat_title_general">Общие</string>
+    <string name="sett_t_theme">Тема оформления</string>
+    <string name="sett_t_message_font_size">Размер шрифта</string>
+    <string name="sett_s_message_font_size">Размер шрифта для текста сообщений</string>
+    <string name="sett_t_orientation">Ориентация</string>
+    <string name="sett_s_show_last_posts_amt">Количество постов при частичной загрузке</string>
+    <string name="sett_t_show_last_posts_amt">Загружать N последних</string>
+    <string name="sett_t_autoupdate_favourites">Автопроверка избранного</string>
+    <string name="sett_t_autoupdate_fav_time">Периодичность автопроверки</string>
+    <string name="sett_s_autoupdate_fav_time">Проверять изменения в избранных тредах. Минимум - 5 минут</string>
+    <string name="sett_s_confirm_dispatch">Выдавать запрос на отправку сообщений</string>
+    <string name="sett_t_confirm_dispatch">Подтверждать отправку</string>
+
+    <!-- Notification -->
+    <string name="sett_cat_title_notifications">Уведомления</string>
+    <string name="sett_t_notify_sound">Звук</string>
+    <string name="sett_t_choose_ringtone">Выбрать звук</string>
+    <string name="sett_t_notify_vibro">Вибро</string>
+    <string name="sett_t_use_led">Мигать светодиодом</string>
+
+    <!-- Lab -->
+    <string name="sett_cat_title_lab">Экспериментальные фичи</string>
+    <string name="sett_t_show_spoilers">Раскрывать спойлеры</string>
+    <string name="sett_s_show_spoilers">Показывать содержимое %%спойлеров%%</string>
+    <string name="sett_t_show_formatting_toolbar">Панель форматирования</string>
+    <string name="sett_s_show_formatting_toolbar">Показывать кнопки форматирования в окне создании поста</string>
+    <string name="sett_t_update_on_post">Моментальное обновление</string>
+    <string name="sett_s_update_on_post">Автоматически обновлять тред сразу после отправки поста</string>
+    <string name="sett_t_spells">Заклнания</string>
+    <string name="sett_s_spells">Каждая строка введенная в поле, позволяет скрыть все посты, содержащие её в себе</string>
+    <string name="sett_t_threads_to_hide">Автоскрытие тредов</string>
+    <string name="sett_s_threads_to_hide">Названия тредов, которые требуется скрывать</string>
+    <string name="sett_t_download_service_off">Альтернативный загрузчик</string>
+    <string name="sett_s_download_service_off">Не использовать системный менеджер загрузок (включите, если картинки не открываются после загрузки)</string>
+    <string name="sett_t_expandable_board">Сворачивать треды</string>
+    <string name="sett_s_expandable_board">Отображать только ОП-посты на доске</string>
+    <string name="sett_t_quick_search">Быстрый поиск</string>
+    <string name="sett_s_quick_search">Использовать быстрый поиск среди вложенных папок (возможны сбои)</string>
+    <string name="sett_s_internal_img_viewer">Использовать встроенный просмотрщик изображений</string>
+    <string name="sett_t_internal_img_viewer">Встроенный просмотрщик</string>
+    <string name="sett_s_img_viewer_max_size">Уменьшать изображения при просмотре, если их размер (ширина или высота) больше значения</string>
+    <string name="sett_t_img_viewer_max_size">Максимальный размер</string>
+    <string name="sett_s_thread_autoupdate_time">Период автообновления треда (в секундах, минимум - 30с)</string>
+    <string name="sett_t_thread_autoupdate_time">Период автообновления</string>
+    <string name="sett_s_new_posts_on_autoupdate">Играть звук при получении новых сообщений во время автообновления</string>
+    <string name="sett_t_new_posts_on_autoupdate">Звук автообновления</string>
+    <string name="sett_t_show_captcha_always">Диалоги с капчей</string>
+    <string name="sett_s_show_captcha_always">Отображать капчу, даже если её не надо вводить</string>
+    
+    <!-- Arrays -->
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>dc</item>
+    </string-array>
+    <string-array name="network_keys">
+        <item>Всегда</item>
+        <item>Только по WIFI</item>
+        <item>Никогда</item>
+    </string-array>
+    <string-array name="network_values">
+        <item>always</item>
+        <item>wifi</item>
+        <item>never</item>
+    </string-array>
+    <string-array name="rotate_keys">
+        <item>Авто</item>
+        <item>Ландшафт</item>
+        <item>Портрет</item>
+    </string-array>
+    <string-array name="rotate_values">
+        <item>auto</item>
+        <item>land</item>
+        <item>port</item>
+    </string-array>
+
+</resources>

@@ -1,7 +1,6 @@
 package org.anonymous.dobrochan.activity;
 
 import greendroid.app.GDActivity;
-import greendroid.util.Md5Util;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.item.Item;
@@ -17,16 +16,15 @@ import org.anonymous.dobrochan.DobroHelper;
 import org.anonymous.dobrochan.DobroNetwork;
 import org.anonymous.dobrochan.DobroParser;
 import org.anonymous.dobrochan.DobroPostItem;
-import org.anonymous.dobrochan.reader.R;
 import org.anonymous.dobrochan.json.DobroBoard;
 import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroThread;
+import org.anonymous.dobrochan.reader.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -85,12 +83,12 @@ public class DobroBoardActivity extends DobroPostsList {
 			pi.isInProgress = false;
 			if (result == null)
 			{
-				pi.text = DobroBoardActivity.this.getString(R.string.next_page);
+				pi.text = DobroBoardActivity.this.getString(R.string.board_next_page);
 				pi.enabled = true;
 				adapter.notifyDataSetChanged();
 				return;
 			}
-			pi.text = getString(R.string.page, page_s);
+			pi.text = getString(R.string.board_page_N, page_s);
 			pi.enabled = false;
 			SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
 			String[] hide_rules = prefs.getString("threads2hide", "").split("\n");
@@ -136,16 +134,16 @@ public class DobroBoardActivity extends DobroPostsList {
 					final int skipped_count_prelast_d = (skipped_count % 100) / 10;
 					int skipped_string;
 					if (skipped_count_prelast_d == 1)
-						skipped_string = R.string.skipped;
+						skipped_string = R.string.board_skipped;
 					else {
 						switch (skipped_count_last_d) {
-							case 1:  skipped_string = R.string.skipped_1;
+							case 1:  skipped_string = R.string.board_skipped_1;
 							         break;
 							case 2:
 							case 3:
-							case 4:  skipped_string = R.string.skipped_2_3_4;
+							case 4:  skipped_string = R.string.board_skipped_2_3_4;
 							         break;
-							default: skipped_string = R.string.skipped;
+							default: skipped_string = R.string.board_skipped;
 							break;
 						}
 					}
@@ -158,7 +156,7 @@ public class DobroBoardActivity extends DobroPostsList {
 				}
 			}
 			ProgressItem nextPage = new ProgressItem(
-					DobroBoardActivity.this.getString(R.string.next_page),
+					DobroBoardActivity.this.getString(R.string.board_next_page),
 					false);
 			nextPage.setTag(DobroConstants.NEXT
 					+ String.valueOf(Integer.parseInt(page_s) + 1));

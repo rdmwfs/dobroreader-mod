@@ -99,6 +99,11 @@ public class DobroConstants {
 		temp.put(3, "news");
 		BOARD_ID_TO_NAME = Collections.unmodifiableMap(temp);
 	}
+	public static final String SFW = "SFW";
+	public static final String R_15 = "R-15";
+	public static final String R_18 = "R-18";
+	public static final String R_18G = "R-18G";
+	public static final String[] ratings = { SFW, R_15, R_18, R_18G };	
 	
 	//old unused
 	public static final String THREADS_CACHE = APP_DIR + "threads/";

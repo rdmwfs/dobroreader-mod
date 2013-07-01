@@ -363,7 +363,7 @@ public class DobroThreadActivity extends DobroPostsList {
 				if(result == null) {
 					Toast.makeText(DobroThreadActivity.this, "Ошибка", Toast.LENGTH_SHORT).show();
 				}
-				pi.text = getString(R.string.update);
+				pi.text = getString(R.string.thread_update);
 				pi.enabled = true;
 //				adapter.notifyDataSetChanged();
 				View v = getListView().getChildAt(adapter.getCount() - 1 - getListView().getFirstVisiblePosition());
@@ -383,7 +383,7 @@ public class DobroThreadActivity extends DobroPostsList {
 				adapter.insert(new DobroPostItem(post), adapter.getCount());
 			}
 			ProgressItem nextPage = new ProgressItem(
-					getString(R.string.update), false);
+					getString(R.string.thread_update), false);
 			nextPage.setTag(DobroConstants.UPDATE_TAG + result.getPosts()[result.getPosts().length-1].getDisplay_id());
 			adapter.add(nextPage);
 			if(!result.isThreadModified())

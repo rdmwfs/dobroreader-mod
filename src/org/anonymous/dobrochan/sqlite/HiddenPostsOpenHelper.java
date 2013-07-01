@@ -21,7 +21,8 @@ public class HiddenPostsOpenHelper extends SQLiteOpenHelper implements IHiddenPo
                 DATA_COLUMN + " TEXT);";
 
     public HiddenPostsOpenHelper(Context context) {
-        super(context,
+    	//XXX SDK_INT > 7
+    	super(context,
         		(Build.VERSION.SDK_INT>7?ApiWrapper.getExternalCacheDir(context).getAbsolutePath()+
         		"/":"")+"hidden_posts.sqlite",
         		null, 

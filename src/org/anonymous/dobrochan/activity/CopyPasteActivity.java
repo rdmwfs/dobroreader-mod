@@ -30,6 +30,7 @@ public class CopyPasteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		String text = getIntent().getStringExtra("text");
 		if(Build.VERSION.SDK_INT < 11) {
+			//XXX SDK_INT < 11
 			EditText te = new EditText(this);
 			te.setGravity(Gravity.TOP);
 			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -40,7 +41,7 @@ public class CopyPasteActivity extends Activity {
 			SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
 			int font_size = 10;
 			try{
-				font_size = Integer.parseInt(prefs.getString("font_size", "16"));
+				font_size = Integer.parseInt(prefs.getString("message_font_size", "16"));
 			} catch (Exception e){}
 			if (font_size < 10)
 				font_size = 10;

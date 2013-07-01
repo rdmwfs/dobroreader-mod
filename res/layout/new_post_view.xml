@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/message" />
+            android:text="@string/newpost_message" />
 
         <EditText
             android:id="@+id/message"
@@ -23,9 +23,10 @@
             android:minLines="4"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" >
+
             <requestFocus />
         </EditText>
-        
+
         <LinearLayout
             android:id="@+id/formatPanel"
             android:layout_width="fill_parent"
@@ -38,79 +39,79 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:onClick="onBoldClick"
                 android:text="B"
-                android:textStyle="bold"
-                android:onClick="onBoldClick" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/italicButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:onClick="onItalicClick"
                 android:text="I"
-                android:textStyle="italic"
-                android:onClick="onItalicClick" />
-            
+                android:textStyle="italic" />
+
             <Button
                 android:id="@+id/boldItalicButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:onClick="onBoldItalicClick"
                 android:text="BI"
-                android:textStyle="bold|italic"
-                android:onClick="onBoldItalicClick" />
-            
+                android:textStyle="bold|italic" />
+
             <Button
                 android:id="@+id/strikeoutButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="S"
-                android:onClick="onStrikeClick" />
-            
+                android:onClick="onStrikeClick"
+                android:text="S" />
+
             <Button
                 android:id="@+id/codeButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:onClick="onCodeClick"
                 android:text="M"
-                android:typeface="monospace"
-                android:onClick="onCodeClick" />
-            
+                android:typeface="monospace" />
+
             <Button
                 android:id="@+id/spoilerButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="%%"
-                android:onClick="onSpoilerClick" />
+                android:onClick="onSpoilerClick"
+                android:text="%%" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/captcha" />
+            android:text="@string/newpost_captcha" />
 
         <org.anonymous.dobrochan.widget.CaptchaImageView
             android:id="@+id/captcha_img"
             android:layout_width="wrap_content"
             android:layout_height="48dip"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:onClick="onCaptchaClick" />
+            android:onClick="onCaptchaClick"
+            android:scaleType="fitCenter" />
 
         <EditText
-            android:inputType="textNoSuggestions"
             android:id="@+id/captcha"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions" />
 
         <Button
             android:id="@+id/sendButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/send"
-            android:onClick="onSendButtonClick"/>
+            android:onClick="onSendButtonClick"
+            android:text="@string/newpost_post" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -128,32 +129,32 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/gallery"
-                android:onClick="onAddImageClick" />
+                android:onClick="onAddImageClick"
+                android:text="@string/newpost_pic_from_gallery" />
 
             <Button
                 android:id="@+id/addBooruButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/booru"
-                android:onClick="onAddBooruClick" />
-            
+                android:onClick="onAddBooruClick"
+                android:text="@string/newpost_pic_from_booru" />
+
             <Button
                 android:id="@+id/takePhoto"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/photo"
-                android:onClick="onAddPhotoClick" />
-            
+                android:onClick="onAddPhotoClick"
+                android:text="@string/newpost_pic_from_cam" />
+
             <Button
                 android:id="@+id/takeFile"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/file"
-                android:onClick="onAddFileClick" />
+                android:onClick="onAddFileClick"
+                android:text="@string/newpost_add_file" />
         </LinearLayout>
 
         <HorizontalScrollView
@@ -171,32 +172,33 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <CheckBox android:id="@+id/sage"
+        <CheckBox
+            android:id="@+id/sage"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sage"/>
+            android:text="@string/newpost_sage" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name" />
+            android:text="@string/newpost_name" />
 
         <EditText
-            android:inputType="textCapSentences"
             android:id="@+id/name"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/theme" />
+            android:text="@string/newpost_theme" />
 
         <EditText
-            android:inputType="textCapSentences"
             android:id="@+id/title"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences" />
     </LinearLayout>
 
 </ScrollView>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CachedAsyncImage -->
+
+
+    <!-- CaptchaImage -->
+
+
+    <!-- HomescreenItem -->
+
+
+    <!-- PostItem -->
+    <string name="post_file_info_pattern">Название1: %1$s\nНазвание2: %2$s\nРазмер: %3$s\nДата первой заливки: %4$s\nРейтинг: %5$s\n%6$s</string>
+    <string name="post_id">№ %s</string>
+    <string name="post_date">%s</string>
+    <string name="post_quote_it">Цитата</string>
+    <string name="post_answer_it">Ответить</string>
+    <string name="posthead_open">Открыть</string>
+    <string name="posthead_show_last_50">Последние</string>
+    <string name="post_hide_thread">Скрыть тред</string>
+    <string name="post_add_to_favourities">В избранное</string>
+
+    <!-- VerticalText (инфа о картинки у превьюшки) -->
+
+</resources>

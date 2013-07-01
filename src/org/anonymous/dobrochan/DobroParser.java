@@ -21,6 +21,7 @@ import org.anonymous.dobrochan.json.DobroPost;
 import org.anonymous.dobrochan.json.DobroSession;
 import org.anonymous.dobrochan.json.DobroThread;
 
+import android.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.SpannableString;
@@ -39,7 +40,7 @@ public class DobroParser extends Object {
 	public static DobroParser getInstance() {
 		DobroApplication app = DobroApplication.getApplicationStatic();
 		return app.getParser();
-	}
+		}
 	
 	public DobroParser() {
 		gson = new Gson();

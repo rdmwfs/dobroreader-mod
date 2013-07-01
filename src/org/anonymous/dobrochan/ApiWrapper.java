@@ -24,10 +24,12 @@ public class ApiWrapper {
 	public static File getExternalCacheDir(Context cnt) {
 		try{
 			File dir;
-			if(Build.VERSION.SDK_INT > 7)
+			if(Build.VERSION.SDK_INT > 7) {
+				//XXX SDK_INT > 7
 				dir = cnt.getExternalCacheDir();
-			else
+			} else {
 				dir = new File(Environment.getExternalStorageDirectory()+"/Android/data/"+cnt.getApplicationInfo().packageName+"/cache/");
+			}
 			if(!dir.isDirectory())
 				dir.mkdirs();
 			return dir;
@@ -43,7 +45,7 @@ public class ApiWrapper {
 		else
 			return Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures";*/
 		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		return prefs.getString("download_target", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures");
+		return prefs.getString("downloads_folder", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures");
 	}
 	
 	public static String getDownloadDir() {
@@ -55,7 +57,7 @@ public class ApiWrapper {
 			return Environment.getExternalStorageDirectory().getAbsolutePath()
 					+ File.separator + "Pictures" + File.separator + "Dobrochan";*/
 		SharedPreferences prefs = DobroApplication.getApplicationStatic().getDefaultPrefs();
-		return prefs.getString("download_target", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures") + File.separator + "/Dobrochan";
+		return prefs.getString("downloads_folder", Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Pictures") + File.separator + "/Dobrochan";
 	}
 	
 	public static Intent getOpenImageIntent(Uri uri) {
@@ -89,6 +91,7 @@ public class ApiWrapper {
 				e.printStackTrace();
 			}
 		if (Build.VERSION.SDK_INT > 8 && !download_service_off) {
+			//XXX SDK_INT > 8
 			DownloadManager manager = (DownloadManager) DobroApplication
 					.getApplicationStatic().getSystemService(
 							Context.DOWNLOAD_SERVICE);
