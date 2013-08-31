@@ -20,7 +20,7 @@ public class DobroConstants {
 	public static final String LAST = "LAST";
 	public static final String FAVS_DUMP = "FAVS_DUMP";
 	public static final String FAVS_TITLES = "FAVS_TITLES";
-	public static final String DOMAIN = "dobrochan.ru";
+	public static final String DOMAIN = "dobrochan.com";
 	public static final String HOST = "http://" + DOMAIN + "/";
 	public static final String API_DIFF = HOST + "api/chan/stats/diff.json";
 	public static final String API_DET_POST      = HOST + "api/post/%s/%s.json?new_format&message_html";
